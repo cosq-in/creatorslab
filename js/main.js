@@ -224,11 +224,13 @@ document.addEventListener('DOMContentLoaded', function() {
                     clearInterval(timer);
                 }
                 
-                let displayValue = Math.floor(current);
+                let displayValue;
                 if (number >= 1000000) {
-                    displayValue = (displayValue / 1000000).toFixed(0) + 'M';
+                    displayValue = (Math.floor(current) / 1000000).toFixed(0) + 'M';
                 } else if (number >= 1000) {
-                    displayValue = (displayValue / 1000).toFixed(0) + 'K';
+                    displayValue = (Math.floor(current) / 1000).toFixed(0) + 'K';
+                } else {
+                    displayValue = Math.floor(current);
                 }
                 
                 stat.textContent = displayValue + (hasPlus ? '+' : '');
