@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contact Creators Lab - Get in touch with our team">
+    <title>Contact Us - Creators Lab by CosQ</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="pixel-nav">
+        <div class="nav-container">
+            <div class="logo">
+                <span class="pixel-text">🧪 CREATORS LAB</span>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="team.html">Team</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="contact.html" class="active">Contact</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1 class="pixel-title">Get in Touch 📬</h1>
+            <p class="page-subtitle">Let's create something amazing together!</p>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="content-section">
+        <div class="container">
+            <div class="contact-layout">
+                
+                <!-- Contact Form -->
+                <div class="contact-form-container pixel-card">
+                    <h2>Send Us a Message 💌</h2>
+                    <form id="contactForm" class="contact-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name">Name *</label>
+                                <input type="text" id="name" name="name" class="pixel-input" required placeholder="Your name">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email *</label>
+                                <input type="email" id="email" name="email" class="pixel-input" required placeholder="your@email.com">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="discord">Discord (Optional)</label>
+                                <input type="text" id="discord" name="discord" class="pixel-input" placeholder="username#1234">
+                            </div>
+                            <div class="form-group">
+                                <label for="platform">Primary Platform *</label>
+                                <select id="platform" name="platform" class="pixel-select" required>
+                                    <option value="">Select platform</option>
+                                    <option value="youtube">YouTube</option>
+                                    <option value="twitch">Twitch</option>
+                                    <option value="tiktok">TikTok</option>
+                                    <option value="instagram">Instagram</option>
+                                    <option value="twitter">Twitter</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="service">Service Interested In *</label>
+                            <select id="service" name="service" class="pixel-select" required>
+                                <option value="">Select a service</option>
+                                <option value="social-media">Social Media Management</option>
+                                <option value="content-production">Content Production</option>
+                                <option value="analytics">Analytics & Growth</option>
+                                <option value="brand-partnerships">Brand Partnerships</option>
+                                <option value="campaign">Campaign Management</option>
+                                <option value="coaching">Stream Coaching</option>
+                                <option value="consultation">General Consultation</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="games">Favorite Games (Optional)</label>
+                            <div class="checkbox-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="games" value="arc-raiders"> Arc Raiders
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="games" value="marvel-rivals"> Marvel Rivals
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="games" value="arknights"> Arknights
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="games" value="valorant"> Valorant
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="games" value="other"> Other
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Tell Us About Your Goals *</label>
+                            <textarea id="message" name="message" class="pixel-textarea" rows="6" required placeholder="What are you hoping to achieve? What challenges are you facing? Any specific goals?"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="budget">Estimated Budget *</label>
+                            <select id="budget" name="budget" class="pixel-select" required>
+                                <option value="">Select budget range</option>
+                                <option value="starter">$299-500/month (Starter)</option>
+                                <option value="professional">$500-1000/month (Professional)</option>
+                                <option value="enterprise">$1000+/month (Enterprise)</option>
+                                <option value="custom">Custom/Not Sure</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="pixel-button primary large">Send Message 🚀</button>
+                        <p class="form-note">We typically respond within 24 hours!</p>
+                    </form>
+                    <div id="formSuccess" class="form-success" style="display: none;">
+                        <p>✅ Thanks for reaching out! We'll get back to you soon!</p>
+                    </div>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="contact-info">
+                    <div class="info-card pixel-card">
+                        <h3>📧 Email Us</h3>
+                        <p><a href="mailto:hello@creatorslabbycosq.com">hello@creatorslabbycosq.com</a></p>
+                        <p class="info-note">For general inquiries</p>
+                    </div>
+
+                    <div class="info-card pixel-card">
+                        <h3>💼 Business Inquiries</h3>
+                        <p><a href="mailto:business@creatorslabbycosq.com">business@creatorslabbycosq.com</a></p>
+                        <p class="info-note">For partnerships & collaborations</p>
+                    </div>
+
+                    <div class="info-card pixel-card">
+                        <h3>💬 Join Our Discord</h3>
+                        <p><a href="#">discord.gg/creatorslab</a></p>
+                        <p class="info-note">Connect with our community</p>
+                    </div>
+
+                    <div class="info-card pixel-card">
+                        <h3>📱 Social Media</h3>
+                        <div class="social-links-large">
+                            <a href="#" class="social-link">🐦 Twitter</a>
+                            <a href="#" class="social-link">📺 YouTube</a>
+                            <a href="#" class="social-link">📸 Instagram</a>
+                            <a href="#" class="social-link">🎮 Twitch</a>
+                            <a href="#" class="social-link">💼 LinkedIn</a>
+                            <a href="#" class="social-link">🎵 TikTok</a>
+                        </div>
+                    </div>
+
+                    <div class="info-card pixel-card">
+                        <h3>🕐 Office Hours</h3>
+                        <p><strong>Monday - Friday:</strong> 9 AM - 6 PM PST</p>
+                        <p><strong>Weekend:</strong> Limited support</p>
+                        <p class="info-note">24/7 support for Enterprise clients</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="content-section alt-bg">
+        <div class="container">
+            <h2 class="section-title center">❓ Frequently Asked Questions</h2>
+            <div class="faq-grid">
+                <div class="faq-item pixel-card">
+                    <h3>How quickly can I get started?</h3>
+                    <p>After our initial consultation, most creators can be onboarded within 1-2 weeks. We'll work with your timeline!</p>
+                </div>
+                <div class="faq-item pixel-card">
+                    <h3>Do you work with small creators?</h3>
+                    <p>Absolutely! We support creators of all sizes, from just starting out to established influencers. Everyone starts somewhere!</p>
+                </div>
+                <div class="faq-item pixel-card">
+                    <h3>What games do you specialize in?</h3>
+                    <p>We focus on Arc Raiders, Marvel Rivals, Arknights, Valorant, and many other popular titles. If you play it, we can help!</p>
+                </div>
+                <div class="faq-item pixel-card">
+                    <h3>Can I cancel anytime?</h3>
+                    <p>Yes! We offer flexible month-to-month contracts. No long-term commitments required.</p>
+                </div>
+                <div class="faq-item pixel-card">
+                    <h3>Do you guarantee results?</h3>
+                    <p>While we can't guarantee viral success, we provide proven strategies backed by data and years of experience.</p>
+                </div>
+                <div class="faq-item pixel-card">
+                    <h3>What platforms do you support?</h3>
+                    <p>YouTube, Twitch, TikTok, Instagram, Twitter, Discord, and more. We're platform-agnostic!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Still Have Questions? 🤔</h2>
+                <p>Schedule a free 30-minute consultation call with our team!</p>
+                <a href="#contactForm" class="pixel-button primary large">Book a Call</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="pixel-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>🧪 Creators Lab</h4>
+                    <p>Empowering the next generation of gaming content creators.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="portfolio.html">Portfolio</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Connect</h4>
+                    <ul>
+                        <li><a href="#">Twitter</a></li>
+                        <li><a href="#">Discord</a></li>
+                        <li><a href="#">YouTube</a></li>
+                        <li><a href="#">Twitch</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Newsletter</h4>
+                    <p>Stay updated with gaming trends!</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Your email" class="pixel-input">
+                        <button type="submit" class="pixel-button small">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Creators Lab by CosQ. All rights reserved. Made with 💜 for gamers.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
