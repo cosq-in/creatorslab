@@ -1,0 +1,19 @@
+{
+  "name": "creators-lab-by-cosq",
+  "version": "1.0.0",
+  "description": "Creators Lab by CosQ - A media agency for gamers, streamers, influencers, and content creators",
+  "main": "index.html",
+  "scripts": {
+    "start": "python3 -m http.server 8000",
+    "dev": "python3 -m http.server 8000"
+  },
+  "keywords": [
+    "gaming",
+    "media-agency",
+    "streamers",
+    "influencers",
+    "content-creators"
+  ],
+  "author": "Creators Lab by CosQ",
+  "license": "MIT"
+}
