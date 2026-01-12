@@ -186,19 +186,25 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Animate stat numbers on scroll
     const statNumbers = document.querySelectorAll('.stat-number');
-    let hasAnimated = false;
 
     const statObserver = new IntersectionObserver(function(entries) {
         entries.forEach(entry => {
-            if (entry.isIntersecting && !hasAnimated) {
-                hasAnimated = true;
-                animateStats();
+            if (entry.isIntersecting) {
+                const container = entry.target;
+                // Check if this container has already been animated
+                if (!container.hasAttribute('data-animated')) {
+                    container.setAttribute('data-animated', 'true');
+                    animateStats();
+                }
             }
         });
     }, { threshold: 0.5 });
 
     if (statNumbers.length > 0) {
-        statObserver.observe(statNumbers[0].parentElement);
+        const statsContainer = statNumbers[0].closest('.stats-section, .stats-grid');
+        if (statsContainer) {
+            statObserver.observe(statsContainer);
+        }
     }
 
     function animateStats() {
