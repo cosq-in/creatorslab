@@ -19,6 +19,16 @@ Creators Lab by CosQ is a comprehensive website designed for a media agency spec
 - 🏰 Arknights
 - 🎯 Valorant
 
+## 📸 Screenshots
+
+**Desktop View**
+
+![Desktop Homepage](screenshots/desktop-homepage.png)
+
+**Mobile View (375×667)**
+
+![Mobile Homepage](screenshots/mobile-homepage.png)
+
 ## ✨ Features
 
 - **Cute & Pixelated Lab Theme** - Pookie aesthetic with pixel art style
