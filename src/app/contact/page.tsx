@@ -3,12 +3,46 @@ import PageHeader from "@/components/PageHeader";
 import { useState } from 'react';
 
 export default function ContactPage() {
-    const [success, setSuccess] = useState(false);
+    const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        setSuccess(true);
-        setTimeout(() => setSuccess(false), 5000);
+        setStatus("submitting");
+
+        const form = e.currentTarget;
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData.entries());
+
+        // Add configuration fields for FormSubmit
+        const payload = {
+            ...data,
+            _cc: "soham@cosq.in,info@cosq.in",
+            _subject: "New Submission from Creators Lab Website",
+            _template: "table",
+            _captcha: "false"
+        };
+
+        try {
+            const response = await fetch("https://formsubmit.co/ajax/marketing@cosq.in", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                },
+                body: JSON.stringify(payload)
+            });
+
+            if (response.ok) {
+                setStatus("success");
+                form.reset();
+                setTimeout(() => setStatus("idle"), 5000);
+            } else {
+                setStatus("error");
+            }
+        } catch (error) {
+            console.error("Form submission error:", error);
+            setStatus("error");
+        }
     };
 
     return (
@@ -21,27 +55,28 @@ export default function ContactPage() {
                         {/* Contact Form */}
                         <div className="contact-form-container pixel-card">
                             <h2>Send Us a Message 💌</h2>
-                            {!success ? (
-                                <form className="contact-form" onSubmit={handleSubmit}>
+
+                            {status !== "success" ? (
+                                <form onSubmit={handleSubmit} className="contact-form">
                                     <div className="form-row">
                                         <div className="form-group">
                                             <label htmlFor="name">Name *</label>
-                                            <input type="text" id="name" name="name" className="pixel-input" required placeholder="Your name" />
+                                            <input type="text" id="name" name="name" className="pixel-input" required placeholder="Your name" disabled={status === "submitting"} />
                                         </div>
                                         <div className="form-group">
                                             <label htmlFor="email">Email *</label>
-                                            <input type="email" id="email" name="email" className="pixel-input" required placeholder="your@email.com" />
+                                            <input type="email" id="email" name="email" className="pixel-input" required placeholder="your@email.com" disabled={status === "submitting"} />
                                         </div>
                                     </div>
 
                                     <div className="form-row">
                                         <div className="form-group">
                                             <label htmlFor="discord">Discord (Optional)</label>
-                                            <input type="text" id="discord" name="discord" className="pixel-input" placeholder="username#1234" />
+                                            <input type="text" id="discord" name="discord" className="pixel-input" placeholder="username#1234" disabled={status === "submitting"} />
                                         </div>
                                         <div className="form-group">
                                             <label htmlFor="platform">Primary Platform *</label>
-                                            <select id="platform" name="platform" className="pixel-select" required defaultValue="">
+                                            <select id="platform" name="platform" className="pixel-select" required defaultValue="" disabled={status === "submitting"}>
                                                 <option value="" disabled>Select platform</option>
                                                 <option value="youtube">YouTube</option>
                                                 <option value="twitch">Twitch</option>
@@ -55,7 +90,7 @@ export default function ContactPage() {
 
                                     <div className="form-group">
                                         <label htmlFor="service">Service Interested In *</label>
-                                        <select id="service" name="service" className="pixel-select" required defaultValue="">
+                                        <select id="service" name="service" className="pixel-select" required defaultValue="" disabled={status === "submitting"}>
                                             <option value="" disabled>Select a service</option>
                                             <option value="social-media">Social Media Management</option>
                                             <option value="content-production">Content Production</option>
@@ -69,15 +104,27 @@ export default function ContactPage() {
 
                                     <div className="form-group">
                                         <label htmlFor="message">Tell Us About Your Goals *</label>
-                                        <textarea id="message" name="message" className="pixel-textarea" rows={6} required placeholder="What are you hoping to achieve? What challenges are you facing? Any specific goals?"></textarea>
+                                        <textarea id="message" name="message" className="pixel-textarea" rows={6} required placeholder="What are you hoping to achieve? What challenges are you facing? Any specific goals?" disabled={status === "submitting"}></textarea>
                                     </div>
 
-                                    <button type="submit" className="pixel-button primary large">Send Message 🚀</button>
+                                    <button type="submit" className="pixel-button primary large" disabled={status === "submitting"}>
+                                        {status === "submitting" ? "Sending... ⏳" : "Send Message 🚀"}
+                                    </button>
                                     <p className="form-note">We typically respond within 24 hours!</p>
+                                    {status === "error" && <p style={{ color: '#ff4444', textAlign: 'center', marginTop: '1rem' }}>❌ Something went wrong. Please try again later.</p>}
                                 </form>
                             ) : (
-                                <div className="form-success">
-                                    <p>✅ Thanks for reaching out! We&apos;ll get back to you soon!</p>
+                                <div className="form-success" style={{ textAlign: 'center', padding: '2rem' }}>
+                                    <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>🎉</div>
+                                    <h3 style={{ color: 'var(--accent-color)', marginBottom: '1rem' }}>Message Sent Successfully!</h3>
+                                    <p>Thanks for reaching out! We&apos;ll check your message and get back to you within 24 hours.</p>
+                                    <button
+                                        onClick={() => setStatus("idle")}
+                                        className="pixel-button secondary small"
+                                        style={{ marginTop: '2rem' }}
+                                    >
+                                        Send Another Message
+                                    </button>
                                 </div>
                             )}
                         </div>
@@ -85,15 +132,15 @@ export default function ContactPage() {
                         {/* Contact Info */}
                         <div className="contact-info">
                             <div className="info-card pixel-card">
-                                <h3>📧 Email Us</h3>
-                                <p><a href="mailto:hello@creatorslabbycosq.com">hello@creatorslabbycosq.com</a></p>
+                                <h3>📧 Marketing & General</h3>
+                                <p><a href="mailto:marketing@cosq.in">marketing@cosq.in</a></p>
                                 <p className="info-note">For general inquiries</p>
                             </div>
 
                             <div className="info-card pixel-card">
-                                <h3>💼 Business Inquiries</h3>
-                                <p><a href="mailto:business@creatorslabbycosq.com">business@creatorslabbycosq.com</a></p>
-                                <p className="info-note">For partnerships & collaborations</p>
+                                <h3>💼 Business & Founder</h3>
+                                <p><a href="mailto:soham@cosq.in">soham@cosq.in</a></p>
+                                <p className="info-note">Soham (Founder)</p>
                             </div>
 
                             <div className="info-card pixel-card">
