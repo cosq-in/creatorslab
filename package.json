@@ -1,19 +1,24 @@
 {
-  "name": "creators-lab-by-cosq",
-  "version": "1.0.0",
-  "description": "Creators Lab by CosQ - A media agency for gamers, streamers, influencers, and content creators",
-  "main": "index.html",
+  "name": "next-site",
+  "version": "0.1.0",
+  "private": true,
   "scripts": {
-    "start": "python3 -m http.server 8000",
-    "dev": "python3 -m http.server 8000"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint"
   },
-  "keywords": [
-    "gaming",
-    "media-agency",
-    "streamers",
-    "influencers",
-    "content-creators"
-  ],
-  "author": "Creators Lab by CosQ",
-  "license": "MIT"
+  "dependencies": {
+    "next": "16.1.4",
+    "react": "19.2.3",
+    "react-dom": "19.2.3"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.1.4",
+    "typescript": "^5"
+  }
 }
