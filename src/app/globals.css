@@ -5,33 +5,29 @@
 
 /* Root Variables */
 :root {
-    /* Cute Lab Colors */
-    --primary-color: #FF69B4;
-    /* Hot Pink */
-    --secondary-color: #9D4EDD;
-    /* Purple */
-    --accent-color: #06FFA5;
-    /* Mint Green */
-    --bg-dark: #1a0933;
-    /* Deep Purple */
-    --bg-light: #2d1654;
-    /* Medium Purple */
-    --bg-card: #3d2266;
-    /* Card Purple */
-    --text-light: #FFFFFF;
-    --text-muted: #D4B5FF;
-    --border-color: #9D4EDD;
+    /* Creator Labs Brand Colors */
+    --primary-color: #FF69B4;  /* Hot Pink - Primary Action/Highlight */
+    --secondary-color: #9D4EDD; /* Purple - Secondary/Shadows */
+    --accent-color: #06FFA5;   /* Mint Green - Accents/Success */
+    --bg-dark: #1a0933;        /* Deep Purple - Main Background */
+    --bg-light: #2d1654;       /* Medium Purple - Section Backgrounds */
+    --bg-card: #3d2266;        /* Card Purple - Element Backgrounds */
+    
+    /* Text Colors */
+    --text-light: #FFFFFF;     /* Primary Text */
+    --text-muted: #D4B5FF;     /* Secondary/Description Text */
+    --border-color: #9D4EDD;   /* Borders */
 
-    /* Spacing */
-    --spacing-xs: 0.5rem;
-    --spacing-sm: 1rem;
-    --spacing-md: 2rem;
-    --spacing-lg: 3rem;
-    --spacing-xl: 4rem;
+    /* Standardized Spacing */
+    --spacing-xs: 0.5rem;   /* 8px */
+    --spacing-sm: 1rem;     /* 16px */
+    --spacing-md: 2rem;     /* 32px */
+    --spacing-lg: 4rem;     /* 64px */
+    --spacing-xl: 8rem;     /* 128px */
 
     /* Typography - Managed by Next.js */
-    /* --font-primary: 'Press Start 2P', 'Courier New', monospace; */
-    /* --font-body: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
+    /* --font-primary: 'Press Start 2P', monospace; */
+    /* --font-body: 'Outfit', sans-serif; */
 }
 
 /* Reset & Base Styles */
