@@ -1,3 +1,4 @@
+@import "tailwindcss";
 /* ========================================
    Creators Lab by CosQ - Pixelated Theme
    Cute & Pookie Lab Aesthetic
@@ -6,24 +7,38 @@
 /* Root Variables */
 :root {
     /* Creator Labs Brand Colors */
-    --primary-color: #FF69B4;  /* Hot Pink - Primary Action/Highlight */
-    --secondary-color: #9D4EDD; /* Purple - Secondary/Shadows */
-    --accent-color: #06FFA5;   /* Mint Green - Accents/Success */
-    --bg-dark: #1a0933;        /* Deep Purple - Main Background */
-    --bg-light: #2d1654;       /* Medium Purple - Section Backgrounds */
-    --bg-card: #3d2266;        /* Card Purple - Element Backgrounds */
-    
+    --primary-color: #FF69B4;
+    /* Hot Pink - Primary Action/Highlight */
+    --secondary-color: #9D4EDD;
+    /* Purple - Secondary/Shadows */
+    --accent-color: #06FFA5;
+    /* Mint Green - Accents/Success */
+    --bg-dark: #1a0933;
+    /* Deep Purple - Main Background */
+    --bg-light: #2d1654;
+    /* Medium Purple - Section Backgrounds */
+    --bg-card: #3d2266;
+    /* Card Purple - Element Backgrounds */
+
     /* Text Colors */
-    --text-light: #FFFFFF;     /* Primary Text */
-    --text-muted: #D4B5FF;     /* Secondary/Description Text */
-    --border-color: #9D4EDD;   /* Borders */
+    --text-light: #FFFFFF;
+    /* Primary Text */
+    --text-muted: #D4B5FF;
+    /* Secondary/Description Text */
+    --border-color: #9D4EDD;
+    /* Borders */
 
     /* Standardized Spacing */
-    --spacing-xs: 0.5rem;   /* 8px */
-    --spacing-sm: 1rem;     /* 16px */
-    --spacing-md: 2rem;     /* 32px */
-    --spacing-lg: 4rem;     /* 64px */
-    --spacing-xl: 8rem;     /* 128px */
+    --spacing-xs: 0.5rem;
+    /* 8px */
+    --spacing-sm: 1rem;
+    /* 16px */
+    --spacing-md: 2rem;
+    /* 32px */
+    --spacing-lg: 4rem;
+    /* 64px */
+    --spacing-xl: 8rem;
+    /* 128px */
 
     /* Typography - Managed by Next.js */
     /* --font-primary: 'Press Start 2P', monospace; */
@@ -1546,4 +1561,96 @@ body::before {
     .section-title {
         font-size: 1.5rem;
     }
+}
+
+/* Splash Gate Styles */
+.splash-gate {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    overflow: hidden;
+    z-index: 9999;
+    background: #000;
+}
+
+.splash-side {
+    position: relative;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: flex 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 2rem;
+}
+
+.splash-side:hover {
+    flex: 1.2;
+}
+
+.side-design {
+    background: linear-gradient(135deg, #1a0933 0%, #3d2266 100%);
+}
+
+.side-creators {
+    background: linear-gradient(45deg, #1a0933 0%, #FF69B4 100%);
+}
+
+.splash-title {
+    font-family: var(--font-primary);
+    font-size: clamp(1.5rem, 4vw, 3rem);
+    color: white;
+    text-align: center;
+    z-index: 2;
+    text-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    pointer-events: none;
+}
+
+.liquid-container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 200px;
+    transform: translateX(-50%);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.liquid-svg {
+    height: 100%;
+    width: 100%;
+}
+
+@keyframes wave {
+    0% {
+        transform: translateY(0) scaleY(1);
+    }
+
+    50% {
+        transform: translateY(-10px) scaleY(1.05);
+    }
+
+    100% {
+        transform: translateY(0) scaleY(1);
+    }
+}
+
+.liquid-path {
+    animation: wave 4s ease-in-out infinite;
+}
+
+/* Transitions */
+.fade-out {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+
+.hide-scroll {
+    overflow: hidden !important;
 }

@@ -28,9 +28,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${pressStart2P.variable} ${outfit.variable}`}>
-        <Navbar />
         {children}
-        <Footer />
       </body>
     </html>
   );
