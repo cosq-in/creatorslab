@@ -28,16 +28,14 @@ export default function Home() {
   }
 
   return (
-    <>
+    <div className="bg-[#050505] text-[#e5e2e1] min-h-screen">
       <Navbar />
       <main>
         <Hero />
         <GamesSection />
         <ServicesPreview />
-        <StatsSection />
-        <CTASection />
       </main>
       <Footer />
-    </>
+    </div>
   );
 }

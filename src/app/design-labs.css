@@ -8,55 +8,27 @@
 */
 
 .design-labs-theme {
-    /* Brand Design System */
-    --dl-primary: #6B1FA8;
-    --dl-secondary: #FF1493;
-    --dl-accent: #00f2fe;
-    --dl-bg: #ffffff;
-    --dl-bg-muted: #fbf8ff;
-    --dl-text: #111111;
-    --dl-text-muted: #555555;
-    --dl-glass-bg: rgba(255, 255, 255, 0.7);
-    --dl-glass-border: rgba(107, 31, 168, 0.1);
-
-    background-color: var(--dl-bg);
-    color: var(--dl-text);
-    /* Modern Sans-Serif Stack */
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: #0a0a0a;
+    color: #e5e2e1;
+    font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
 }
 
-/* 1. Isolation Mega-Reset */
 .design-labs-theme * {
-    margin: 0;
-    padding: 0;
     box-sizing: border-box;
-    text-shadow: none !important;
-    /* Kill Creators Lab pixel shadows */
-    border-radius: initial;
-    border: none;
-    outline: none;
-    font-family: inherit;
 }
 
-/* 2. Typography Standardisation */
-.design-labs-theme h1,
-.design-labs-theme h2,
-.design-labs-theme h3,
-.design-labs-theme h4 {
-    font-weight: 800;
-    letter-spacing: -0.02em;
-    line-height: 1.1;
-    color: var(--dl-text);
+/* Premium Gradient Text */
+.design-labs-theme .text-gradient {
+    background: linear-gradient(135deg, #9D4EDD, #ff69b4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
-.design-labs-theme p {
-    color: var(--dl-text-muted);
-    font-size: 1.1rem;
-}
-
-/* 3. Global Container Fix */
+/* Global Container Fix */
 .design-labs-theme .container-centered {
     width: 100%;
     max-width: 1200px;
@@ -66,102 +38,68 @@
     padding-right: 1.5rem;
 }
 
-/* 4. Glassmorphism Utility */
-.design-labs-theme .glass-card {
-    background: var(--dl-glass-bg);
-    backdrop-filter: blur(12px);
-    border: 1px solid var(--dl-glass-border);
-    border-radius: 24px;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+/* CRT Scanline overlay — fixed full-screen */
+.dl-crt-scanline {
+    pointer-events: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%),
+                linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+    background-size: 100% 4px, 3px 100%;
+    z-index: 100;
+    opacity: 0.15;
 }
 
-.design-labs-theme .glass-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 20px 40px rgba(107, 31, 168, 0.1);
-    border-color: rgba(107, 31, 168, 0.2);
-}
-
-/* 5. Premium Gradient Text */
-.design-labs-theme .text-gradient {
-    background: linear-gradient(135deg, var(--dl-primary), var(--dl-secondary));
+/* Unknown italic gradient text with hover underline reveal */
+.dl-unknown-gradient {
+    background: linear-gradient(to right, #d3bdf1, #6e0044, #3d0024);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    position: relative;
+}
+.dl-unknown-gradient::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #d3bdf1;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+}
+.dl-hero-container:hover .dl-unknown-gradient::after {
+    transform: scaleX(1);
+    transform-origin: left;
 }
 
-/* 6. Buttons Reset & Premium Styling */
-.design-labs-theme button,
-.design-labs-theme .btn-primary {
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.8rem 2rem;
-    font-weight: 600;
-    border-radius: 9999px;
-    transition: all 0.3s ease;
-    text-transform: none !important;
-    letter-spacing: normal !important;
+/* Glass panel — purple frosted card */
+.dl-glass-panel {
+    background: rgba(26, 9, 51, 0.4);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(45, 27, 77, 0.3);
 }
 
-.design-labs-theme .btn-primary {
-    background: linear-gradient(135deg, var(--dl-primary), var(--dl-secondary));
-    color: white;
-    box-shadow: 0 10px 20px rgba(107, 31, 168, 0.2);
+/* Carbon dot-grid background for stats section */
+.dl-carbon-bg {
+    background-image: radial-gradient(circle at 2px 2px, #1a0933 1px, transparent 0);
+    background-size: 24px 24px;
 }
 
-.design-labs-theme .btn-primary:hover {
-    transform: scale(1.05);
-    box-shadow: 0 15px 30px rgba(107, 31, 168, 0.3);
+/* Glitch hover animation */
+.dl-glitch-hover:hover {
+    animation: dl-glitch 0.2s infinite;
 }
-
-/* 7. Centering & Spacing Classes */
-.design-labs-theme .flex-center {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.design-labs-theme .section-spacer {
-    padding-top: 120px;
-    padding-bottom: 120px;
-}
-
-/* 8. Specific Overrides for Screenshot Issues */
-.design-labs-theme nav {
-    background: rgba(255, 255, 255, 0.8) !important;
-    backdrop-filter: blur(10px);
-}
-
-/* Force Tailwind Flex behavior if global styles break it */
-.design-labs-theme .flex {
-    display: flex !important;
-}
-
-.design-labs-theme .grid {
-    display: grid !important;
-}
-
-.design-labs-theme .items-center {
-    align-items: center !important;
-}
-
-.design-labs-theme .justify-center {
-    justify-content: center !important;
-}
-
-.design-labs-theme .justify-between {
-    justify-content: space-between !important;
-}
-
-.design-labs-theme .text-center {
-    text-align: center !important;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .design-labs-theme .section-spacer {
-        padding-top: 80px;
-        padding-bottom: 80px;
-    }
+@keyframes dl-glitch {
+    0%   { transform: translate(0); }
+    20%  { transform: translate(-2px, 2px); }
+    40%  { transform: translate(-2px, -2px); }
+    60%  { transform: translate(2px, 2px); }
+    80%  { transform: translate(2px, -2px); }
+    100% { transform: translate(0); }
 }

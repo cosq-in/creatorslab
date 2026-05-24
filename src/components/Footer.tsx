@@ -1,44 +1,49 @@
 "use client";
-import Link from 'next/link';
+
+import React from "react";
 
 export default function Footer() {
     return (
-        <footer className="pixel-footer">
-            <div className="container">
-                <div className="footer-grid">
-                    <div className="footer-col">
-                        <h4>🧪 Creators Lab</h4>
-                        <p>Empowering the next generation of gaming content creators.</p>
-                    </div>
-                    <div className="footer-col">
-                        <h4>Quick Links</h4>
-                        <ul>
-                            <li><Link href="/about">About Us</Link></li>
-                            <li><Link href="/services">Services</Link></li>
-                            <li><Link href="/portfolio">Portfolio</Link></li>
-                            <li><Link href="/contact">Contact</Link></li>
-                        </ul>
-                    </div>
-                    <div className="footer-col">
-                        <h4>Connect</h4>
-                        <ul>
-                            <li><a href="#">Twitter</a></li>
-                            <li><a href="#">Discord</a></li>
-                            <li><a href="#">YouTube</a></li>
-                            <li><a href="#">Twitch</a></li>
-                        </ul>
-                    </div>
-                    <div className="footer-col">
-                        <h4>Newsletter</h4>
-                        <p>Stay updated with gaming trends!</p>
-                        <form className="newsletter-form" onSubmit={(e) => { e.preventDefault(); alert('Subscribed!'); }}>
-                            <input type="email" placeholder="Your email" className="pixel-input" />
-                            <button type="submit" className="pixel-button small">Subscribe</button>
-                        </form>
+        <footer className="w-full py-12 bg-[#050505] border-t border-outline-variant/10 text-left">
+            <div className="flex flex-col md:flex-row justify-between items-center px-6 lg:px-margin-desktop max-w-container-max mx-auto gap-8 w-full">
+                {/* Left Side */}
+                <div className="flex flex-col gap-2">
+                    <div className="font-headline-md text-2xl font-bold text-white tracking-tighter uppercase">
+                        COSQ LABS
                     </div>
                 </div>
-                <div className="footer-bottom">
-                    <p>&copy; 2026 Creators Lab by CosQ. All rights reserved. Made with 💜 for gamers.</p>
+
+                {/* Center Links */}
+                <div className="flex flex-wrap justify-center gap-6 md:gap-10 font-mono text-[10px] uppercase tracking-wider">
+                    <a
+                        className="text-gray-400 hover:text-white transition-colors"
+                        href="#"
+                    >
+                        Privacy Policy
+                    </a>
+                    <a
+                        className="text-gray-400 hover:text-white transition-colors"
+                        href="#"
+                    >
+                        Terms of Service
+                    </a>
+                    <a
+                        className="text-gray-400 hover:text-white transition-colors"
+                        href="#"
+                    >
+                        Brand Guidelines
+                    </a>
+                    <a
+                        className="text-gray-400 hover:text-white transition-colors"
+                        href="#"
+                    >
+                        Investor Relations
+                    </a>
+                </div>
+
+                {/* Right Side */}
+                <div className="font-mono text-[9px] uppercase tracking-widest text-gray-500 text-center md:text-right max-w-xs">
+                    © 2026 COSQ LABS. ALL RIGHTS RESERVED. OPERATING UNDER DIGITAL CRAFTSMANSHIP PROTOCOLS.
                 </div>
             </div>
         </footer>

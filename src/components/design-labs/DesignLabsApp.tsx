@@ -20,7 +20,7 @@ export default function DesignLabsApp() {
     };
 
     return (
-        <div className="design-labs-theme min-h-screen bg-white">
+        <div className="design-labs-theme min-h-screen bg-[#0a0a0a]">
             {currentPage === "home" && <CompanyLanding onNavigate={handleNavigate} />}
             {currentPage === "portfolio" && <Portfolio onBack={handleBackToHome} />}
             {currentPage === "submit-project" && <ProjectSubmission onBack={handleBackToHome} />}

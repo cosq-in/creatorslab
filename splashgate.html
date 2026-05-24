@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>COSQ LABS | PORTAL</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <style>
+        @keyframes liquid-flow-horizontal {
+            0% {
+                border-radius: 40% 60% 30% 70% / 50% 30% 70% 50%;
+                transform: translateX(-50%) scale(1) rotate(0deg);
+            }
+
+            50% {
+                border-radius: 60% 40% 70% 30% / 30% 50% 50% 70%;
+                transform: translateX(-50%) scale(1.1) rotate(10deg);
+            }
+
+            100% {
+                border-radius: 40% 60% 30% 70% / 50% 30% 70% 50%;
+                transform: translateX(-50%) scale(1) rotate(0deg);
+            }
+        }
+
+        @keyframes liquid-flow-vertical {
+            0% {
+                border-radius: 50% 30% 70% 50% / 40% 60% 30% 70%;
+                transform: translateY(-50%) scale(1) rotate(0deg);
+            }
+
+            50% {
+                border-radius: 30% 50% 50% 70% / 60% 40% 70% 30%;
+                transform: translateY(-50%) scale(1.1) rotate(10deg);
+            }
+
+            100% {
+                border-radius: 50% 30% 70% 50% / 40% 60% 30% 70%;
+                transform: translateY(-50%) scale(1) rotate(0deg);
+            }
+        }
+
+        /* Metaball Boundary Effect */
+        .metaball-boundary {
+            position: absolute;
+            filter: blur(25px) contrast(25);
+            z-index: 30;
+            overflow: hidden;
+            pointer-events: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Mobile Orientation (Horizontal Divider) */
+        @media (max-width: 1023.9px) {
+            .metaball-boundary {
+                top: 50%;
+                left: 0;
+                width: 100%;
+                height: 120px;
+                transform: translateY(-50%);
+            }
+
+            .liquid-wave-1 {
+                position: absolute;
+                bottom: 20%;
+                left: 50%;
+                width: 150vw;
+                height: 200px;
+                background: #23133c;
+                /* on-tertiary-fixed */
+                animation: liquid-flow-horizontal 12s ease-in-out infinite;
+                opacity: 0.9;
+            }
+
+            .liquid-wave-2 {
+                position: absolute;
+                top: 20%;
+                left: 50%;
+                width: 160vw;
+                height: 220px;
+                background: #ff69b4;
+                /* primary-container */
+                animation: liquid-flow-horizontal 15s ease-in-out infinite reverse;
+                opacity: 0.8;
+            }
+        }
+
+        /* Desktop Orientation (Vertical Divider) */
+        @media (min-width: 1024px) {
+            .metaball-boundary {
+                top: 0;
+                left: 50%;
+                width: 120px;
+                height: 100%;
+                transform: translateX(-50%);
+            }
+
+            .liquid-wave-1 {
+                position: absolute;
+                right: 20%;
+                top: 50%;
+                height: 150vh;
+                width: 200px;
+                background: #23133c;
+                animation: liquid-flow-vertical 12s ease-in-out infinite;
+                opacity: 0.9;
+            }
+
+            .liquid-wave-2 {
+                position: absolute;
+                left: 20%;
+                top: 50%;
+                height: 160vh;
+                width: 220px;
+                background: #ff69b4;
+                animation: liquid-flow-vertical 15s ease-in-out infinite reverse;
+                opacity: 0.8;
+            }
+        }
+
+        .scanline-overlay {
+            background: linear-gradient(to bottom, transparent 50%, rgba(0, 0, 0, 0.15) 50%);
+            background-size: 100% 4px;
+            pointer-events: none;
+        }
+
+        .glitch-hover:active {
+            text-shadow: 2px 0 #ffb0d0, -2px 0 #00e292;
+        }
+
+        .perspective-container {
+            perspective: 1000px;
+        }
+
+        .floating-element {
+            transform-style: preserve-3d;
+        }
+    </style>
+    <!-- Tailwind Config Verbatim -->
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed": "#23133c",
+                        "on-primary-fixed-variant": "#8c0058",
+                        "on-primary-fixed": "#3d0024",
+                        "error-container": "#93000a",
+                        "on-secondary": "#003921",
+                        "inverse-on-surface": "#313030",
+                        "background": "#131313",
+                        "on-primary-container": "#6e0044",
+                        "surface-container": "#201f1f",
+                        "primary-fixed": "#ffd8e6",
+                        "surface-dim": "#131313",
+                        "primary-fixed-dim": "#ffb0d0",
+                        "tertiary-container": "#aa96c8",
+                        "surface-container-lowest": "#0e0e0e",
+                        "on-secondary-container": "#007147",
+                        "inverse-surface": "#e5e2e1",
+                        "on-secondary-fixed": "#002111",
+                        "tertiary-fixed": "#ecdcff",
+                        "on-error": "#690005",
+                        "tertiary": "#d3bdf1",
+                        "error": "#ffb4ab",
+                        "secondary": "#f5fff5",
+                        "on-tertiary-fixed-variant": "#4f3f6a",
+                        "surface-container-low": "#1c1b1b",
+                        "on-tertiary-container": "#3e2e58",
+                        "primary": "#ffb0d0",
+                        "outline-variant": "#564149",
+                        "secondary-fixed": "#51ffad",
+                        "inverse-primary": "#ac2471",
+                        "on-surface": "#e5e2e1",
+                        "primary-container": "#ff69b4",
+                        "surface-container-highest": "#353534",
+                        "surface": "#131313",
+                        "outline": "#a48a93",
+                        "on-secondary-fixed-variant": "#005232",
+                        "surface-tint": "#ffb0d0",
+                        "surface-container-high": "#2a2a2a",
+                        "surface-bright": "#3a3939",
+                        "on-primary": "#63003d",
+                        "surface-variant": "#353534",
+                        "secondary-container": "#05ffa5",
+                        "on-tertiary": "#382852",
+                        "on-surface-variant": "#dcbfc9",
+                        "on-error-container": "#ffdad6",
+                        "tertiary-fixed-dim": "#d3bdf1",
+                        "secondary-fixed-dim": "#00e292",
+                        "on-background": "#e5e2e1"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-mobile": "16px",
+                        "container-max": "1440px",
+                        "margin-desktop": "40px",
+                        "gutter": "24px",
+                        "unit": "4px"
+                    },
+                    "fontFamily": {
+                        "label-caps": ["JetBrains Mono"],
+                        "display-xl": ["Space Grotesk"],
+                        "display-lg": ["Space Grotesk"],
+                        "body-lg": ["Space Grotesk"],
+                        "headline-md-mobile": ["Space Grotesk"],
+                        "code-sm": ["JetBrains Mono"],
+                        "body-md": ["Space Grotesk"],
+                        "headline-md": ["Space Grotesk"]
+                    },
+                    "fontSize": {
+                        "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "700" }],
+                        "display-xl": ["72px", { "lineHeight": "72px", "letterSpacing": "-0.04em", "fontWeight": "700" }],
+                        "display-lg": ["48px", { "lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-md-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "code-sm": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-md": ["32px", { "lineHeight": "40px", "letterSpacing": "0.02em", "fontWeight": "600" }]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+
+<body
+    class="bg-background text-on-surface font-body-md overflow-hidden selection:bg-primary-container selection:text-on-primary-container h-[100dvh]">
+    <!-- System Header -->
+    <header
+        class="fixed top-0 left-0 w-full z-[100] flex justify-between items-center px-margin-mobile lg:px-margin-desktop h-16 bg-background/40 backdrop-blur-lg border-b border-outline-variant/10">
+        <div class="flex items-center gap-3">
+            <span
+                class="font-headline-md text-[18px] lg:text-[20px] font-bold tracking-tighter text-on-surface uppercase">COSQ
+                LABS</span>
+            <div
+                class="hidden sm:flex items-center gap-2 text-secondary-fixed-dim font-label-caps text-[10px] opacity-80">
+                <span class="flex items-center gap-1"><span class="material-symbols-outlined text-[12px]">sensors</span>
+                    LINK</span>
+                <span class="flex items-center gap-1"><span class="material-symbols-outlined text-[12px]">memory</span>
+                    24%</span>
+            </div>
+        </div>
+        <div class="flex items-center gap-4 font-label-caps text-[10px] text-secondary-fixed-dim">
+            <span class="hidden sm:block" id="current-time">00:00:00 UTC</span>
+            <button class="material-symbols-outlined hover:text-primary transition-colors cursor-pointer"
+                data-icon="menu">menu</button>
+        </div>
+    </header>
+    <!-- Liquid Boundary (Responsive Divider) -->
+    <div class="metaball-boundary">
+        <div class="liquid-wave-1"></div>
+        <div class="liquid-wave-2"></div>
+    </div>
+    <!-- Main Split Portal (Responsive Stack/Split) -->
+    <main
+        class="relative h-[100dvh] w-screen flex flex-col lg:flex-row overflow-hidden perspective-container bg-transparent z-10">
+        <!-- Section: Wing 01 - Digital Labs -->
+        <section
+            class="relative h-1/2 lg:h-full lg:w-1/2 group cursor-pointer transition-all duration-700 ease-in-out border-b lg:border-b-0 lg:border-r border-outline-variant/10 z-10 overflow-hidden"
+            id="digital-labs">
+            <div class="absolute inset-0 opacity-20 pointer-events-none">
+                <img alt="Data architecture background" class="w-full h-full object-cover grayscale brightness-50"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuA7UlxmaaZetlbNTQqUIhjJNOd82LFabs51C-58j1IcGrp-XGpBVQ3HvIUbb8BkjZqWSjF0jamvBEZFvtHXqn7kNFKUIXF4PMZCQo90T7TVlblFO9yJH6Bp3j-ZoaALJRbXG-rSrmQ4Ngo5vuXYXgsCTdNXis1aH7mSdGhbaR2Bv5OgNY_oUGxC2bBHhn2sPfC65EEi4BQ-e_S_tszA6QLefILZ50XSQsKH5hHig5I12nZmaeoTuyAwtmtKabEAzqLNKhTgxNIU9vQ" />
+            </div>
+            <div class="scanline-overlay absolute inset-0 z-10 opacity-10"></div>
+            <!-- Content -->
+            <div class="relative z-20 h-full flex flex-col justify-end lg:justify-center items-center pb-12 lg:pb-0 px-6 text-center space-y-3 floating-element"
+                id="labs-content">
+                <span class="font-label-caps text-[10px] text-tertiary-fixed tracking-[0.4em] uppercase opacity-80">WING
+                    // 01</span>
+                <h1
+                    class="font-display-lg text-[32px] lg:text-[48px] text-on-surface leading-tight glitch-hover drop-shadow-2xl uppercase">
+                    DIGITAL<br class="lg:hidden" /> LABS</h1>
+                <p class="font-body-md text-[14px] text-on-surface/70 max-w-xs mx-auto">Architectural digital
+                    craftsmanship and high-fidelity rendering.</p>
+                <div class="pt-4 lg:pt-8">
+                    <button
+                        class="px-6 py-3 bg-transparent border border-secondary-fixed-dim text-secondary-fixed-dim font-label-caps text-[11px] active:bg-secondary-fixed-dim active:text-background hover:bg-secondary-fixed-dim/10 transition-all duration-200 flex items-center gap-2 backdrop-blur-sm">
+                        INITIALIZE CORE <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+                    </button>
+                </div>
+            </div>
+            <!-- Deco -->
+            <div
+                class="absolute left-4 top-20 z-20 flex flex-col gap-1 font-code-sm text-[9px] text-on-surface-variant opacity-40">
+                <span>X: 42.091</span>
+                <span>Y: -71.223</span>
+            </div>
+        </section>
+        <!-- Section: Sector 02 - Creators Lab -->
+        <section
+            class="relative h-1/2 lg:h-full lg:w-1/2 group cursor-pointer transition-all duration-700 ease-in-out z-10 overflow-hidden"
+            id="creators-lab">
+            <div class="absolute inset-0 opacity-20 pointer-events-none">
+                <img alt="Gaming environment background" class="w-full h-full object-cover grayscale brightness-50"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuBT25TBsZR1ZClphu_M1mTuNMAdEU8Zjk7KCi-NuJfXeaOs7qBzaGrwPN5chaHEg23dzANIJBcZKa0qzKbR0yKX2FH6fexF_rOcbv0oSiQqPv6NXx-7Ph7fAvk7T-Oo9D0BbV6CGYN7rs-A9Y_BLQuCwaWMT9esMIVsie6cqbjpZCinq-kHuXgR2ahCY-46hCBi2lhG8u5Km7c-K59zJO1qypXIDMnaRczEJqjed4yHU7NuGFUAMIVblHPgCZXuP_9HqzQTUhBDPJs" />
+            </div>
+            <div class="scanline-overlay absolute inset-0 z-10 opacity-10"></div>
+            <!-- Content -->
+            <div class="relative z-20 h-full flex flex-col justify-start lg:justify-center items-center pt-12 lg:pt-0 px-6 text-center space-y-3 floating-element"
+                id="creators-content">
+                <span
+                    class="font-label-caps text-[10px] text-primary-fixed tracking-[0.4em] uppercase opacity-80">SECTOR
+                    // 02</span>
+                <h1
+                    class="font-display-lg text-[32px] lg:text-[48px] text-primary leading-tight glitch-hover drop-shadow-2xl uppercase">
+                    CREATORS<br class="lg:hidden" /> LAB</h1>
+                <p class="font-body-md text-[14px] text-on-surface/70 max-w-xs mx-auto">Immersive play and digital
+                    streaming culture.</p>
+                <div class="pt-4 lg:pt-8">
+                    <button
+                        class="px-6 py-3 bg-primary text-background font-label-caps text-[11px] shadow-[0_0_15px_rgba(255,176,208,0.3)] active:scale-95 hover:brightness-110 transition-all duration-200 flex items-center gap-2">
+                        ENTER STUDIO <span class="material-symbols-outlined text-[18px]">bolt</span>
+                    </button>
+                </div>
+            </div>
+            <!-- Deco -->
+            <div
+                class="absolute right-4 bottom-24 lg:bottom-4 z-20 flex flex-col gap-1 font-code-sm text-[9px] text-on-surface-variant opacity-40 text-right">
+                <span>PING: 12ms</span>
+                <span>BUF: OPT</span>
+            </div>
+        </section>
+    </main>
+    <!-- Footer Overlay -->
+    <footer
+        class="fixed bottom-0 left-0 w-full z-50 p-margin-mobile lg:px-margin-desktop lg:pb-6 pointer-events-none flex flex-col gap-4">
+        <div class="flex justify-between items-end">
+            <div
+                class="pointer-events-auto bg-surface-container-lowest/90 backdrop-blur-md p-3 border border-outline-variant/20 max-w-[180px]">
+                <div class="flex items-center gap-2 mb-1">
+                    <div class="w-1.5 h-1.5 rounded-full bg-secondary-fixed shadow-[0_0_8px_#51ffad]"></div>
+                    <span class="font-label-caps text-[9px] text-secondary-fixed">LIVE_FEED</span>
+                </div>
+                <p class="font-code-sm text-[9px] text-on-surface-variant leading-tight">
+                    V1.0.4-ALPHA<br />
+                    <span class="text-secondary-fixed">ENCRYPTED_OK</span>
+                </p>
+            </div>
+            <div class="pointer-events-auto flex flex-col items-end gap-3">
+                <div
+                    class="flex gap-4 font-label-caps text-[10px] text-on-surface-variant bg-background/60 p-2 backdrop-blur-sm">
+                    <a class="hover:text-primary active:text-primary transition-colors" href="#">X</a>
+                    <a class="hover:text-primary active:text-primary transition-colors" href="#">IG</a>
+                    <a class="hover:text-primary active:text-primary transition-colors" href="#">DC</a>
+                </div>
+                <div
+                    class="h-8 w-24 bg-surface-container-low/80 backdrop-blur-sm border border-outline-variant/10 p-1.5 flex items-center justify-between">
+                    <span class="font-label-caps text-[9px] text-on-surface-variant">PWR</span>
+                    <div class="flex gap-0.5">
+                        <div class="w-1 h-3 bg-secondary-fixed"></div>
+                        <div class="w-1 h-3 bg-secondary-fixed"></div>
+                        <div class="w-1 h-3 bg-secondary-fixed"></div>
+                        <div class="w-1 h-3 bg-secondary-fixed/30"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script>
+        document.addEventListener('mousemove', (e) => {
+            const x = (e.clientX / window.innerWidth - 0.5) * 10;
+            const y = (e.clientY / window.innerHeight - 0.5) * 10;
+
+            const labsContent = document.getElementById('labs-content');
+            const creatorsContent = document.getElementById('creators-content');
+
+            if (labsContent && creatorsContent) {
+                labsContent.style.transform = `translate3d(${x * -0.3}px, ${y * -0.3}px, 20px)`;
+                creatorsContent.style.transform = `translate3d(${x * 0.3}px, ${y * 0.3}px, 20px)`;
+            }
+        });
+
+        function updateClock() {
+            const now = new Date();
+            const timeStr = now.toLocaleTimeString('en-US', {
+                hour12: false,
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                timeZone: 'UTC'
+            }) + ' UTC';
+            const clockEl = document.getElementById('current-time');
+            if (clockEl) clockEl.textContent = timeStr;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+    </script>
+</body>
+
+</html>
