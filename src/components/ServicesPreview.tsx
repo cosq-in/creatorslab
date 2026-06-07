@@ -3,13 +3,17 @@
 import React, { useState, useEffect } from "react";
 import { FlaskConical, Terminal } from "lucide-react";
 
+const MONO: React.CSSProperties = { fontFamily: "'JetBrains Mono', monospace" };
+const DISPLAY: React.CSSProperties = { fontFamily: "'Outfit', sans-serif" };
+const INTER: React.CSSProperties = { fontFamily: "'Inter', sans-serif" };
+
 const SIMULATED_LINES = [
     "Syncing telemetry data from global nodes...",
     "Decrypting competitor strategies...",
     "Calibrating neon luminescence levels...",
     "Establishing connection to Discord Matrix...",
     "Injecting performance enhancers to UI layer...",
-    "Status: ELITE OPERATIONAL READY."
+    "Status: ELITE OPERATIONAL READY.",
 ];
 
 export default function ServicesPreview() {
@@ -20,18 +24,15 @@ export default function ServicesPreview() {
         "> Fetching roster status...",
         "@TENZ_PROTO: ONLINE",
         "@SHROUD_PROTO: STANDBY",
-        "[WARNING] System temperature rising. Fans at 100%."
+        "[WARNING] System temperature rising. Fans at 100%.",
     ]);
 
     useEffect(() => {
         let index = 0;
         const interval = setInterval(() => {
             setLogs(prev => {
-                const nextLogs = [...prev, `[SYSTEM] ${SIMULATED_LINES[index % SIMULATED_LINES.length]}`];
-                if (nextLogs.length > 11) {
-                    nextLogs.splice(4, 1); // remove older log lines to prevent infinite height
-                }
-                return nextLogs;
+                const next = [...prev, `[SYSTEM] ${SIMULATED_LINES[index % SIMULATED_LINES.length]}`];
+                return next.length > 12 ? next.slice(next.length - 12) : next;
             });
             index++;
         }, 3000);
@@ -39,107 +40,240 @@ export default function ServicesPreview() {
     }, []);
 
     return (
-        <section id="creator-system" className="py-24 bg-[#050505] px-6 lg:px-margin-desktop max-w-container-max mx-auto space-y-16 border-t border-outline-variant/10">
-            {/* The Creator Core System Row */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
-                {/* Left Side Info */}
-                <div className="lg:col-span-7 bg-[#0b0b0c] border border-outline-variant/10 p-8 flex flex-col justify-between text-left relative overflow-hidden group">
-                    <div className="space-y-6">
-                        <h3 className="font-display-xl text-3xl md:text-5xl font-extrabold leading-tight text-white uppercase">
-                            THE CREATOR
-                            <br />
-                            <span className="bg-gradient-to-r from-[#9D4EDD] to-[#6366f1] bg-clip-text text-transparent">
-                                CORE SYSTEM
-                            </span>
-                        </h3>
-                        <p className="font-sans text-sm text-gray-300 leading-relaxed max-w-xl">
-                            Our proprietary analytics engine tracks performance across every frame, every click, and every interaction. We provide the hardware and the data to turn potential into dominance.
-                        </p>
-                    </div>
+        <section
+            id="creator-system"
+            style={{
+                background: "#050505",
+                borderTop: "1px solid rgba(255,255,255,0.05)",
+                padding: "80px 24px",
+            }}
+        >
+            <div style={{ maxWidth: "1440px", margin: "0 auto" }}>
 
-                    {/* Stats Row */}
-                    <div className="grid grid-cols-3 gap-4 border-t border-outline-variant/10 pt-8 mt-12">
-                        <div>
-                            <span className="font-mono text-white text-2xl md:text-3xl font-extrabold block">99.9%</span>
-                            <span className="font-mono text-[10px] uppercase tracking-wider text-gray-400 font-medium block mt-2">
-                                UPTIME RELIABILITY
-                            </span>
-                        </div>
-                        <div>
-                            <span className="font-mono text-white text-2xl md:text-3xl font-extrabold block">2ms</span>
-                            <span className="font-mono text-[10px] uppercase tracking-wider text-gray-400 font-medium block mt-2">
-                                AVG LATENCY
-                            </span>
-                        </div>
-                        <div>
-                            <span className="font-mono text-white text-2xl md:text-3xl font-extrabold block">24/7</span>
-                            <span className="font-mono text-[10px] uppercase tracking-wider text-gray-400 font-medium block mt-2">
-                                ADMIN SUPPORT
-                            </span>
-                        </div>
-                    </div>
+                {/* Section eyebrow */}
+                <div style={{ display: "flex", alignItems: "center", gap: "16px", marginBottom: "48px" }}>
+                    <span style={{ ...MONO, fontSize: "10px", color: "#a5b4fc", letterSpacing: "0.28em", textTransform: "uppercase", opacity: 0.7 }}>
+                        Creator Infrastructure
+                    </span>
+                    <div style={{ flex: 1, height: "1px", background: "rgba(255,255,255,0.05)" }} />
                 </div>
 
-                {/* Right Side Stacked Cards */}
-                <div className="lg:col-span-5 flex flex-col gap-6 justify-between">
-                    {/* Talent Incubation Card */}
-                    <div className="bg-[#0b0b0c] border border-[#9D4EDD]/35 p-6 flex flex-col justify-center text-left flex-1 relative overflow-hidden group">
-                        <div className="flex items-center gap-4 mb-4">
-                            <div className="p-2 bg-[#9D4EDD]/10 border border-[#9D4EDD]/20 text-[#9D4EDD]">
-                                <FlaskConical className="w-6 h-6" />
-                            </div>
-                            <h4 className="font-display-lg text-lg font-bold text-white uppercase">Talent Incubation</h4>
-                        </div>
-                        <p className="font-sans text-xs text-gray-300 leading-relaxed">
-                            Customized growth paths for rising stars in the competitive gaming scene.
-                        </p>
-                    </div>
-
-                    {/* Studio Protocol Card */}
-                    <div className="bg-[#0b0b0c] border border-outline-variant/10 p-6 flex flex-col justify-center text-left flex-1 relative overflow-hidden group">
-                        <div className="flex items-center gap-4 mb-4">
-                            <div className="p-2 bg-white/5 border border-white/10 text-white">
-                                <Terminal className="w-6 h-6" />
-                            </div>
-                            <h4 className="font-display-lg text-lg font-bold text-white uppercase">Studio Protocol</h4>
-                        </div>
-                        <p className="font-sans text-xs text-gray-300 leading-relaxed">
-                            Access to ultra-high-end production, broadcast, and streaming facilities.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            {/* Terminal Section (Full-width below the core system) */}
-            <div id="terminal-section" className="bg-[#050505] border border-outline-variant/15 p-6 md:p-8 font-mono text-xs leading-relaxed relative text-left">
-                {/* Traffic Lights */}
-                <div className="flex gap-2 mb-6 border-b border-outline-variant/10 pb-4">
-                    <div className="w-3 h-3 rounded-full bg-[#ef4444]"></div>
-                    <div className="w-3 h-3 rounded-full bg-[#f59e0b]"></div>
-                    <div className="w-3 h-3 rounded-full bg-[#10b981]"></div>
-                </div>
-                {/* Terminal Outputs */}
-                <div className="text-zinc-400 space-y-1 font-mono">
-                    {logs.map((log, index) => {
-                        let colorClass = "text-zinc-400";
-                        if (log.startsWith("[WARNING]")) {
-                            colorClass = "text-[#f59e0b]";
-                        } else if (log.startsWith("[SUCCESS]")) {
-                            colorClass = "text-[#10b981]";
-                        } else if (log.startsWith(">")) {
-                            colorClass = "text-white";
-                        } else if (log.startsWith("@")) {
-                            colorClass = "text-[#6366f1]";
-                        }
-                        return (
-                            <p key={index} className={`${colorClass} font-mono`}>
-                                {log}
+                {/* Main 2-col grid */}
+                <div
+                    className="grid gap-4 mb-4"
+                    style={{ gridTemplateColumns: "repeat(12, 1fr)" }}
+                >
+                    {/* Left: Core System card */}
+                    <div
+                        className="col-span-12 lg:col-span-7"
+                        style={{
+                            background: "#0a0a0b",
+                            border: "1px solid rgba(255,255,255,0.07)",
+                            padding: "40px 40px 36px",
+                            display: "flex",
+                            flexDirection: "column",
+                            justifyContent: "space-between",
+                            minHeight: "360px",
+                        }}
+                    >
+                        <div style={{ marginBottom: "32px" }}>
+                            <h3 style={{
+                                ...DISPLAY,
+                                fontSize: "clamp(28px, 3.5vw, 44px)",
+                                fontWeight: 800,
+                                color: "#fff",
+                                letterSpacing: "-0.03em",
+                                lineHeight: 1,
+                                textTransform: "uppercase",
+                                margin: "0 0 20px 0",
+                            }}>
+                                The Creator
+                                <br />
+                                <span style={{
+                                    background: "linear-gradient(135deg, #9D4EDD 0%, #6366f1 100%)",
+                                    WebkitBackgroundClip: "text",
+                                    WebkitTextFillColor: "transparent",
+                                    backgroundClip: "text",
+                                }}>
+                                    Core System
+                                </span>
+                            </h3>
+                            <p style={{
+                                ...INTER,
+                                fontSize: "14px",
+                                color: "#888",
+                                lineHeight: 1.75,
+                                maxWidth: "480px",
+                                margin: 0,
+                            }}>
+                                Our proprietary analytics engine tracks performance across every frame, every click, and every interaction. We provide the hardware and the data to turn potential into dominance.
                             </p>
-                        );
-                    })}
-                    <p className="animate-pulse text-white font-mono">_</p>
+                        </div>
+
+                        {/* Stats */}
+                        <div style={{
+                            display: "grid",
+                            gridTemplateColumns: "repeat(3, 1fr)",
+                            gap: "24px",
+                            paddingTop: "28px",
+                            borderTop: "1px solid rgba(255,255,255,0.06)",
+                        }}>
+                            {[
+                                { val: "99.9%", label: "Uptime Reliability" },
+                                { val: "2ms",   label: "Avg Latency" },
+                                { val: "24/7",  label: "Admin Support" },
+                            ].map(({ val, label }) => (
+                                <div key={label}>
+                                    <span style={{ ...MONO, fontSize: "clamp(20px, 2.5vw, 28px)", fontWeight: 800, color: "#fff", display: "block", marginBottom: "6px" }}>
+                                        {val}
+                                    </span>
+                                    <span style={{ ...MONO, fontSize: "9px", color: "#555", letterSpacing: "0.15em", textTransform: "uppercase", display: "block" }}>
+                                        {label}
+                                    </span>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Right: Two service cards stacked */}
+                    <div className="col-span-12 lg:col-span-5 flex flex-col gap-4">
+                        <ServiceCard
+                            Icon={FlaskConical}
+                            iconColor="#9D4EDD"
+                            iconBg="rgba(157,78,221,0.1)"
+                            iconBorder="rgba(157,78,221,0.2)"
+                            borderColor="rgba(157,78,221,0.25)"
+                            hoverBorder="rgba(157,78,221,0.5)"
+                            title="Talent Incubation"
+                            body="Customized growth paths for rising stars in the competitive gaming scene."
+                        />
+                        <ServiceCard
+                            Icon={Terminal}
+                            iconColor="#aaa"
+                            iconBg="rgba(255,255,255,0.04)"
+                            iconBorder="rgba(255,255,255,0.1)"
+                            borderColor="rgba(255,255,255,0.07)"
+                            hoverBorder="rgba(255,255,255,0.18)"
+                            title="Studio Protocol"
+                            body="Access to ultra-high-end production, broadcast, and streaming facilities."
+                        />
+                    </div>
+                </div>
+
+                {/* Terminal */}
+                <div
+                    id="terminal-section"
+                    style={{
+                        background: "#080808",
+                        border: "1px solid rgba(255,255,255,0.07)",
+                        padding: "24px 28px",
+                    }}
+                >
+                    {/* Header bar */}
+                    <div style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "12px",
+                        paddingBottom: "16px",
+                        marginBottom: "16px",
+                        borderBottom: "1px solid rgba(255,255,255,0.05)",
+                    }}>
+                        <div style={{ display: "flex", gap: "6px" }}>
+                            <div style={{ width: "10px", height: "10px", borderRadius: "50%", background: "#ef4444" }} />
+                            <div style={{ width: "10px", height: "10px", borderRadius: "50%", background: "#f59e0b" }} />
+                            <div style={{ width: "10px", height: "10px", borderRadius: "50%", background: "#10b981" }} />
+                        </div>
+                        <span style={{ ...MONO, fontSize: "9px", color: "#444", letterSpacing: "0.12em", textTransform: "uppercase" }}>
+                            cosq-labs ~ terminal
+                        </span>
+                    </div>
+
+                    {/* Log lines */}
+                    <div style={{ display: "flex", flexDirection: "column", gap: "4px", minHeight: "180px" }}>
+                        {logs.map((log, i) => {
+                            let color = "#555";
+                            if (log.startsWith("[WARNING]")) color = "#f59e0b";
+                            else if (log.startsWith("[SUCCESS]")) color = "#10b981";
+                            else if (log.startsWith(">")) color = "#e5e5e5";
+                            else if (log.startsWith("@")) color = "#818cf8";
+                            else if (log.startsWith("[SYSTEM]")) color = "#666";
+                            return (
+                                <p key={i} style={{ ...MONO, fontSize: "11px", color, lineHeight: "1.6", margin: 0 }}>
+                                    {log}
+                                </p>
+                            );
+                        })}
+                        <p style={{ ...MONO, fontSize: "11px", color: "#fff", margin: 0, animation: "pulse 1s step-end infinite" }}>▋</p>
+                    </div>
                 </div>
             </div>
         </section>
+    );
+}
+
+function ServiceCard({
+    Icon, iconColor, iconBg, iconBorder, borderColor, hoverBorder, title, body
+}: {
+    Icon: React.ElementType;
+    iconColor: string;
+    iconBg: string;
+    iconBorder: string;
+    borderColor: string;
+    hoverBorder: string;
+    title: string;
+    body: string;
+}) {
+    const [hovered, setHovered] = React.useState(false);
+
+    return (
+        <div
+            onMouseEnter={() => setHovered(true)}
+            onMouseLeave={() => setHovered(false)}
+            style={{
+                flex: 1,
+                background: "#0a0a0b",
+                border: `1px solid ${hovered ? hoverBorder : borderColor}`,
+                padding: "28px 32px",
+                transition: "border-color 0.25s",
+            }}
+        >
+            <div style={{ display: "flex", alignItems: "flex-start", gap: "18px" }}>
+                <div style={{
+                    width: "40px",
+                    height: "40px",
+                    minWidth: "40px",
+                    background: iconBg,
+                    border: `1px solid ${iconBorder}`,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    marginTop: "2px",
+                }}>
+                    <Icon size={18} style={{ color: iconColor }} />
+                </div>
+                <div>
+                    <h4 style={{
+                        fontFamily: "'Outfit', sans-serif",
+                        fontSize: "15px",
+                        fontWeight: 700,
+                        color: "#fff",
+                        textTransform: "uppercase",
+                        letterSpacing: "0.04em",
+                        margin: "0 0 8px 0",
+                    }}>
+                        {title}
+                    </h4>
+                    <p style={{
+                        fontFamily: "'Inter', sans-serif",
+                        fontSize: "13px",
+                        color: "#666",
+                        lineHeight: 1.7,
+                        margin: 0,
+                    }}>
+                        {body}
+                    </p>
+                </div>
+            </div>
+        </div>
     );
 }

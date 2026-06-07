@@ -1,12 +1,47 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { useState } from "react";
-import { ArrowLeft, Upload, Send, Sparkles } from "lucide-react";
-import cosqLogo from "@/assets/design-labs/9b7838d4ff4793e150de59dc4cda78b5c3207879.png";
+import { ArrowLeft, Upload, Send } from "lucide-react";
 
 interface ProjectSubmissionProps {
   onBack: () => void;
+}
+
+const MONO: React.CSSProperties = { fontFamily: "'JetBrains Mono', monospace" };
+const DISPLAY: React.CSSProperties = { fontFamily: "'Space Grotesk', sans-serif" };
+
+const inputStyle: React.CSSProperties = {
+  width: "100%",
+  background: "#080808",
+  border: "1px solid rgba(255,255,255,0.09)",
+  color: "#e5e2e1",
+  padding: "12px 16px",
+  fontSize: "14px",
+  fontFamily: "'Space Grotesk', sans-serif",
+  outline: "none",
+  borderRadius: 0,
+  transition: "border-color 0.2s",
+  appearance: "none" as const,
+};
+
+const labelStyle: React.CSSProperties = {
+  ...MONO,
+  fontSize: "10px",
+  fontWeight: 700,
+  letterSpacing: "0.18em",
+  textTransform: "uppercase" as const,
+  color: "#666",
+  display: "block",
+  marginBottom: "8px",
+};
+
+function Field({ label, children }: { label: string; children: React.ReactNode }) {
+  return (
+    <div style={{ display: "flex", flexDirection: "column" }}>
+      <label style={labelStyle}>{label}</label>
+      {children}
+    </div>
+  );
 }
 
 export function ProjectSubmission({ onBack }: ProjectSubmissionProps) {
@@ -14,154 +49,339 @@ export function ProjectSubmission({ onBack }: ProjectSubmissionProps) {
     companyName: "",
     contactName: "",
     email: "",
-    phone: "",
     projectType: "",
-    budget: "",
-    timeline: "",
     description: "",
-    requirements: "",
   });
 
-  const handleInputChange = (field: string, value: string) => {
+  const [focused, setFocused] = useState<string | null>(null);
+
+  const set = (field: string, value: string) =>
     setFormData(prev => ({ ...prev, [field]: value }));
-  };
+
+  const getFocusStyle = (name: string): React.CSSProperties => ({
+    ...inputStyle,
+    borderColor: focused === name ? "rgba(211,189,241,0.5)" : "rgba(255,255,255,0.09)",
+    boxShadow: focused === name ? "0 0 0 1px rgba(211,189,241,0.15)" : "none",
+  });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    alert("Thank you! Your project blueprint has been received. Our lead architect will reach out within 24 hours.");
+    alert("Project blueprint received. Our lead architect will reach out within 24 hours.");
     onBack();
   };
 
   return (
-    <div className="design-labs-theme min-h-screen bg-[#0a0a0a] text-[#e5e2e1]">
-      {/* Header */}
-      <nav className="sticky top-0 z-[100] bg-[#0a0a0a]/80 backdrop-blur-xl border-b border-outline-variant/10">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-          <div className="flex items-center gap-3">
-            <img src={cosqLogo.src} alt="Logo" className="w-10 h-10 object-contain" />
-            <span className="text-xl font-bold tracking-tight text-gradient">INITIATE PROJECT</span>
+    <div style={{ minHeight: "100vh", background: "#0a0a0a", color: "#e5e2e1" }}>
+
+      {/* Nav */}
+      <nav style={{
+        position: "sticky",
+        top: 0,
+        zIndex: 100,
+        background: "rgba(10,10,10,0.95)",
+        backdropFilter: "blur(16px)",
+        borderBottom: "1px solid rgba(255,255,255,0.05)",
+        padding: "0 40px",
+        height: "60px",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+        maxWidth: "100%",
+      }}>
+        <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+          <div style={{
+            width: "24px", height: "24px",
+            background: "rgba(211,189,241,0.15)",
+            border: "1px solid rgba(211,189,241,0.3)",
+            display: "flex", alignItems: "center", justifyContent: "center",
+          }}>
+            <div style={{ width: "8px", height: "8px", background: "#d3bdf1", borderRadius: "50%" }} />
           </div>
-          <button 
-            onClick={onBack} 
-            className="group flex items-center gap-2 text-sm font-bold text-gray-300 hover:text-white transition-colors cursor-pointer focus-visible:ring-2 focus-visible:ring-[#ff69b4] focus-visible:outline-none"
-          >
-            <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-            Back to Home
-          </button>
+          <span style={{ ...MONO, fontSize: "11px", fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", color: "#d3bdf1" }}>
+            Initiate Project
+          </span>
         </div>
+        <button
+          onClick={onBack}
+          style={{
+            display: "flex", alignItems: "center", gap: "8px",
+            ...MONO, fontSize: "11px", color: "#666", letterSpacing: "0.1em",
+            background: "none", border: "none", cursor: "pointer", outline: "none",
+            textTransform: "uppercase", transition: "color 0.2s",
+          }}
+          onMouseEnter={e => ((e.currentTarget as HTMLElement).style.color = "#e5e2e1")}
+          onMouseLeave={e => ((e.currentTarget as HTMLElement).style.color = "#666")}
+        >
+          <ArrowLeft size={14} />
+          Back to Home
+        </button>
       </nav>
 
-      <section className="py-24 bg-[#0a0a0a]">
-        <div className="container-centered max-w-4xl">
-          <div className="text-center mb-16">
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-none bg-[#9D4EDD]/15 border border-[#9D4EDD]/30 text-purple-200 text-xs font-mono uppercase tracking-widest mb-6"
-            >
-              <Sparkles className="w-3 h-3 text-[#ff69b4]" /> The Design Lab
-            </motion.div>
-            <h1 className="text-5xl font-extrabold text-white mb-6 tracking-tight">Let&apos;s Create <br /><span className="bg-gradient-to-r from-[#9D4EDD] to-[#ff69b4] bg-clip-text text-transparent italic font-extrabold">Something Iconic.</span></h1>
-            <p className="text-gray-300 text-base font-medium">Tell us about your brand vision and we&apos;ll help you bring it to life with world-class design.</p>
+      {/* Page layout: left column (info) + right column (form) */}
+      <div style={{
+        maxWidth: "1440px",
+        margin: "0 auto",
+        padding: "0 40px",
+        display: "grid",
+        gridTemplateColumns: "1fr 1.6fr",
+        gap: "80px",
+        alignItems: "start",
+        minHeight: "calc(100vh - 60px)",
+      }}
+        className="flex-col-mobile"
+      >
+
+        {/* Left — info panel */}
+        <div style={{ paddingTop: "80px", paddingBottom: "80px", position: "sticky", top: "80px" }}>
+          {/* Eyebrow */}
+          <div style={{
+            display: "inline-flex", alignItems: "center", gap: "8px",
+            padding: "5px 12px",
+            border: "1px solid rgba(211,189,241,0.25)",
+            background: "rgba(211,189,241,0.06)",
+            marginBottom: "28px",
+          }}>
+            <div style={{ width: "6px", height: "6px", borderRadius: "50%", background: "#00e292", boxShadow: "0 0 6px #00e292" }} />
+            <span style={{ ...MONO, fontSize: "9px", letterSpacing: "0.3em", textTransform: "uppercase", color: "#d3bdf1" }}>
+              The Design Lab
+            </span>
           </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="bg-[#0b0b0c] border border-outline-variant/15 p-8 md:p-16 rounded-none select-none text-left"
-          >
-            <form onSubmit={handleSubmit} className="space-y-10">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-                <div>
-                  <label className="block text-xs font-mono font-bold uppercase tracking-wider text-gray-300 mb-2.5">Company Name</label>
-                  <input
-                    required
-                    className="w-full bg-[#050505] border border-outline-variant/15 text-white rounded-none px-4 py-3 text-sm font-medium focus:border-[#ff69b4] focus:ring-2 focus:ring-[#ff69b4]/50 focus:outline-none transition-all"
-                    type="text"
-                    placeholder="E.g. Lumina Tech"
-                    value={formData.companyName}
-                    onChange={(e) => handleInputChange("companyName", e.target.value)}
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs font-mono font-bold uppercase tracking-wider text-gray-300 mb-2.5">Contact Person</label>
-                  <input
-                    required
-                    className="w-full bg-[#050505] border border-outline-variant/15 text-white rounded-none px-4 py-3 text-sm font-medium focus:border-[#ff69b4] focus:ring-2 focus:ring-[#ff69b4]/50 focus:outline-none transition-all"
-                    type="text"
-                    placeholder="John Doe"
-                    value={formData.contactName}
-                    onChange={(e) => handleInputChange("contactName", e.target.value)}
-                  />
-                </div>
-              </div>
+          {/* Headline */}
+          <h1 style={{
+            ...DISPLAY,
+            fontSize: "clamp(36px, 4vw, 56px)",
+            fontWeight: 800,
+            letterSpacing: "-0.03em",
+            lineHeight: 1,
+            color: "#e5e2e1",
+            margin: "0 0 12px 0",
+          }}>
+            Let&apos;s Create
+          </h1>
+          <h1 style={{
+            ...DISPLAY,
+            fontSize: "clamp(36px, 4vw, 56px)",
+            fontWeight: 800,
+            letterSpacing: "-0.03em",
+            lineHeight: 1,
+            fontStyle: "italic",
+            background: "linear-gradient(135deg, #d3bdf1 0%, #9D4EDD 50%, #ffb0d0 100%)",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            backgroundClip: "text",
+            margin: "0 0 32px 0",
+          }}>
+            Something Iconic.
+          </h1>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-                <div>
-                  <label className="block text-xs font-mono font-bold uppercase tracking-wider text-gray-300 mb-2.5">Email Address</label>
-                  <input
-                    required
-                    className="w-full bg-[#050505] border border-outline-variant/15 text-white rounded-none px-4 py-3 text-sm font-medium focus:border-[#ff69b4] focus:ring-2 focus:ring-[#ff69b4]/50 focus:outline-none transition-all"
-                    type="email"
-                    placeholder="john@example.com"
-                    value={formData.email}
-                    onChange={(e) => handleInputChange("email", e.target.value)}
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs font-mono font-bold uppercase tracking-wider text-gray-300 mb-2.5">What are we building?</label>
-                  <select
-                    required
-                    className="w-full bg-[#050505] border border-outline-variant/15 text-white rounded-none px-4 py-3 text-sm font-medium focus:border-[#ff69b4] focus:ring-2 focus:ring-[#ff69b4]/50 focus:outline-none transition-all"
-                    value={formData.projectType}
-                    onChange={(e) => handleInputChange("projectType", e.target.value)}
-                  >
-                    <option value="" className="bg-[#0b0b0c]">Select project type</option>
-                    <option value="Branding" className="bg-[#0b0b0c]">Brand Identity & Logo</option>
-                    <option value="UI/UX" className="bg-[#0b0b0c]">UI/UX & Web Design</option>
-                    <option value="3D" className="bg-[#0b0b0c]">3D & Motion Graphics</option>
-                    <option value="Full" className="bg-[#0b0b0c]">Full Design Partnership</option>
-                  </select>
-                </div>
-              </div>
+          <p style={{
+            ...DISPLAY,
+            fontSize: "15px",
+            color: "#555",
+            lineHeight: 1.7,
+            maxWidth: "380px",
+            margin: "0 0 48px 0",
+          }}>
+            Tell us about your brand vision and we&apos;ll help you bring it to life with world-class design and technical precision.
+          </p>
 
-              <div>
-                <label className="block text-xs font-mono font-bold uppercase tracking-wider text-gray-300 mb-2.5">Project Vision & Goals</label>
-                <textarea
-                  required
-                  rows={6}
-                  className="w-full bg-[#050505] border border-outline-variant/15 text-white rounded-none px-4 py-3.5 text-sm font-medium focus:border-[#ff69b4] focus:ring-2 focus:ring-[#ff69b4]/50 focus:outline-none transition-all resize-none"
-                  placeholder="What's the story behind this project? What impact do you want to make?"
-                  value={formData.description}
-                  onChange={(e) => handleInputChange("description", e.target.value)}
-                />
-              </div>
-
-              <div className="bg-[#050505] rounded-none p-8 border border-outline-variant/10">
-                <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 bg-white/5 border border-white/10 flex items-center justify-center flex-shrink-0">
-                    <Upload className="w-5 h-5 text-[#ff69b4]" />
-                  </div>
-                  <div>
-                    <h4 className="text-sm font-bold text-white mb-1 uppercase tracking-tight">Attachments</h4>
-                    <p className="text-xs text-gray-400 mb-4 font-medium">Briefs, moodboards, or current brand assets (Max 50MB).</p>
-                    <button type="button" className="text-xs font-mono font-bold text-white uppercase tracking-widest px-4 py-2 bg-transparent rounded-none border border-outline-variant/20 hover:border-white transition-colors cursor-pointer hover:scale-[1.02] active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-[#ff69b4] focus-visible:outline-none">Select Files</button>
-                  </div>
-                </div>
-              </div>
-
-              <button 
-                type="submit" 
-                className="w-full py-4 bg-[#ff69b4] hover:bg-[#ff85c2] text-white font-mono text-xs font-bold tracking-widest uppercase transition-all hover:shadow-[0_0_20px_rgba(255,105,180,0.4)] flex items-center justify-center cursor-pointer hover:scale-[1.02] active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-[#ff69b4] focus-visible:outline-none"
-              >
-                Transmit to Labs <Send className="ml-3 w-4 h-4" />
-              </button>
-
-              <p className="text-center text-[9px] font-mono text-gray-500 uppercase tracking-widest">Your data is secured by COSQ Systems.</p>
-            </form>
-          </motion.div>
+          {/* Three quick facts */}
+          {[
+            { label: "Response Time", value: "< 24 hrs" },
+            { label: "Projects Delivered", value: "250+" },
+            { label: "Satisfaction Rate", value: "99.2%" },
+          ].map(({ label, value }) => (
+            <div key={label} style={{
+              display: "flex", justifyContent: "space-between", alignItems: "baseline",
+              padding: "14px 0",
+              borderBottom: "1px solid rgba(255,255,255,0.05)",
+            }}>
+              <span style={{ ...MONO, fontSize: "10px", letterSpacing: "0.15em", textTransform: "uppercase", color: "#444" }}>{label}</span>
+              <span style={{ ...DISPLAY, fontSize: "18px", fontWeight: 700, color: "#e5e2e1" }}>{value}</span>
+            </div>
+          ))}
         </div>
-      </section>
+
+        {/* Right — form */}
+        <div style={{ paddingTop: "80px", paddingBottom: "80px" }}>
+          <form
+            onSubmit={handleSubmit}
+            style={{
+              background: "#0d0d0d",
+              border: "1px solid rgba(255,255,255,0.07)",
+              padding: "48px",
+              display: "flex",
+              flexDirection: "column",
+              gap: "28px",
+            }}
+          >
+            {/* Row 1 */}
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "20px" }}>
+              <Field label="Company Name">
+                <input
+                  required type="text" placeholder="E.g. Lumina Tech"
+                  value={formData.companyName}
+                  onChange={e => set("companyName", e.target.value)}
+                  onFocus={() => setFocused("company")}
+                  onBlur={() => setFocused(null)}
+                  style={getFocusStyle("company")}
+                />
+              </Field>
+              <Field label="Contact Person">
+                <input
+                  required type="text" placeholder="John Doe"
+                  value={formData.contactName}
+                  onChange={e => set("contactName", e.target.value)}
+                  onFocus={() => setFocused("contact")}
+                  onBlur={() => setFocused(null)}
+                  style={getFocusStyle("contact")}
+                />
+              </Field>
+            </div>
+
+            {/* Row 2 */}
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "20px" }}>
+              <Field label="Email Address">
+                <input
+                  required type="email" placeholder="you@company.com"
+                  value={formData.email}
+                  onChange={e => set("email", e.target.value)}
+                  onFocus={() => setFocused("email")}
+                  onBlur={() => setFocused(null)}
+                  style={getFocusStyle("email")}
+                />
+              </Field>
+              <Field label="What Are We Building?">
+                <select
+                  required
+                  value={formData.projectType}
+                  onChange={e => set("projectType", e.target.value)}
+                  onFocus={() => setFocused("type")}
+                  onBlur={() => setFocused(null)}
+                  style={{ ...getFocusStyle("type"), color: formData.projectType ? "#e5e2e1" : "#444" }}
+                >
+                  <option value="" style={{ background: "#0d0d0d", color: "#888" }}>Select project type</option>
+                  <option value="Branding" style={{ background: "#0d0d0d" }}>Brand Identity &amp; Logo</option>
+                  <option value="UI/UX" style={{ background: "#0d0d0d" }}>UI/UX &amp; Web Design</option>
+                  <option value="3D" style={{ background: "#0d0d0d" }}>3D &amp; Motion Graphics</option>
+                  <option value="Full" style={{ background: "#0d0d0d" }}>Full Design Partnership</option>
+                </select>
+              </Field>
+            </div>
+
+            {/* Divider */}
+            <div style={{ height: "1px", background: "rgba(255,255,255,0.05)" }} />
+
+            {/* Textarea */}
+            <Field label="Project Vision & Goals">
+              <textarea
+                required rows={6}
+                placeholder="What's the story behind this project? What impact do you want to make?"
+                value={formData.description}
+                onChange={e => set("description", e.target.value)}
+                onFocus={() => setFocused("desc")}
+                onBlur={() => setFocused(null)}
+                style={{ ...getFocusStyle("desc"), resize: "none", lineHeight: 1.7 }}
+              />
+            </Field>
+
+            {/* Attachments */}
+            <div style={{
+              background: "#080808",
+              border: "1px solid rgba(255,255,255,0.07)",
+              padding: "20px 24px",
+              display: "flex",
+              alignItems: "center",
+              gap: "20px",
+            }}>
+              <div style={{
+                width: "40px", height: "40px", minWidth: "40px",
+                background: "rgba(211,189,241,0.08)",
+                border: "1px solid rgba(211,189,241,0.2)",
+                display: "flex", alignItems: "center", justifyContent: "center",
+              }}>
+                <Upload size={16} style={{ color: "#d3bdf1" }} />
+              </div>
+              <div style={{ flex: 1 }}>
+                <p style={{ ...DISPLAY, fontSize: "13px", fontWeight: 700, color: "#e5e2e1", margin: "0 0 3px 0" }}>
+                  Attachments
+                </p>
+                <p style={{ ...MONO, fontSize: "10px", color: "#444", letterSpacing: "0.05em", margin: 0 }}>
+                  Briefs, moodboards, or current brand assets — Max 50MB
+                </p>
+              </div>
+              <button
+                type="button"
+                style={{
+                  ...MONO, fontSize: "10px", fontWeight: 700,
+                  letterSpacing: "0.15em", textTransform: "uppercase",
+                  padding: "8px 16px",
+                  border: "1px solid rgba(255,255,255,0.15)",
+                  color: "#aaa",
+                  background: "transparent",
+                  cursor: "pointer",
+                  outline: "none",
+                  transition: "border-color 0.2s, color 0.2s",
+                  whiteSpace: "nowrap" as const,
+                }}
+                onMouseEnter={e => {
+                  (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.4)";
+                  (e.currentTarget as HTMLElement).style.color = "#fff";
+                }}
+                onMouseLeave={e => {
+                  (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.15)";
+                  (e.currentTarget as HTMLElement).style.color = "#aaa";
+                }}
+              >
+                Select Files
+              </button>
+            </div>
+
+            {/* Divider */}
+            <div style={{ height: "1px", background: "rgba(255,255,255,0.05)" }} />
+
+            {/* Submit */}
+            <button
+              type="submit"
+              style={{
+                display: "flex", alignItems: "center", justifyContent: "center", gap: "12px",
+                padding: "16px 32px",
+                background: "#d3bdf1",
+                color: "#0a0a0a",
+                ...MONO, fontSize: "11px", fontWeight: 800,
+                letterSpacing: "0.2em", textTransform: "uppercase",
+                border: "none", cursor: "pointer", outline: "none",
+                transition: "background 0.2s, box-shadow 0.2s",
+              }}
+              onMouseEnter={e => {
+                (e.currentTarget as HTMLElement).style.background = "#c4a8f0";
+                (e.currentTarget as HTMLElement).style.boxShadow = "0 0 24px rgba(211,189,241,0.3)";
+              }}
+              onMouseLeave={e => {
+                (e.currentTarget as HTMLElement).style.background = "#d3bdf1";
+                (e.currentTarget as HTMLElement).style.boxShadow = "none";
+              }}
+            >
+              Transmit to Labs <Send size={14} />
+            </button>
+
+            <p style={{ ...MONO, fontSize: "9px", textAlign: "center", color: "#333", letterSpacing: "0.18em", textTransform: "uppercase", margin: 0 }}>
+              Your data is secured by COSQ Systems.
+            </p>
+          </form>
+        </div>
+      </div>
+
+      <style>{`
+        @media (max-width: 900px) {
+          .flex-col-mobile {
+            grid-template-columns: 1fr !important;
+            gap: 0 !important;
+            padding: 0 24px !important;
+          }
+        }
+      `}</style>
     </div>
   );
 }

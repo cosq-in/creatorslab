@@ -70,10 +70,10 @@ export function CompanyLanding({ onNavigate }: CompanyLandingProps) {
 
       {/* ── TERMINAL HEADER ─────────────────────────────────────────── */}
       <header
-        className="fixed top-0 w-full z-[60] border-b border-[#564149]/10 backdrop-blur-md"
-        style={{ backgroundColor: "rgba(10,10,10,0.92)" }}
+        className="fixed top-0 w-full z-[60] border-b border-white/[0.04] backdrop-blur-md"
+        style={{ backgroundColor: "rgba(10,10,10,0.95)" }}
       >
-        <div className="max-w-[1440px] mx-auto px-10 h-12 flex items-center justify-between font-mono text-[10px] tracking-widest uppercase text-[#dcbfc9]/60">
+        <div className="max-w-[1440px] mx-auto px-6 lg:px-10 h-10 flex items-center justify-between font-mono text-[10px] tracking-widest uppercase text-[#dcbfc9]/50">
           <div className="flex gap-6">
             <span>SYS_STATUS: OPTIMAL</span>
             <span>LATENCY: 12ms</span>
@@ -91,24 +91,24 @@ export function CompanyLanding({ onNavigate }: CompanyLandingProps) {
 
       {/* ── TOP NAV ──────────────────────────────────────────────────── */}
       <nav
-        className="fixed top-12 w-full z-50 border-b border-[#564149]/10 backdrop-blur-xl"
-        style={{ backgroundColor: "rgba(19,19,19,0.85)" }}
+        className="fixed top-10 w-full z-50 border-b border-white/[0.05] backdrop-blur-xl"
+        style={{ backgroundColor: "rgba(10,10,10,0.92)" }}
       >
-        <div className="flex justify-between items-center h-20 px-10 max-w-[1440px] mx-auto">
+        <div className="flex justify-between items-center h-16 lg:h-[68px] px-6 lg:px-10 max-w-[1440px] mx-auto">
           {/* Logo */}
           <button
             onClick={() => window.location.reload()}
-            className="font-bold tracking-tighter text-white uppercase text-[32px] leading-[40px] hover:opacity-80 transition-opacity cursor-pointer"
-            style={{ fontFamily: "'Space Grotesk', sans-serif", letterSpacing: "0.02em" }}
+            className="font-bold text-white uppercase hover:opacity-80 transition-opacity cursor-pointer select-none shrink-0"
+            style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "20px", letterSpacing: "-0.01em", border: "none", background: "none", outline: "none" }}
           >
             COSQ LABS
           </button>
 
           {/* Links */}
-          <div className="hidden md:flex gap-8">
+          <div className="hidden md:flex gap-8 lg:gap-10 items-center">
             <span
-              className="font-mono text-[12px] tracking-wider uppercase cursor-pointer pb-1"
-              style={{ color: "#d3bdf1", borderBottom: "2px solid #d3bdf1", fontFamily: "'JetBrains Mono', monospace" }}
+              className="font-mono text-[11px] tracking-widest uppercase cursor-pointer"
+              style={{ color: "#d3bdf1", borderBottom: "1px solid rgba(211,189,241,0.5)", paddingBottom: "2px", fontFamily: "'JetBrains Mono', monospace" }}
             >
               Digital Labs
             </span>
@@ -121,8 +121,8 @@ export function CompanyLanding({ onNavigate }: CompanyLandingProps) {
               <button
                 key={label}
                 onClick={action}
-                className="font-mono text-[12px] tracking-wider uppercase text-[#dcbfc9] hover:text-white transition-colors cursor-pointer"
-                style={{ fontFamily: "'JetBrains Mono', monospace" }}
+                className="font-mono text-[11px] tracking-widest uppercase text-[#666] hover:text-white transition-colors cursor-pointer"
+                style={{ fontFamily: "'JetBrains Mono', monospace", border: "none", background: "none", outline: "none", padding: 0 }}
               >
                 {label}
               </button>
@@ -130,34 +130,39 @@ export function CompanyLanding({ onNavigate }: CompanyLandingProps) {
           </div>
 
           {/* Actions */}
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-3 shrink-0">
             <button
               onClick={() => onNavigate("submit-project")}
-              className="px-6 py-2 font-mono text-[12px] tracking-widest uppercase cursor-pointer active:scale-95 transition-all hover:opacity-80"
+              className="hidden sm:block font-mono text-[11px] tracking-widest uppercase cursor-pointer active:scale-95 transition-all hover:bg-white/5"
               style={{
-                backgroundColor: "#ffb0d0",
-                color: "#63003d",
+                padding: "7px 18px",
+                border: "1px solid rgba(255,255,255,0.15)",
+                color: "#e5e2e1",
+                backgroundColor: "transparent",
                 fontFamily: "'JetBrains Mono', monospace",
+                outline: "none",
               }}
             >
               Inquire
             </button>
             <button
-              className="text-[#e5e2e1] cursor-pointer hover:text-white transition-colors"
+              className="text-[#666] cursor-pointer hover:text-white transition-colors p-1"
               onClick={() => window.location.reload()}
+              style={{ border: "none", background: "none", outline: "none" }}
             >
-              <Menu className="w-6 h-6" />
+              <Menu className="w-5 h-5" />
             </button>
           </div>
         </div>
       </nav>
 
       {/* ── MAIN ─────────────────────────────────────────────────────── */}
-      <main className="pt-32">
+      <main style={{ paddingTop: "calc(40px + 68px)" }}>
 
         {/* ── HERO ─────────────────────────────────────────────────── */}
         <section
-          className="relative min-h-[921px] flex flex-col justify-center px-10 max-w-[1440px] mx-auto dl-hero-container"
+          className="relative flex flex-col justify-center dl-hero-container"
+          style={{ minHeight: "88vh", padding: "80px 40px 100px", maxWidth: "1440px", margin: "0 auto" }}
         >
           {/* Background image — right half */}
           <div className="absolute right-0 top-0 w-1/2 h-full -z-10 opacity-40">
@@ -261,8 +266,8 @@ export function CompanyLanding({ onNavigate }: CompanyLandingProps) {
         </section>
 
         {/* ── STATS SECTION ────────────────────────────────────────── */}
-        <section className="py-16 dl-carbon-bg border-y border-[#564149]/10">
-          <div className="max-w-[1440px] mx-auto px-10 grid grid-cols-2 md:grid-cols-4 gap-6">
+        <section style={{ padding: "64px 40px", background: "#0d0d0d", borderTop: "1px solid rgba(255,255,255,0.05)", borderBottom: "1px solid rgba(255,255,255,0.05)" }}>
+          <div className="max-w-[1440px] mx-auto grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-6">
             {[
               { num: "250+", label: "Projects Deployed",  id: "001", color: "#ffb0d0", barW: "w-2/3" },
               { num: "80+",  label: "Global Clients",     id: "002", color: "#00e292", barW: "w-1/2" },
@@ -310,7 +315,7 @@ export function CompanyLanding({ onNavigate }: CompanyLandingProps) {
         </section>
 
         {/* ── SERVICES / CAPABILITIES ──────────────────────────────── */}
-        <section className="py-16 max-w-[1440px] mx-auto px-10">
+        <section style={{ padding: "80px 40px", maxWidth: "1440px", margin: "0 auto" }}>
           {/* Section header */}
           <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
             <div className="space-y-4">
@@ -570,10 +575,10 @@ export function CompanyLanding({ onNavigate }: CompanyLandingProps) {
         </section>
 
         {/* ── CTA SECTION ──────────────────────────────────────────── */}
-        <section className="py-16 px-10 relative overflow-hidden">
+        <section style={{ padding: "0 40px 80px", position: "relative", overflow: "hidden" }}>
           <div
-            className="max-w-[1440px] mx-auto dl-glass-panel p-20 text-center space-y-6 relative z-10"
-            style={{ border: "1px solid rgba(255,176,208,0.2)" }}
+            className="max-w-[1440px] mx-auto dl-glass-panel text-center relative z-10"
+            style={{ border: "1px solid rgba(255,176,208,0.15)", padding: "80px 40px", display: "flex", flexDirection: "column", gap: "20px", alignItems: "center" }}
           >
             {/* Blur orbs */}
             <div
@@ -634,59 +639,51 @@ export function CompanyLanding({ onNavigate }: CompanyLandingProps) {
 
       {/* ── FOOTER ───────────────────────────────────────────────────── */}
       <footer
-        className="w-full py-16 mt-16 border-t border-[#564149]/5"
-        style={{ backgroundColor: "#131313" }}
+        style={{ backgroundColor: "#0a0a0a", borderTop: "1px solid rgba(255,255,255,0.05)", padding: "36px 40px" }}
       >
-        <div className="flex flex-col md:flex-row justify-between items-center px-10 max-w-[1440px] mx-auto gap-6">
-          {/* Left */}
-          <div className="flex flex-col gap-3">
+        <div className="flex flex-col md:flex-row justify-between items-center max-w-[1440px] mx-auto gap-5" style={{ flexWrap: "wrap" }}>
+          {/* Left — logo + copyright on one line */}
+          <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
             <div
-              className="font-bold text-[#e5e2e1]"
-              style={{
-                fontFamily: "'Space Grotesk', sans-serif",
-                fontSize: "32px",
-                lineHeight: "40px",
-                letterSpacing: "0.02em",
-              }}
+              className="font-bold text-white uppercase"
+              style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: "18px", letterSpacing: "-0.01em" }}
             >
               COSQ LABS
             </div>
             <p
-              className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#dcbfc9] max-w-xs text-center md:text-left"
-              style={{ fontFamily: "'JetBrains Mono', monospace" }}
+              className="font-mono uppercase"
+              style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "9px", letterSpacing: "0.15em", color: "#444" }}
             >
-              © 2024 COSQ LABS. ALL RIGHTS RESERVED. OPERATING UNDER DIGITAL
-              CRAFTSMANSHIP PROTOCOLS.
+              © 2024 COSQ LABS. ALL RIGHTS RESERVED.
             </p>
           </div>
 
           {/* Centre links */}
-          <div className="flex flex-wrap justify-center gap-10">
-            {["Privacy Policy", "Terms of Service", "Brand Guidelines", "Investor Relations"].map(
-              (link) => (
-                <a
-                  key={link}
-                  href="#"
-                  className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#dcbfc9] hover:text-[#d3bdf1] transition-colors"
-                  style={{ fontFamily: "'JetBrains Mono', monospace" }}
-                >
-                  {link}
-                </a>
-              )
-            )}
+          <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "24px 32px" }}>
+            {["Privacy Policy", "Terms of Service", "Brand Guidelines", "Investor Relations"].map((link) => (
+              <a
+                key={link}
+                href="#"
+                className="font-mono uppercase transition-colors"
+                style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: "10px", letterSpacing: "0.14em", color: "#444", textDecoration: "none" }}
+                onMouseEnter={e => ((e.currentTarget as HTMLElement).style.color = "#aaa")}
+                onMouseLeave={e => ((e.currentTarget as HTMLElement).style.color = "#444")}
+              >
+                {link}
+              </a>
+            ))}
           </div>
 
           {/* Right icons */}
-          <div className="flex gap-6">
-            <a href="#" className="text-[#dcbfc9] hover:text-[#ffb0d0] transition-colors">
-              <Share2 className="w-5 h-5" />
-            </a>
-            <a href="#" className="text-[#dcbfc9] hover:text-[#ffb0d0] transition-colors">
-              <Mail className="w-5 h-5" />
-            </a>
-            <a href="#" className="text-[#dcbfc9] hover:text-[#ffb0d0] transition-colors">
-              <Terminal className="w-5 h-5" />
-            </a>
+          <div style={{ display: "flex", gap: "20px" }}>
+            {[Share2, Mail, Terminal].map((Icon, i) => (
+              <a key={i} href="#" className="transition-colors" style={{ color: "#444" }}
+                onMouseEnter={e => ((e.currentTarget as HTMLElement).style.color = "#ffb0d0")}
+                onMouseLeave={e => ((e.currentTarget as HTMLElement).style.color = "#444")}
+              >
+                <Icon size={16} />
+              </a>
+            ))}
           </div>
         </div>
       </footer>

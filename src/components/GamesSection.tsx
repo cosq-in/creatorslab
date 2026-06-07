@@ -3,105 +3,203 @@
 import React from "react";
 import { ChevronLeft, ChevronRight, Grid, Share2, Zap, Sliders } from "lucide-react";
 
+const SECTION_PADDING = { padding: "80px 24px" };
+const MAX_W = { maxWidth: "1440px", margin: "0 auto" };
+
 export default function GamesSection() {
     const cartridges = [
-        {
-            id: "001_PROTO",
-            title: "VALORANT",
-            tag: "TACTICAL PROTOCOL",
-            themeColor: "border-[#9D4EDD]",
-            image: "https://lh3.googleusercontent.com/aida-public/AB6AXuDVLRY6XtUsRwrSrgNENmgPerfbOvQGlMFJuPj0uNopIvFJBDH_eoKRG9-FTFjtXhEzFEr1HaNWBuNVpPnkgb8Mce27edoxyEbfZ0WqQ4XYUUdFwNTyTdAAuhJDkA1yqeOzrL2psHGmgCB2_TzSrzLSc7ZZ9bV8RInK2Ic8qtsvsta8tbCCdW_6aKt50UtvECa-IGPvqy8KB0-KxNTo3-XLbGRfQxTBxQAvsPCc_bJ7cA_CGgQCKJ55PD5A0Q_UPHPcRAui9mAGM5c",
-            icon: Grid,
-        },
-        {
-            id: "002_PROTO",
-            title: "MARVEL RIVALS",
-            tag: "HERO PROTOCOL",
-            themeColor: "border-[#9D4EDD]",
-            image: "https://lh3.googleusercontent.com/aida-public/AB6AXuBb2ArEE38oLHump2oM_S1nR22geu36quG-rcJ3aH-VHBoitSXunTJRht6gf7fCBFZfaykc6yCQWjN3qtEHm4Ihw-h4jYwOylLvBTozunGHrxgPycjY8NcO05F-CJiR9F_x29LadhAvOQbAERhZgEOTOVTcgNgJbv2Nb9HVB9_dK3MwIoiW0C7CNRdJH4a-o0MgllySNCtOe6EHewye7Qzvj4AwjXPWut6xR4OAFQMdTSY-0acVtXfF-_FZ3SrF5Zn4Bu8bo1Jsnag",
-            icon: Share2,
-        },
-        {
-            id: "003_PROTO",
-            title: "APEX LEGENDS",
-            tag: "MOVEMENT PROTOCOL",
-            themeColor: "border-[#9D4EDD]",
-            image: "https://lh3.googleusercontent.com/aida-public/AB6AXuD6u7LAT25_-1b-lWtOCKPbMnZs8PC4VyrfnqnVxCr2kcsCJ6EA_6nIYde_sToyVF03uIgI7-hJ4HTuV7_0yedIRrDaNtWHwXl9l__CBMR9k2IuNdczJaxeYuiCGkRL4R2hn41F4r9rov_QZGvxbGuNy9r1dDFsNnyzRd86h3qbxXH7IozJr-QrfrNsGYyCc-64N5GIEjLH38w1orX3RYRG0sgW-uwhKjeETcuVVYx77kFr-JZmI5sxU_rZ1Hb6Xt3QIE26dD3exDg",
-            icon: Zap,
-        },
-        {
-            id: "004_PROTO",
-            title: "THE FINALS",
-            tag: "DESTRUCTION PROTOCOL",
-            themeColor: "border-[#9D4EDD]",
-            image: "https://lh3.googleusercontent.com/aida-public/AB6AXuBg8WEYdcKN8zVWcTkdNBlnd7yt5Z2PeyeSq2Z7Yc6koJPbSxBAX5ArAvSqOZSuT4ymi9YLh0qKCBxkVeAmg_uTy6qBg68anTNX5DoEszDCL5g1cNwJYQqd-v6ovSQyQYY1WQ3TiHDhXMo8A-BXrw5zg2ZiNsyQZH8Z5NsW5fBEPtzAJf14UV92aKmpzPwkiacG3fzy2d3fiGY-BepmtQmJjcHB7b2NTKHmLn2f_PHmqH4ausq3wLTl6NBIqgptWFKV7vtiFIhQUX4",
-            icon: Sliders,
-        }
+        { id: "001", title: "VALORANT",      tag: "TACTICAL PROTOCOL",     image: "https://lh3.googleusercontent.com/aida-public/AB6AXuDVLRY6XtUsRwrSrgNENmgPerfbOvQGlMFJuPj0uNopIvFJBDH_eoKRG9-FTFjtXhEzFEr1HaNWBuNVpPnkgb8Mce27edoxyEbfZ0WqQ4XYUUdFwNTyTdAAuhJDkA1yqeOzrL2psHGmgCB2_TzSrzLSc7ZZ9bV8RInK2Ic8qtsvsta8tbCCdW_6aKt50UtvECa-IGPvqy8KB0-KxNTo3-XLbGRfQxTBxQAvsPCc_bJ7cA_CGgQCKJ55PD5A0Q_UPHPcRAui9mAGM5c", Icon: Grid },
+        { id: "002", title: "MARVEL RIVALS", tag: "HERO PROTOCOL",         image: "https://lh3.googleusercontent.com/aida-public/AB6AXuBb2ArEE38oLHump2oM_S1nR22geu36quG-rcJ3aH-VHBoitSXunTJRht6gf7fCBFZfaykc6yCQWjN3qtEHm4Ihw-h4jYwOylLvBTozunGHrxgPycjY8NcO05F-CJiR9F_x29LadhAvOQbAERhZgEOTOVTcgNgJbv2Nb9HVB9_dK3MwIoiW0C7CNRdJH4a-o0MgllySNCtOe6EHewye7Qzvj4AwjXPWut6xR4OAFQMdTSY-0acVtXfF-_FZ3SrF5Zn4Bu8bo1Jsnag", Icon: Share2 },
+        { id: "003", title: "APEX LEGENDS",  tag: "MOVEMENT PROTOCOL",     image: "https://lh3.googleusercontent.com/aida-public/AB6AXuD6u7LAT25_-1b-lWtOCKPbMnZs8PC4VyrfnqnVxCr2kcsCJ6EA_6nIYde_sToyVF03uIgI7-hJ4HTuV7_0yedIRrDaNtWHwXl9l__CBMR9k2IuNdczJaxeYuiCGkRL4R2hn41F4r9rov_QZGvxbGuNy9r1dDFsNnyzRd86h3qbxXH7IozJr-QrfrNsGYyCc-64N5GIEjLH38w1orX3RYRG0sgW-uwhKjeETcuVVYx77kFr-JZmI5sxU_rZ1Hb6Xt3QIE26dD3exDg", Icon: Zap },
+        { id: "004", title: "THE FINALS",    tag: "DESTRUCTION PROTOCOL",  image: "https://lh3.googleusercontent.com/aida-public/AB6AXuBg8WEYdcKN8zVWcTkdNBlnd7yt5Z2PeyeSq2Z7Yc6koJPbSxBAX5ArAvSqOZSuT4ymi9YLh0qKCBxkVeAmg_uTy6qBg68anTNX5DoEszDCL5g1cNwJYQqd-v6ovSQyQYY1WQ3TiHDhXMo8A-BXrw5zg2ZiNsyQZH8Z5NsW5fBEPtzAJf14UV92aKmpzPwkiacG3fzy2d3fiGY-BepmtQmJjcHB7b2NTKHmLn2f_PHmqH4ausq3wLTl6NBIqgptWFKV7vtiFIhQUX4", Icon: Sliders },
     ];
 
     return (
-        <section id="games-showcase" className="py-24 bg-[#050505] px-6 lg:px-margin-desktop max-w-container-max mx-auto border-t border-outline-variant/10">
-            {/* Header Section */}
-            <div className="flex justify-between items-end mb-12">
-                <div className="text-left">
-                    <h2 className="font-display-lg text-lg font-bold text-white uppercase tracking-[0.2em]">
-                        GAMES SHOWCASE
-                    </h2>
-                    <p className="font-mono text-[10px] text-gray-400 uppercase tracking-widest mt-1">
-                        ACTIVE PROTOCOLS FOR MAJOR COMPETITIVE TITLES
-                    </p>
-                </div>
-                {/* Carousel Navigation Buttons */}
-                <div className="flex gap-2 text-white">
-                    <button className="w-8 h-8 rounded-none border border-outline-variant/20 hover:border-white hover:bg-white/5 transition-all flex items-center justify-center cursor-pointer">
-                        <ChevronLeft className="w-4 h-4" />
-                    </button>
-                    <button className="w-8 h-8 rounded-none border border-outline-variant/20 hover:border-white hover:bg-white/5 transition-all flex items-center justify-center cursor-pointer">
-                        <ChevronRight className="w-4 h-4" />
-                    </button>
-                </div>
-            </div>
+        <section
+            id="games-showcase"
+            style={{
+                ...SECTION_PADDING,
+                background: "#050505",
+                borderTop: "1px solid rgba(255,255,255,0.05)",
+            }}
+        >
+            <div style={{ ...MAX_W, paddingLeft: "24px", paddingRight: "24px" }}>
 
-            {/* static Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                {cartridges.map((cartridge) => {
-                    const IconComponent = cartridge.icon;
-                    return (
-                        <div 
-                            key={cartridge.id} 
-                            className="bg-[#0b0b0c] border border-outline-variant/15 p-4 flex flex-col group hover:border-[#9D4EDD]/45 transition-all duration-300 relative select-none rounded-none"
-                        >
-                            {/* Top Left Label */}
-                            <div className="absolute top-2 left-2 z-20 px-2 py-0.5 bg-[#050505]/80 border border-outline-variant/20 text-[9px] font-mono text-[#a5b4fc] tracking-wider uppercase">
-                                {cartridge.id}
-                            </div>
-                            
-                            {/* Image Container */}
-                            <div className="aspect-[4/5] bg-surface-container-highest flex-grow flex items-center justify-center border border-outline-variant/10 overflow-hidden relative mb-4">
-                                <img
-                                    alt={cartridge.title}
-                                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500"
-                                    src={cartridge.image}
-                                />
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60"></div>
-                            </div>
-                            
-                            {/* Title & Metadata */}
-                            <div className="text-left space-y-1">
-                                <h3 className="font-display-lg text-lg font-bold text-white tracking-wider">
-                                    {cartridge.title}
-                                </h3>
-                                <div className="flex justify-between items-center pt-1 border-t border-outline-variant/10">
-                                    <span className="font-mono text-[9px] text-[#a5b4fc] tracking-wider">
-                                        {cartridge.tag}
-                                    </span>
-                                    <IconComponent className="w-3.5 h-3.5 text-zinc-500 group-hover:text-[#9D4EDD] transition-colors" />
-                                </div>
-                            </div>
-                        </div>
-                    );
-                })}
+                {/* Header */}
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: "40px" }}>
+                    <div>
+                        <p style={{
+                            fontFamily: "'JetBrains Mono', monospace",
+                            fontSize: "10px",
+                            color: "#a5b4fc",
+                            letterSpacing: "0.28em",
+                            textTransform: "uppercase",
+                            marginBottom: "8px",
+                            opacity: 0.7,
+                        }}>
+                            Active Protocols
+                        </p>
+                        <h2 style={{
+                            fontFamily: "'Outfit', sans-serif",
+                            fontSize: "clamp(20px, 2.5vw, 28px)",
+                            fontWeight: 700,
+                            color: "#fff",
+                            letterSpacing: "-0.02em",
+                            textTransform: "uppercase",
+                            margin: 0,
+                        }}>
+                            Games Showcase
+                        </h2>
+                    </div>
+                    <div style={{ display: "flex", gap: "6px" }}>
+                        {[ChevronLeft, ChevronRight].map((Icon, i) => (
+                            <button
+                                key={i}
+                                style={{
+                                    width: "36px",
+                                    height: "36px",
+                                    display: "flex",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                    border: "1px solid rgba(255,255,255,0.1)",
+                                    background: "transparent",
+                                    color: "#888",
+                                    cursor: "pointer",
+                                    outline: "none",
+                                    transition: "border-color 0.2s, color 0.2s",
+                                }}
+                                onMouseEnter={e => {
+                                    (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.3)";
+                                    (e.currentTarget as HTMLElement).style.color = "#fff";
+                                }}
+                                onMouseLeave={e => {
+                                    (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.1)";
+                                    (e.currentTarget as HTMLElement).style.color = "#888";
+                                }}
+                            >
+                                <Icon size={16} />
+                            </button>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Cards */}
+                <div style={{
+                    display: "grid",
+                    gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))",
+                    gap: "16px",
+                }}>
+                    {cartridges.map(({ id, title, tag, image, Icon }) => (
+                        <GameCard key={id} id={id} title={title} tag={tag} image={image} Icon={Icon} />
+                    ))}
+                </div>
             </div>
         </section>
+    );
+}
+
+function GameCard({ id, title, tag, image, Icon }: {
+    id: string;
+    title: string;
+    tag: string;
+    image: string;
+    Icon: React.ElementType;
+}) {
+    const [hovered, setHovered] = React.useState(false);
+
+    return (
+        <div
+            onMouseEnter={() => setHovered(true)}
+            onMouseLeave={() => setHovered(false)}
+            style={{
+                background: "#0a0a0b",
+                border: `1px solid ${hovered ? "rgba(157,78,221,0.45)" : "rgba(255,255,255,0.07)"}`,
+                padding: "12px",
+                display: "flex",
+                flexDirection: "column",
+                cursor: "pointer",
+                position: "relative",
+                transition: "border-color 0.3s, box-shadow 0.3s",
+                boxShadow: hovered ? "0 0 24px rgba(157,78,221,0.1)" : "none",
+            }}
+        >
+            {/* ID badge */}
+            <div style={{
+                position: "absolute",
+                top: "10px",
+                left: "10px",
+                zIndex: 2,
+                padding: "2px 8px",
+                background: "rgba(0,0,0,0.75)",
+                border: "1px solid rgba(255,255,255,0.1)",
+                fontFamily: "'JetBrains Mono', monospace",
+                fontSize: "9px",
+                color: "#a5b4fc",
+                letterSpacing: "0.1em",
+                textTransform: "uppercase",
+            }}>
+                {id}
+            </div>
+
+            {/* Image */}
+            <div style={{ aspectRatio: "4/5", overflow: "hidden", position: "relative", background: "#111", marginBottom: "12px" }}>
+                <img
+                    src={image}
+                    alt={title}
+                    style={{
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "cover",
+                        filter: hovered ? "grayscale(0%)" : "grayscale(80%)",
+                        transform: hovered ? "scale(1.04)" : "scale(1)",
+                        transition: "filter 0.5s ease, transform 0.5s ease",
+                    }}
+                />
+                <div style={{
+                    position: "absolute",
+                    inset: 0,
+                    background: "linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 50%)",
+                }} />
+            </div>
+
+            {/* Text */}
+            <div style={{ padding: "0 2px" }}>
+                <h3 style={{
+                    fontFamily: "'Outfit', sans-serif",
+                    fontSize: "15px",
+                    fontWeight: 700,
+                    color: "#fff",
+                    letterSpacing: "-0.01em",
+                    margin: "0 0 8px 0",
+                }}>
+                    {title}
+                </h3>
+                <div style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    paddingTop: "8px",
+                    borderTop: "1px solid rgba(255,255,255,0.06)",
+                }}>
+                    <span style={{
+                        fontFamily: "'JetBrains Mono', monospace",
+                        fontSize: "9px",
+                        color: "#a5b4fc",
+                        letterSpacing: "0.1em",
+                        textTransform: "uppercase",
+                        opacity: 0.8,
+                    }}>
+                        {tag}
+                    </span>
+                    <Icon
+                        size={14}
+                        style={{
+                            color: hovered ? "#9D4EDD" : "#444",
+                            transition: "color 0.3s",
+                        }}
+                    />
+                </div>
+            </div>
+        </div>
     );
 }

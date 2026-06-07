@@ -3,47 +3,72 @@
 import React from "react";
 
 export default function Footer() {
+    const links = ["Privacy Policy", "Terms of Service", "Brand Guidelines", "Investor Relations"];
+
     return (
-        <footer className="w-full py-12 bg-[#050505] border-t border-outline-variant/10 text-left">
-            <div className="flex flex-col md:flex-row justify-between items-center px-6 lg:px-margin-desktop max-w-container-max mx-auto gap-8 w-full">
-                {/* Left Side */}
-                <div className="flex flex-col gap-2">
-                    <div className="font-headline-md text-2xl font-bold text-white tracking-tighter uppercase">
-                        COSQ LABS
-                    </div>
+        <footer
+            style={{
+                background: "#050505",
+                borderTop: "1px solid rgba(255,255,255,0.05)",
+                padding: "36px 24px",
+            }}
+        >
+            <div
+                style={{
+                    maxWidth: "1440px",
+                    margin: "0 auto",
+                    display: "flex",
+                    flexWrap: "wrap",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    gap: "20px",
+                }}
+            >
+                {/* Logo */}
+                <div style={{
+                    fontFamily: "'Outfit', sans-serif",
+                    fontSize: "18px",
+                    fontWeight: 700,
+                    color: "#f0eef0",
+                    letterSpacing: "-0.01em",
+                    textTransform: "uppercase",
+                    userSelect: "none",
+                }}>
+                    COSQ LABS
                 </div>
 
-                {/* Center Links */}
-                <div className="flex flex-wrap justify-center gap-6 md:gap-10 font-mono text-[10px] uppercase tracking-wider">
-                    <a
-                        className="text-gray-400 hover:text-white transition-colors"
-                        href="#"
-                    >
-                        Privacy Policy
-                    </a>
-                    <a
-                        className="text-gray-400 hover:text-white transition-colors"
-                        href="#"
-                    >
-                        Terms of Service
-                    </a>
-                    <a
-                        className="text-gray-400 hover:text-white transition-colors"
-                        href="#"
-                    >
-                        Brand Guidelines
-                    </a>
-                    <a
-                        className="text-gray-400 hover:text-white transition-colors"
-                        href="#"
-                    >
-                        Investor Relations
-                    </a>
+                {/* Links */}
+                <div style={{ display: "flex", flexWrap: "wrap", gap: "24px 32px", justifyContent: "center" }}>
+                    {links.map(link => (
+                        <a
+                            key={link}
+                            href="#"
+                            style={{
+                                fontFamily: "'JetBrains Mono', monospace",
+                                fontSize: "10px",
+                                color: "#444",
+                                letterSpacing: "0.14em",
+                                textTransform: "uppercase",
+                                textDecoration: "none",
+                                transition: "color 0.2s",
+                            }}
+                            onMouseEnter={e => ((e.currentTarget as HTMLElement).style.color = "#aaa")}
+                            onMouseLeave={e => ((e.currentTarget as HTMLElement).style.color = "#444")}
+                        >
+                            {link}
+                        </a>
+                    ))}
                 </div>
 
-                {/* Right Side */}
-                <div className="font-mono text-[9px] uppercase tracking-widest text-gray-500 text-center md:text-right max-w-xs">
-                    © 2026 COSQ LABS. ALL RIGHTS RESERVED. OPERATING UNDER DIGITAL CRAFTSMANSHIP PROTOCOLS.
+                {/* Copyright */}
+                <div style={{
+                    fontFamily: "'JetBrains Mono', monospace",
+                    fontSize: "9px",
+                    color: "#333",
+                    letterSpacing: "0.14em",
+                    textTransform: "uppercase",
+                }}>
+                    © 2026 COSQ LABS
                 </div>
             </div>
         </footer>

@@ -78,11 +78,11 @@
     transform-origin: left;
 }
 
-/* Glass panel — purple frosted card */
+/* Glass panel — dark card with subtle border */
 .dl-glass-panel {
-    background: rgba(26, 9, 51, 0.4);
+    background: #0f0f0f;
     backdrop-filter: blur(12px);
-    border: 1px solid rgba(45, 27, 77, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 /* Carbon dot-grid background for stats section */

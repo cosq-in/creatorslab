@@ -4,71 +4,203 @@ import React from "react";
 
 export default function Hero() {
     const handleScrollToTerminal = () => {
-        const terminalEl = document.getElementById("terminal-section");
-        if (terminalEl) {
-            terminalEl.scrollIntoView({ behavior: "smooth" });
-        }
+        document.getElementById("terminal-section")?.scrollIntoView({ behavior: "smooth" });
     };
-
     const handleScrollToGames = () => {
-        const gamesEl = document.getElementById("games-showcase");
-        if (gamesEl) {
-            gamesEl.scrollIntoView({ behavior: "smooth" });
-        }
+        document.getElementById("games-showcase")?.scrollIntoView({ behavior: "smooth" });
     };
 
     return (
-        <section className="relative min-h-[900px] flex flex-col items-center justify-center text-center px-6 lg:px-margin-desktop py-24 bg-[#050505] overflow-hidden">
-            {/* Background Grid Overlay */}
-            <div className="absolute inset-0 z-0 opacity-10 pointer-events-none">
-                <div 
-                    className="w-full h-full"
+        <section
+            className="relative flex flex-col items-center justify-center text-center overflow-hidden bg-[#050505]"
+            style={{ minHeight: "100svh", paddingTop: "96px", paddingBottom: "80px" }}
+        >
+            {/* Grid background */}
+            <div
+                className="absolute inset-0 pointer-events-none"
+                style={{
+                    backgroundImage:
+                        "linear-gradient(rgba(99,102,241,0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(99,102,241,0.07) 1px, transparent 1px)",
+                    backgroundSize: "60px 60px",
+                }}
+            />
+            {/* Center glow */}
+            <div
+                className="absolute inset-0 pointer-events-none"
+                style={{
+                    background: "radial-gradient(ellipse 55% 45% at 50% 55%, rgba(99,102,241,0.1) 0%, transparent 70%)",
+                }}
+            />
+
+            <div className="relative z-10 flex flex-col items-center" style={{ gap: "28px", maxWidth: "900px", width: "100%", margin: "0 auto", padding: "0 24px" }}>
+
+                {/* Status badge */}
+                <div
                     style={{
-                        backgroundImage: "linear-gradient(to right, rgba(99, 102, 241, 0.1) 1px, transparent 1px)",
-                        backgroundSize: "40px 100%",
+                        display: "inline-flex",
+                        alignItems: "center",
+                        gap: "8px",
+                        padding: "6px 14px",
+                        border: "1px solid rgba(255,255,255,0.1)",
+                        background: "rgba(255,255,255,0.03)",
                     }}
-                ></div>
-            </div>
-            
-            <div className="relative z-10 max-w-4xl flex flex-col items-center space-y-8 mt-12">
-                {/* System Loaded Tag */}
-                <div className="font-mono text-xs text-[#a5b4fc] tracking-[0.25em] uppercase opacity-80">
-                    V1.0.4-ALPHA // SYSTEM LOADED
+                >
+                    <div
+                        style={{
+                            width: "6px",
+                            height: "6px",
+                            borderRadius: "50%",
+                            background: "#10b981",
+                            animation: "pulse 2s infinite",
+                        }}
+                    />
+                    <span
+                        style={{
+                            fontFamily: "'JetBrains Mono', monospace",
+                            fontSize: "10px",
+                            color: "#a5b4fc",
+                            letterSpacing: "0.22em",
+                            textTransform: "uppercase",
+                        }}
+                    >
+                        V1.0.4-ALPHA · System Loaded
+                    </span>
                 </div>
-                
-                {/* Main Heading */}
-                <h1 className="font-display-xl text-5xl md:text-7xl lg:text-[84px] leading-tight font-extrabold text-white tracking-tighter">
-                    CREATORS LAB <span className="bg-gradient-to-r from-[#9D4EDD] to-[#6366f1] bg-clip-text text-transparent font-bold">by COSQ</span>
+
+                {/* Headline */}
+                <h1
+                    style={{
+                        fontFamily: "'Outfit', sans-serif",
+                        fontSize: "clamp(44px, 8vw, 88px)",
+                        fontWeight: 800,
+                        color: "#ffffff",
+                        letterSpacing: "-0.03em",
+                        lineHeight: 0.95,
+                        textTransform: "uppercase",
+                        margin: 0,
+                    }}
+                >
+                    Creators Lab{" "}
+                    <span
+                        style={{
+                            background: "linear-gradient(135deg, #9D4EDD 0%, #6366f1 55%, #818cf8 100%)",
+                            WebkitBackgroundClip: "text",
+                            WebkitTextFillColor: "transparent",
+                            backgroundClip: "text",
+                        }}
+                    >
+                        by COSQ
+                    </span>
                 </h1>
-                
+
+                {/* Rule */}
+                <div style={{ width: "64px", height: "1px", background: "rgba(255,255,255,0.12)" }} />
+
                 {/* Subtitle */}
-                <p className="font-mono text-xs md:text-sm text-gray-300 max-w-3xl leading-relaxed tracking-wider uppercase">
-                    YOUR PARTNER IN GAMING EXCELLENCE. WE BUILD THE INFRASTRUCTURE FOR THE NEXT GENERATION OF COMPETITIVE ICONS.
+                <p
+                    style={{
+                        fontFamily: "'JetBrains Mono', monospace",
+                        fontSize: "11px",
+                        color: "#666",
+                        letterSpacing: "0.1em",
+                        lineHeight: 1.9,
+                        textTransform: "uppercase",
+                        maxWidth: "560px",
+                        margin: 0,
+                    }}
+                >
+                    Your partner in gaming excellence — building the infrastructure for the next generation of competitive icons.
                 </p>
-                
-                {/* Action Buttons */}
-                <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                    <button 
+
+                {/* Buttons */}
+                <div style={{ display: "flex", gap: "12px", flexWrap: "wrap", justifyContent: "center", paddingTop: "8px" }}>
+                    <button
                         onClick={handleScrollToTerminal}
-                        className="px-8 py-3.5 bg-[#6366f1] hover:bg-[#4f46e5] text-white font-mono text-xs font-bold tracking-widest transition-all hover:shadow-[0_0_20px_rgba(99,102,241,0.5)] active:scale-95 cursor-pointer"
+                        style={{
+                            padding: "12px 32px",
+                            background: "#6366f1",
+                            color: "#fff",
+                            fontFamily: "'JetBrains Mono', monospace",
+                            fontSize: "11px",
+                            fontWeight: 700,
+                            letterSpacing: "0.14em",
+                            textTransform: "uppercase",
+                            border: "none",
+                            cursor: "pointer",
+                            outline: "none",
+                            transition: "background 0.2s, box-shadow 0.2s",
+                        }}
+                        onMouseEnter={e => {
+                            (e.currentTarget as HTMLElement).style.background = "#4f46e5";
+                            (e.currentTarget as HTMLElement).style.boxShadow = "0 0 24px rgba(99,102,241,0.4)";
+                        }}
+                        onMouseLeave={e => {
+                            (e.currentTarget as HTMLElement).style.background = "#6366f1";
+                            (e.currentTarget as HTMLElement).style.boxShadow = "none";
+                        }}
                     >
-                        LAUNCH TERMINAL
+                        Launch Terminal
                     </button>
-                    <button 
+                    <button
                         onClick={handleScrollToGames}
-                        className="px-8 py-3.5 border border-white/20 hover:border-white text-white font-mono text-xs font-bold tracking-widest transition-all bg-transparent active:scale-95 cursor-pointer"
+                        style={{
+                            padding: "12px 32px",
+                            background: "transparent",
+                            color: "#ccc",
+                            fontFamily: "'JetBrains Mono', monospace",
+                            fontSize: "11px",
+                            fontWeight: 700,
+                            letterSpacing: "0.14em",
+                            textTransform: "uppercase",
+                            border: "1px solid rgba(255,255,255,0.14)",
+                            cursor: "pointer",
+                            outline: "none",
+                            transition: "border-color 0.2s, color 0.2s",
+                        }}
+                        onMouseEnter={e => {
+                            (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.35)";
+                            (e.currentTarget as HTMLElement).style.color = "#fff";
+                        }}
+                        onMouseLeave={e => {
+                            (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.14)";
+                            (e.currentTarget as HTMLElement).style.color = "#ccc";
+                        }}
                     >
-                        PROTOCOL DOCS
+                        View Games
                     </button>
                 </div>
             </div>
 
-            {/* Scroll Indicator */}
-            <div className="absolute bottom-10 flex flex-col items-center gap-4 opacity-40 hover:opacity-80 transition-opacity">
-                <span className="font-mono text-[9px] tracking-[0.3em] text-on-surface-variant uppercase">
-                    SCROLL TO INITIALIZE
+            {/* Scroll cue */}
+            <div
+                style={{
+                    position: "absolute",
+                    bottom: "28px",
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    gap: "10px",
+                    opacity: 0.3,
+                }}
+            >
+                <span
+                    style={{
+                        fontFamily: "'JetBrains Mono', monospace",
+                        fontSize: "9px",
+                        letterSpacing: "0.3em",
+                        color: "#999",
+                        textTransform: "uppercase",
+                    }}
+                >
+                    Scroll
                 </span>
-                <div className="w-[1px] h-12 bg-gradient-to-b from-[#6366f1] to-transparent"></div>
+                <div
+                    style={{
+                        width: "1px",
+                        height: "36px",
+                        background: "linear-gradient(to bottom, #6366f1, transparent)",
+                    }}
+                />
             </div>
         </section>
     );

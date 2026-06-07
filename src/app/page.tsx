@@ -33,6 +33,7 @@ export default function Home() {
       <main>
         <Hero />
         <GamesSection />
+        <StatsSection />
         <ServicesPreview />
       </main>
       <Footer />

@@ -3,51 +3,88 @@
 import React from "react";
 import { TrendingUp } from "lucide-react";
 
+const MONO: React.CSSProperties = { fontFamily: "'JetBrains Mono', monospace" };
+const DISPLAY: React.CSSProperties = { fontFamily: "'Outfit', sans-serif" };
+
 export default function StatsSection() {
+    const stats = [
+        { label: "Active Creators", value: "1,248", delta: "+12%",  bar: 75, color: "#a5b4fc", glow: "#818cf8" },
+        { label: "Monthly Reach",   value: "45.2M",  delta: "+8.4%", bar: 48, color: "#34d399", glow: "#10b981" },
+        { label: "Campaign ROI",    value: "4.2×",   delta: null,    bar: 62, color: "#f472b6", glow: "#ec4899", icon: true },
+    ];
+
     return (
-        <section className="px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto mb-stack-xl py-12">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-gutter">
-                {/* Active Creators */}
-                <div className="glass-panel p-6 flex flex-col gap-4 group hover:border-tertiary/50 transition-colors">
-                    <span className="font-code-sm text-caption text-tertiary uppercase font-mono tracking-wider">
-                        Active Creators
-                    </span>
-                    <div className="flex items-baseline gap-2">
-                        <span className="font-display-xl text-4xl lg:text-5xl font-bold text-white">1,248</span>
-                        <span className="font-caption text-xs text-on-secondary-container font-mono">+12%</span>
-                    </div>
-                    <div className="h-1.5 w-full bg-surface-container-highest overflow-hidden">
-                        <div className="h-full bg-tertiary w-[75%] shadow-[0_0_10px_#c0c1ff]"></div>
-                    </div>
-                </div>
+        <section
+            style={{
+                borderTop: "1px solid rgba(255,255,255,0.05)",
+                background: "#050505",
+                padding: "64px 24px",
+            }}
+        >
+            <div
+                style={{
+                    maxWidth: "1440px",
+                    margin: "0 auto",
+                    display: "grid",
+                    gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+                    gap: "16px",
+                }}
+            >
+                {stats.map(({ label, value, delta, bar, color, glow, icon }) => (
+                    <div
+                        key={label}
+                        style={{
+                            background: "#0a0a0b",
+                            border: "1px solid rgba(255,255,255,0.07)",
+                            padding: "28px 28px 24px",
+                            display: "flex",
+                            flexDirection: "column",
+                            gap: "16px",
+                        }}
+                    >
+                        {/* Label */}
+                        <span style={{ ...MONO, fontSize: "10px", letterSpacing: "0.22em", textTransform: "uppercase", color }}>
+                            {label}
+                        </span>
 
-                {/* Reach (Monthly) */}
-                <div className="glass-panel p-6 flex flex-col gap-4 group hover:border-secondary-fixed-dim/50 transition-colors">
-                    <span className="font-code-sm text-caption text-secondary-fixed-dim uppercase font-mono tracking-wider">
-                        Reach (Monthly)
-                    </span>
-                    <div className="flex items-baseline gap-2">
-                        <span className="font-display-xl text-4xl lg:text-5xl font-bold text-white">45.2M</span>
-                        <span className="font-caption text-xs text-on-secondary-container font-mono">+8.4%</span>
-                    </div>
-                    <div className="h-1.5 w-full bg-surface-container-highest overflow-hidden">
-                        <div className="h-full bg-secondary-fixed-dim w-[48%] shadow-[0_0_10px_#51ffad]"></div>
-                    </div>
-                </div>
+                        {/* Value row */}
+                        <div style={{ display: "flex", alignItems: "baseline", gap: "10px" }}>
+                            <span style={{
+                                ...DISPLAY,
+                                fontSize: "clamp(36px, 4vw, 48px)",
+                                fontWeight: 800,
+                                color: "#fff",
+                                lineHeight: 1,
+                                fontVariantNumeric: "tabular-nums",
+                            }}>
+                                {value}
+                            </span>
+                            {delta && (
+                                <span style={{ ...MONO, fontSize: "10px", color: "#34d399", letterSpacing: "0.05em" }}>
+                                    {delta}
+                                </span>
+                            )}
+                            {icon && (
+                                <TrendingUp size={16} style={{ color }} />
+                            )}
+                        </div>
 
-                {/* Campaign ROI */}
-                <div className="glass-panel p-6 flex flex-col gap-4 group hover:border-on-tertiary-container/50 transition-colors">
-                    <span className="font-code-sm text-caption text-on-tertiary-container uppercase font-mono tracking-wider">
-                        Campaign ROI
-                    </span>
-                    <div className="flex items-baseline gap-2">
-                        <span className="font-display-xl text-4xl lg:text-5xl font-bold text-white">4.2x</span>
-                        <TrendingUp className="text-on-tertiary-container w-[18px] h-[18px]" />
+                        {/* Bar */}
+                        <div style={{ height: "2px", background: "rgba(255,255,255,0.06)", position: "relative", overflow: "hidden" }}>
+                            <div
+                                style={{
+                                    position: "absolute",
+                                    left: 0,
+                                    top: 0,
+                                    height: "100%",
+                                    width: `${bar}%`,
+                                    background: color,
+                                    boxShadow: `0 0 8px ${glow}`,
+                                }}
+                            />
+                        </div>
                     </div>
-                    <div className="h-1.5 w-full bg-surface-container-highest overflow-hidden">
-                        <div className="h-full bg-on-tertiary-container w-[62%] shadow-[0_0_10px_#6669f4]"></div>
-                    </div>
-                </div>
+                ))}
             </div>
         </section>
     );
