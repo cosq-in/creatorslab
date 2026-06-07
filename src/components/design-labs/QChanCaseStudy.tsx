@@ -249,13 +249,13 @@ export function QChanCaseStudy({ onBack }: QChanProps) {
               <div style={{ height: "3px", background: "linear-gradient(90deg, #ff0000, #ff7700, #ffff00, #00ff00, #0000ff, #8b00ff, #d3bdf1)" }} />
               <img
                 src={CHAR_SHEET}
-                alt="Q-Chan official character sheet by Susen mt"
+                alt="Q-Chan official character sheet by Suna Mi"
                 style={{ width: "100%", display: "block", objectFit: "contain" }}
               />
               <div style={{ padding: "16px 20px", borderTop: "1px solid rgba(255,255,255,0.05)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                 <div>
                   <div style={{ ...DISPLAY, fontSize: "13px", fontWeight: 700, color: "#e5e2e1", marginBottom: "2px" }}>Official Character Sheet</div>
-                  <div style={{ ...MONO, fontSize: "9px", color: "#444", letterSpacing: "0.1em" }}>Illustration by Susen mt · @ph4forms</div>
+                  <div style={{ ...MONO, fontSize: "9px", color: "#444", letterSpacing: "0.1em" }}>Illustration by Suna Mi · @ph4forms</div>
                 </div>
                 <div style={{ ...MONO, fontSize: "9px", letterSpacing: "0.12em", textTransform: "uppercase", color: "#d3bdf1", padding: "4px 10px", border: "1px solid rgba(211,189,241,0.2)" }}>2024</div>
               </div>
@@ -295,7 +295,7 @@ export function QChanCaseStudy({ onBack }: QChanProps) {
             <TraitRow label="Signature Item" value="Bubble bead braid · spray cans on belt" />
             <TraitRow label="Shoes" value="Chunky platform sneakers — star motif" />
             <TraitRow label="Personality" value="Kinda clumsy · talks a lot · HA HA HA" />
-            <TraitRow label="Illustrator" value="Susen mt" />
+            <TraitRow label="Illustrator" value="Suna Mi" />
             <TraitRow label="3D Model" value="@ph4forms · VRoid Studio" />
             <TraitRow label="Client" value="COSQ / Odisha Anime Club" />
           </div>
@@ -336,7 +336,7 @@ export function QChanCaseStudy({ onBack }: QChanProps) {
           <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "1px", background: "rgba(255,255,255,0.04)" }} className="pipeline-col">
             {[
               { step: "01", phase: "Concept", tool: "Pencil + iPad", desc: "Character brief established. Eye studies, face structure, outfit silhouette, personality traits written into the design." },
-              { step: "02", phase: "Illustration", tool: "Digital — Susen mt", desc: "Full character sheet: front/back/side views, expression study, hair colour chart, shoe detail, tagline." },
+              { step: "02", phase: "Illustration", tool: "Digital — Suna Mi", desc: "Full character sheet: front/back/side views, expression study, hair colour chart, shoe detail, tagline." },
               { step: "03", phase: "3D Modelling", tool: "VRoid Studio", desc: "Character rigged in VRoid Studio from the reference sheet. Heterochromic eyes, platinum-white hair with braid, full t-pose rig." },
               { step: "04", phase: "Props + Polish", tool: "Blender + render", desc: "Belt prop designed and rendered. Alternate qipao outfit modelled. VRChat / MMD export pipeline set up." },
             ].map(({ step, phase: ph, tool, desc }) => (
@@ -405,7 +405,7 @@ export function QChanCaseStudy({ onBack }: QChanProps) {
             onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = "#d3bdf1"; (e.currentTarget as HTMLElement).style.boxShadow = "none"; }}
           >Back to Showcase</button>
           <p style={{ ...MONO, fontSize: "9px", color: "#333", letterSpacing: "0.15em", textTransform: "uppercase", marginTop: "48px" }}>
-            © 2026 Digital Labs by COSQ · Q-Chan designed by Susen mt · 3D by @ph4forms
+            © 2026 Digital Labs by COSQ · Q-Chan designed by Suna Mi · 3D by @ph4forms
           </p>
         </div>
       </section>
