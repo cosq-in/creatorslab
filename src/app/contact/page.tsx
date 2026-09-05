@@ -1,6 +1,28 @@
 "use client";
 import PageHeader from "@/components/PageHeader";
+import PixelNavbar from "@/components/PixelNavbar";
+import PixelFooter from "@/components/PixelFooter";
 import { useState } from 'react';
+import { WEB3FORMS_ACCESS_KEY, WEB3FORMS_ENDPOINT } from '@/lib/web3forms';
+
+const FAQS = [
+    {
+        q: "Do you only work with gamers and streamers?",
+        a: "Not at all! While we started in gaming and esports, we work with all kinds of creators — Instagram Reels, YouTube Shorts, TikTok, lifestyle, and more. If you're building an audience, we're built for you.",
+    },
+    {
+        q: "How much do your services cost?",
+        a: "Plans start at $299/month for creators just getting started, with custom pricing for larger orgs and teams. Check out our Services page for the full breakdown, or reach out and we'll recommend a fit.",
+    },
+    {
+        q: "I'm brand new with barely any followers. Can you still help?",
+        a: "Yes. Some of our best growth stories started at zero. Our Starter plan is built specifically for creators early in their journey who want a real strategy instead of guessing.",
+    },
+    {
+        q: "How fast can I get started?",
+        a: "We typically respond to inquiries within 24 hours and can have a strategy call scheduled within the week. Onboarding for most plans takes 3-5 business days.",
+    },
+];
 
 export default function ContactPage() {
     const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
@@ -13,17 +35,14 @@ export default function ContactPage() {
         const formData = new FormData(form);
         const data = Object.fromEntries(formData.entries());
 
-        // Add configuration fields for FormSubmit
         const payload = {
+            access_key: WEB3FORMS_ACCESS_KEY,
+            subject: "New Contact Form Submission — Creators Lab",
             ...data,
-            _cc: "soham@cosq.in,info@cosq.in",
-            _subject: "New Submission from Creators Lab Website",
-            _template: "table",
-            _captcha: "false"
         };
 
         try {
-            const response = await fetch("https://formsubmit.co/ajax/marketing@cosq.in", {
+            const response = await fetch(WEB3FORMS_ENDPOINT, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -31,8 +50,9 @@ export default function ContactPage() {
                 },
                 body: JSON.stringify(payload)
             });
+            const result = await response.json();
 
-            if (response.ok) {
+            if (result.success) {
                 setStatus("success");
                 form.reset();
                 setTimeout(() => setStatus("idle"), 5000);
@@ -46,7 +66,9 @@ export default function ContactPage() {
     };
 
     return (
-        <main>
+        <>
+            <PixelNavbar />
+            <main>
             <PageHeader title="Get in Touch 📬" subtitle="Let's create something amazing together!" />
 
             <section className="content-section">
@@ -79,9 +101,10 @@ export default function ContactPage() {
                                             <select id="platform" name="platform" className="pixel-select" required defaultValue="" disabled={status === "submitting"}>
                                                 <option value="" disabled>Select platform</option>
                                                 <option value="youtube">YouTube</option>
+                                                <option value="youtube-shorts">YouTube Shorts</option>
                                                 <option value="twitch">Twitch</option>
                                                 <option value="tiktok">TikTok</option>
-                                                <option value="instagram">Instagram</option>
+                                                <option value="instagram">Instagram / Reels</option>
                                                 <option value="twitter">Twitter</option>
                                                 <option value="other">Other</option>
                                             </select>
@@ -138,9 +161,9 @@ export default function ContactPage() {
                             </div>
 
                             <div className="info-card pixel-card">
-                                <h3>💼 Business & Founder</h3>
+                                <h3>💼 Business & Founders</h3>
                                 <p><a href="mailto:soham@cosq.in">soham@cosq.in</a></p>
-                                <p className="info-note">Soham (Founder)</p>
+                                <p className="info-note">Soham (Co-Founder)</p>
                             </div>
 
                             <div className="info-card pixel-card">
@@ -152,6 +175,23 @@ export default function ContactPage() {
                     </div>
                 </div>
             </section>
-        </main>
+
+            {/* FAQ */}
+            <section className="content-section alt-bg">
+                <div className="container">
+                    <h2 className="section-title center">Frequently Asked Questions</h2>
+                    <div className="faq-grid">
+                        {FAQS.map((faq) => (
+                            <div key={faq.q} className="faq-item pixel-card">
+                                <h3>{faq.q}</h3>
+                                <p>{faq.a}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+            </main>
+            <PixelFooter />
+        </>
     );
 }

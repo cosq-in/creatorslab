@@ -1,12 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { ArrowLeft, ChevronLeft, ChevronRight, X } from "lucide-react";
-import Image from "next/image";
 
-interface QChanProps {
-  onBack: () => void;
-}
 
 const MONO: React.CSSProperties = { fontFamily: "'JetBrains Mono', monospace" };
 const DISPLAY: React.CSSProperties = { fontFamily: "'Space Grotesk', sans-serif" };
@@ -52,50 +49,49 @@ const PHASES = ["All", "Concept", "3D Build", "Props"];
 
 // ── Sub-components ─────────────────────────────────────────────────────────────
 
-function SubNav({ onBack }: { onBack: () => void }) {
+function SubNav() {
   return (
     <nav style={{
       position: "sticky", top: 0, zIndex: 100,
       background: "rgba(10,10,10,0.95)", backdropFilter: "blur(16px)",
-      borderBottom: "1px solid rgba(255,255,255,0.05)",
+      borderBottom: "1px solid rgba(157,78,221,0.05)",
       padding: "0 40px", height: "60px",
       display: "flex", alignItems: "center", justifyContent: "space-between",
     }}>
       <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-        <div style={{ width: "24px", height: "24px", background: "rgba(211,189,241,0.12)", border: "1px solid rgba(211,189,241,0.25)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-          <div style={{ width: "8px", height: "8px", background: "#d3bdf1", borderRadius: "50%" }} />
+        <div style={{ width: "24px", height: "24px", background: "rgba(255,105,180,0.12)", border: "1px solid rgba(255,105,180,0.25)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+          <div style={{ width: "8px", height: "8px", background: "#FF69B4", borderRadius: "50%" }} />
         </div>
-        <span style={{ ...MONO, fontSize: "11px", fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", color: "#d3bdf1" }}>Q-Chan · Character Design</span>
+        <span style={{ ...MONO, fontSize: "11px", fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", color: "#FF69B4" }}>Q-Chan · Character Design</span>
       </div>
-      <button onClick={onBack} style={{
+      <Link href="/digital-labs/portfolio" style={{
         display: "flex", alignItems: "center", gap: "8px",
-        ...MONO, fontSize: "11px", color: "#555", letterSpacing: "0.1em",
-        background: "none", border: "none", cursor: "pointer", outline: "none",
-        textTransform: "uppercase", transition: "color 0.2s",
+        ...MONO, fontSize: "11px", color: "#645578", letterSpacing: "0.1em",
+        textTransform: "uppercase", transition: "color 0.2s", textDecoration: "none",
       }}
-        onMouseEnter={e => ((e.currentTarget as HTMLElement).style.color = "#e5e2e1")}
-        onMouseLeave={e => ((e.currentTarget as HTMLElement).style.color = "#555")}
+        onMouseEnter={e => ((e.currentTarget as HTMLElement).style.color = "var(--text-light)")}
+        onMouseLeave={e => ((e.currentTarget as HTMLElement).style.color = "#645578")}
       >
         <ArrowLeft size={14} /> Back to Showcase
-      </button>
+      </Link>
     </nav>
   );
 }
 
 function StatBox({ value, label, accent }: { value: string; label: string; accent: string }) {
   return (
-    <div style={{ padding: "20px 24px", background: "#0d0d0d", border: "1px solid rgba(255,255,255,0.06)", flex: 1, minWidth: "120px" }}>
+    <div style={{ padding: "20px 24px", background: "var(--bg-card)", border: "1px solid rgba(157,78,221,0.06)", flex: 1, minWidth: "120px" }}>
       <div style={{ ...DISPLAY, fontSize: "clamp(24px, 2.5vw, 36px)", fontWeight: 800, color: accent, lineHeight: 1, marginBottom: "6px" }}>{value}</div>
-      <div style={{ ...MONO, fontSize: "9px", letterSpacing: "0.18em", textTransform: "uppercase", color: "#444" }}>{label}</div>
+      <div style={{ ...MONO, fontSize: "9px", letterSpacing: "0.18em", textTransform: "uppercase", color: "#4d4160" }}>{label}</div>
     </div>
   );
 }
 
 function TraitRow({ label, value, accent }: { label: string; value: string; accent?: string }) {
   return (
-    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", padding: "13px 0", borderBottom: "1px solid rgba(255,255,255,0.05)" }}>
-      <span style={{ ...MONO, fontSize: "9px", letterSpacing: "0.18em", textTransform: "uppercase", color: "#444" }}>{label}</span>
-      <span style={{ ...DISPLAY, fontSize: "14px", fontWeight: 600, color: accent || "#888" }}>{value}</span>
+    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", padding: "13px 0", borderBottom: "1px solid rgba(157,78,221,0.05)" }}>
+      <span style={{ ...MONO, fontSize: "9px", letterSpacing: "0.18em", textTransform: "uppercase", color: "#4d4160" }}>{label}</span>
+      <span style={{ ...DISPLAY, fontSize: "14px", fontWeight: 600, color: accent || "#a294b8" }}>{value}</span>
     </div>
   );
 }
@@ -116,13 +112,13 @@ function Lightbox({ images, index, onClose, onPrev, onNext }: {
     >
       <button onClick={e => { e.stopPropagation(); onPrev(); }} style={{
         position: "absolute", left: "24px",
-        background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)",
+        background: "rgba(157,78,221,0.06)", border: "1px solid rgba(157,78,221,0.1)",
         color: "#fff", cursor: "pointer", outline: "none",
         width: "48px", height: "48px", display: "flex", alignItems: "center", justifyContent: "center",
         transition: "background 0.2s",
       }}
-        onMouseEnter={e => (e.currentTarget.style.background = "rgba(255,255,255,0.12)")}
-        onMouseLeave={e => (e.currentTarget.style.background = "rgba(255,255,255,0.06)")}
+        onMouseEnter={e => (e.currentTarget.style.background = "rgba(157,78,221,0.12)")}
+        onMouseLeave={e => (e.currentTarget.style.background = "rgba(157,78,221,0.06)")}
       ><ChevronLeft size={20} /></button>
 
       <div onClick={e => e.stopPropagation()} style={{ display: "flex", flexDirection: "column", alignItems: "center", maxWidth: "90vw", maxHeight: "90vh" }}>
@@ -133,8 +129,8 @@ function Lightbox({ images, index, onClose, onPrev, onNext }: {
           />
         </div>
         <div style={{ marginTop: "16px", textAlign: "center" }}>
-          <div style={{ ...DISPLAY, fontSize: "14px", fontWeight: 600, color: "#e5e2e1", marginBottom: "4px" }}>{img.label}</div>
-          <div style={{ ...MONO, fontSize: "9px", letterSpacing: "0.2em", textTransform: "uppercase", color: "#444" }}>
+          <div style={{ ...DISPLAY, fontSize: "14px", fontWeight: 600, color: "var(--text-light)", marginBottom: "4px" }}>{img.label}</div>
+          <div style={{ ...MONO, fontSize: "9px", letterSpacing: "0.2em", textTransform: "uppercase", color: "#4d4160" }}>
             {index + 1} / {images.length} · {img.phase}
           </div>
         </div>
@@ -142,18 +138,18 @@ function Lightbox({ images, index, onClose, onPrev, onNext }: {
 
       <button onClick={e => { e.stopPropagation(); onNext(); }} style={{
         position: "absolute", right: "24px",
-        background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)",
+        background: "rgba(157,78,221,0.06)", border: "1px solid rgba(157,78,221,0.1)",
         color: "#fff", cursor: "pointer", outline: "none",
         width: "48px", height: "48px", display: "flex", alignItems: "center", justifyContent: "center",
         transition: "background 0.2s",
       }}
-        onMouseEnter={e => (e.currentTarget.style.background = "rgba(255,255,255,0.12)")}
-        onMouseLeave={e => (e.currentTarget.style.background = "rgba(255,255,255,0.06)")}
+        onMouseEnter={e => (e.currentTarget.style.background = "rgba(157,78,221,0.12)")}
+        onMouseLeave={e => (e.currentTarget.style.background = "rgba(157,78,221,0.06)")}
       ><ChevronRight size={20} /></button>
 
       <button onClick={onClose} style={{
         position: "absolute", top: "20px", right: "20px",
-        background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)",
+        background: "rgba(157,78,221,0.06)", border: "1px solid rgba(157,78,221,0.1)",
         color: "#fff", cursor: "pointer", outline: "none",
         width: "40px", height: "40px", display: "flex", alignItems: "center", justifyContent: "center",
       }}><X size={16} /></button>
@@ -169,14 +165,14 @@ function GalleryTile({ img, index, onOpen }: { img: GalleryImage; index: number;
       onMouseLeave={() => setHov(false)}
       onClick={() => onOpen(index)}
       style={{
-        background: "#0d0d0d",
-        border: `1px solid ${hov ? "rgba(211,189,241,0.35)" : "rgba(255,255,255,0.06)"}`,
+        background: "var(--bg-card)",
+        border: `1px solid ${hov ? "rgba(255,105,180,0.35)" : "rgba(157,78,221,0.06)"}`,
         overflow: "hidden", cursor: "pointer",
         transition: "border-color 0.25s, transform 0.2s",
         transform: hov ? "translateY(-3px)" : "translateY(0)",
       }}
     >
-      <div style={{ aspectRatio: "4/3", position: "relative", overflow: "hidden", background: "#111" }}>
+      <div style={{ aspectRatio: "4/3", position: "relative", overflow: "hidden", background: "var(--bg-card)" }}>
         <img
           src={img.src} alt={img.label}
           style={{ width: "100%", height: "100%", objectFit: "cover", display: "block",
@@ -189,20 +185,20 @@ function GalleryTile({ img, index, onOpen }: { img: GalleryImage; index: number;
         <div style={{
           position: "absolute", top: "8px", left: "8px",
           ...MONO, fontSize: "8px", letterSpacing: "0.15em", textTransform: "uppercase",
-          padding: "3px 8px", color: "#d3bdf1",
+          padding: "3px 8px", color: "#FF69B4",
           background: "rgba(0,0,0,0.55)", backdropFilter: "blur(6px)",
-          border: "1px solid rgba(211,189,241,0.2)",
+          border: "1px solid rgba(255,105,180,0.2)",
         }}>{img.phase}</div>
         {hov && (
           <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
-            <div style={{ ...MONO, fontSize: "9px", letterSpacing: "0.15em", textTransform: "uppercase", color: "#fff", background: "rgba(0,0,0,0.6)", padding: "6px 14px", border: "1px solid rgba(255,255,255,0.2)" }}>
+            <div style={{ ...MONO, fontSize: "9px", letterSpacing: "0.15em", textTransform: "uppercase", color: "#fff", background: "rgba(0,0,0,0.6)", padding: "6px 14px", border: "1px solid rgba(157,78,221,0.2)" }}>
               Enlarge
             </div>
           </div>
         )}
       </div>
       <div style={{ padding: "10px 12px 12px" }}>
-        <p style={{ ...MONO, fontSize: "10px", color: "#555", lineHeight: 1.5, margin: 0 }}>{img.label}</p>
+        <p style={{ ...MONO, fontSize: "10px", color: "#645578", lineHeight: 1.5, margin: 0 }}>{img.label}</p>
       </div>
     </div>
   );
@@ -210,7 +206,7 @@ function GalleryTile({ img, index, onOpen }: { img: GalleryImage; index: number;
 
 // ── Main Component ─────────────────────────────────────────────────────────────
 
-export function QChanCaseStudy({ onBack }: QChanProps) {
+export function QChanCaseStudy() {
   const [phase, setPhase] = useState("All");
   const [lightboxIdx, setLightboxIdx] = useState<number | null>(null);
 
@@ -222,18 +218,18 @@ export function QChanCaseStudy({ onBack }: QChanProps) {
   const nextImg = () => setLightboxIdx(p => p !== null ? (p + 1) % filtered.length : null);
 
   return (
-    <div style={{ minHeight: "100vh", background: "#0a0a0a", color: "#e5e2e1" }}>
-      <SubNav onBack={onBack} />
+    <div style={{ minHeight: "100vh", background: "var(--bg-dark)", color: "var(--text-light)" }}>
+      <SubNav />
 
       {/* ── HERO ─────────────────────────────────────────────────────────── */}
       <section style={{ padding: "80px 40px 0", maxWidth: "1440px", margin: "0 auto" }}>
         <div style={{ display: "flex", gap: "8px", flexWrap: "wrap", marginBottom: "32px" }}>
-          <div style={{ display: "inline-flex", alignItems: "center", gap: "8px", padding: "5px 12px", border: "1px solid rgba(211,189,241,0.25)", background: "rgba(211,189,241,0.06)" }}>
-            <div style={{ width: "6px", height: "6px", borderRadius: "50%", background: "#00e292", boxShadow: "0 0 6px #00e292" }} />
-            <span style={{ ...MONO, fontSize: "9px", letterSpacing: "0.3em", textTransform: "uppercase", color: "#d3bdf1" }}>Original Character · COSQ Mascot</span>
+          <div style={{ display: "inline-flex", alignItems: "center", gap: "8px", padding: "5px 12px", border: "1px solid rgba(255,105,180,0.25)", background: "rgba(255,105,180,0.06)" }}>
+            <div style={{ width: "6px", height: "6px", borderRadius: "50%", background: "#06FFA5", boxShadow: "0 0 6px #06FFA5" }} />
+            <span style={{ ...MONO, fontSize: "9px", letterSpacing: "0.3em", textTransform: "uppercase", color: "#FF69B4" }}>Original Character · COSQ Mascot</span>
           </div>
-          <div style={{ display: "inline-flex", alignItems: "center", gap: "8px", padding: "5px 12px", border: "1px solid rgba(255,255,255,0.07)" }}>
-            <span style={{ ...MONO, fontSize: "9px", letterSpacing: "0.18em", textTransform: "uppercase", color: "#444" }}>2D Illustration + 3D Model + VRChat-Ready</span>
+          <div style={{ display: "inline-flex", alignItems: "center", gap: "8px", padding: "5px 12px", border: "1px solid rgba(157,78,221,0.07)" }}>
+            <span style={{ ...MONO, fontSize: "9px", letterSpacing: "0.18em", textTransform: "uppercase", color: "#4d4160" }}>2D Illustration + 3D Model + VRChat-Ready</span>
           </div>
         </div>
 
@@ -242,51 +238,51 @@ export function QChanCaseStudy({ onBack }: QChanProps) {
           {/* Left — character sheet */}
           <div style={{ position: "sticky", top: "80px" }}>
             <div style={{
-              background: "#0d0d0d", border: "1px solid rgba(211,189,241,0.15)",
+              background: "var(--bg-card)", border: "1px solid rgba(255,105,180,0.15)",
               overflow: "hidden", position: "relative",
             }}>
               {/* Colour flash strip across top */}
-              <div style={{ height: "3px", background: "linear-gradient(90deg, #ff0000, #ff7700, #ffff00, #00ff00, #0000ff, #8b00ff, #d3bdf1)" }} />
+              <div style={{ height: "3px", background: "linear-gradient(90deg, #ff0000, #ff7700, #ffff00, #00ff00, #0000ff, #8b00ff, #FF69B4)" }} />
               <img
                 src={CHAR_SHEET}
                 alt="Q-Chan official character sheet by Suna Mi"
                 style={{ width: "100%", display: "block", objectFit: "contain" }}
               />
-              <div style={{ padding: "16px 20px", borderTop: "1px solid rgba(255,255,255,0.05)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+              <div style={{ padding: "16px 20px", borderTop: "1px solid rgba(157,78,221,0.05)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                 <div>
-                  <div style={{ ...DISPLAY, fontSize: "13px", fontWeight: 700, color: "#e5e2e1", marginBottom: "2px" }}>Official Character Sheet</div>
-                  <div style={{ ...MONO, fontSize: "9px", color: "#444", letterSpacing: "0.1em" }}>Illustration by Suna Mi · @ph4forms</div>
+                  <div style={{ ...DISPLAY, fontSize: "13px", fontWeight: 700, color: "var(--text-light)", marginBottom: "2px" }}>Official Character Sheet</div>
+                  <div style={{ ...MONO, fontSize: "9px", color: "#4d4160", letterSpacing: "0.1em" }}>Illustration by Suna Mi · @ph4forms</div>
                 </div>
-                <div style={{ ...MONO, fontSize: "9px", letterSpacing: "0.12em", textTransform: "uppercase", color: "#d3bdf1", padding: "4px 10px", border: "1px solid rgba(211,189,241,0.2)" }}>2024</div>
+                <div style={{ ...MONO, fontSize: "9px", letterSpacing: "0.12em", textTransform: "uppercase", color: "#FF69B4", padding: "4px 10px", border: "1px solid rgba(255,105,180,0.2)" }}>2024</div>
               </div>
             </div>
           </div>
 
           {/* Right — info */}
           <div style={{ paddingTop: "4px" }}>
-            <h1 style={{ ...DISPLAY, fontSize: "clamp(52px, 6vw, 88px)", fontWeight: 800, letterSpacing: "-0.04em", lineHeight: 0.9, color: "#e5e2e1", margin: "0 0 8px 0" }}>
+            <h1 style={{ ...DISPLAY, fontSize: "clamp(52px, 6vw, 88px)", fontWeight: 800, letterSpacing: "-0.04em", lineHeight: 0.9, color: "var(--text-light)", margin: "0 0 8px 0" }}>
               Q-Chan
             </h1>
-            <div style={{ ...DISPLAY, fontSize: "clamp(18px, 2.5vw, 28px)", fontWeight: 400, fontStyle: "italic", background: "linear-gradient(135deg, #d3bdf1 0%, #a78bfa 50%, #f472b6 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text", margin: "0 0 32px 0", lineHeight: 1.2 }}>
+            <div style={{ ...DISPLAY, fontSize: "clamp(18px, 2.5vw, 28px)", fontWeight: 400, fontStyle: "italic", background: "linear-gradient(135deg, #FF69B4 0%, #a78bfa 50%, #FF69B4 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text", margin: "0 0 32px 0", lineHeight: 1.2 }}>
               Lawless Girl in a Lawless World.
             </div>
 
-            <p style={{ ...DISPLAY, fontSize: "15px", color: "#555", lineHeight: 1.75, margin: "0 0 32px 0", maxWidth: "460px" }}>
+            <p style={{ ...DISPLAY, fontSize: "15px", color: "#645578", lineHeight: 1.75, margin: "0 0 32px 0", maxWidth: "460px" }}>
               Q-Chan is the official mascot of COSQ — a 172cm original character designed from scratch:
               hand-illustrated character sheet, full 3D model built in Blender, rigged for VRChat and MMD,
               with a custom prop belt designed in Blender. She embodies the chaotic creative spirit of the Odisha cosplay and gaming community.
             </p>
 
             {/* Stat bar */}
-            <div style={{ display: "flex", flexWrap: "wrap", gap: "1px", background: "rgba(255,255,255,0.04)", marginBottom: "36px" }}>
-              <StatBox value="172cm" label="Height" accent="#d3bdf1" />
-              <StatBox value="2" label="Eye Colours" accent="#f472b6" />
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "1px", background: "rgba(157,78,221,0.04)", marginBottom: "36px" }}>
+              <StatBox value="172cm" label="Height" accent="#FF69B4" />
+              <StatBox value="2" label="Eye Colours" accent="#FF69B4" />
               <StatBox value="3" label="Outfit Variants" accent="#a78bfa" />
-              <StatBox value="3D" label="VRChat Ready" accent="#34d399" />
+              <StatBox value="3D" label="VRChat Ready" accent="#06FFA5" />
             </div>
 
             {/* Character traits */}
-            <div style={{ ...MONO, fontSize: "10px", letterSpacing: "0.25em", textTransform: "uppercase", color: "#333", marginBottom: "16px" }}>Character Profile</div>
+            <div style={{ ...MONO, fontSize: "10px", letterSpacing: "0.25em", textTransform: "uppercase", color: "#3a2f4a", marginBottom: "16px" }}>Character Profile</div>
             <TraitRow label="Full Name" value="Q-Chan" />
             <TraitRow label="Archetype" value="Lawless Girl · Chaotic Creative" />
             <TraitRow label="Height" value="172 cm" />
@@ -305,17 +301,17 @@ export function QChanCaseStudy({ onBack }: QChanProps) {
       {/* ── OUTFIT BREAKDOWN ─────────────────────────────────────────────── */}
       <section style={{ padding: "80px 40px", maxWidth: "1440px", margin: "0 auto" }}>
         <div style={{ display: "flex", alignItems: "center", gap: "16px", marginBottom: "48px" }}>
-          <div style={{ height: "1px", flex: 1, background: "rgba(255,255,255,0.06)" }} />
-          <span style={{ ...MONO, fontSize: "10px", letterSpacing: "0.3em", textTransform: "uppercase", color: "#444", whiteSpace: "nowrap" }}>Design Language · Outfit System</span>
-          <div style={{ height: "1px", flex: 1, background: "rgba(255,255,255,0.06)" }} />
+          <div style={{ height: "1px", flex: 1, background: "rgba(157,78,221,0.06)" }} />
+          <span style={{ ...MONO, fontSize: "10px", letterSpacing: "0.3em", textTransform: "uppercase", color: "#4d4160", whiteSpace: "nowrap" }}>Design Language · Outfit System</span>
+          <div style={{ height: "1px", flex: 1, background: "rgba(157,78,221,0.06)" }} />
         </div>
 
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))", gap: "8px" }}>
           {[
             { name: "Main Outfit",    desc: "Light blue relaxed overalls, white tee, red tie, suspenders with spray can holders. Belt with star buckle.",   accent: "#93c5fd" },
-            { name: "Bead Braid",     desc: "Long braided ponytail woven with multi-colour bubble beads — red, green, yellow, teal — ending in a floral tie.", accent: "#d3bdf1" },
+            { name: "Bead Braid",     desc: "Long braided ponytail woven with multi-colour bubble beads — red, green, yellow, teal — ending in a floral tie.", accent: "#FF69B4" },
             { name: "Rainbow Streak", desc: "Short platinum-white hair with a signature 4-colour rainbow streak (red/yellow/blue/green) at the crown.",         accent: "#fbbf24" },
-            { name: "Belt Prop",      desc: "Custom designed belt buckle — star side badges, RGB gradient grill at centre. 3D rendered in Blender.",            accent: "#f472b6" },
+            { name: "Belt Prop",      desc: "Custom designed belt buckle — star side badges, RGB gradient grill at centre. 3D rendered in Blender.",            accent: "#FF69B4" },
             { name: "Heterochromia",  desc: "Left eye: hot pink. Right eye: vivid green. Both with large diamond highlight reflecting her dual energy.",        accent: "#f9a8d4" },
             { name: "Alt: Qipao",     desc: "Red Chinese brocade qipao with black fur cuffs — an alternate outfit variant demonstrating costume versatility.",   accent: "#ef4444" },
           ].map(({ name, desc, accent }) => (
@@ -325,26 +321,26 @@ export function QChanCaseStudy({ onBack }: QChanProps) {
       </section>
 
       {/* ── PIPELINE ─────────────────────────────────────────────────────── */}
-      <section style={{ background: "#0d0d0d", borderTop: "1px solid rgba(255,255,255,0.05)", borderBottom: "1px solid rgba(255,255,255,0.05)", padding: "80px 40px" }}>
+      <section style={{ background: "var(--bg-card)", borderTop: "1px solid rgba(157,78,221,0.05)", borderBottom: "1px solid rgba(157,78,221,0.05)", padding: "80px 40px" }}>
         <div style={{ maxWidth: "1440px", margin: "0 auto" }}>
           <div style={{ display: "flex", alignItems: "center", gap: "16px", marginBottom: "48px" }}>
-            <div style={{ height: "1px", flex: 1, background: "rgba(255,255,255,0.06)" }} />
-            <span style={{ ...MONO, fontSize: "10px", letterSpacing: "0.3em", textTransform: "uppercase", color: "#444", whiteSpace: "nowrap" }}>Creation Pipeline · From Sketch to 3D</span>
-            <div style={{ height: "1px", flex: 1, background: "rgba(255,255,255,0.06)" }} />
+            <div style={{ height: "1px", flex: 1, background: "rgba(157,78,221,0.06)" }} />
+            <span style={{ ...MONO, fontSize: "10px", letterSpacing: "0.3em", textTransform: "uppercase", color: "#4d4160", whiteSpace: "nowrap" }}>Creation Pipeline · From Sketch to 3D</span>
+            <div style={{ height: "1px", flex: 1, background: "rgba(157,78,221,0.06)" }} />
           </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "1px", background: "rgba(255,255,255,0.04)" }} className="pipeline-col">
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "1px", background: "rgba(157,78,221,0.04)" }} className="pipeline-col">
             {[
               { step: "01", phase: "Concept", tool: "Pencil + iPad", desc: "Character brief established. Eye studies, face structure, outfit silhouette, personality traits written into the design." },
               { step: "02", phase: "Illustration", tool: "Digital — Suna Mi", desc: "Full character sheet: front/back/side views, expression study, hair colour chart, shoe detail, tagline." },
               { step: "03", phase: "3D Modelling", tool: "VRoid Studio", desc: "Character rigged in VRoid Studio from the reference sheet. Heterochromic eyes, platinum-white hair with braid, full t-pose rig." },
               { step: "04", phase: "Props + Polish", tool: "Blender + render", desc: "Belt prop designed and rendered. Alternate qipao outfit modelled. VRChat / MMD export pipeline set up." },
             ].map(({ step, phase: ph, tool, desc }) => (
-              <div key={step} style={{ padding: "32px 28px", background: "#0d0d0d" }}>
-                <div style={{ ...MONO, fontSize: "32px", fontWeight: 800, color: "rgba(211,189,241,0.12)", lineHeight: 1, marginBottom: "20px" }}>{step}</div>
-                <div style={{ ...MONO, fontSize: "9px", letterSpacing: "0.2em", textTransform: "uppercase", color: "#d3bdf1", marginBottom: "8px" }}>{ph}</div>
-                <div style={{ ...DISPLAY, fontSize: "14px", fontWeight: 700, color: "#e5e2e1", marginBottom: "10px" }}>{tool}</div>
-                <p style={{ ...DISPLAY, fontSize: "13px", color: "#555", lineHeight: 1.65, margin: 0 }}>{desc}</p>
+              <div key={step} style={{ padding: "32px 28px", background: "var(--bg-card)" }}>
+                <div style={{ ...MONO, fontSize: "32px", fontWeight: 800, color: "rgba(255,105,180,0.12)", lineHeight: 1, marginBottom: "20px" }}>{step}</div>
+                <div style={{ ...MONO, fontSize: "9px", letterSpacing: "0.2em", textTransform: "uppercase", color: "#FF69B4", marginBottom: "8px" }}>{ph}</div>
+                <div style={{ ...DISPLAY, fontSize: "14px", fontWeight: 700, color: "var(--text-light)", marginBottom: "10px" }}>{tool}</div>
+                <p style={{ ...DISPLAY, fontSize: "13px", color: "#645578", lineHeight: 1.65, margin: 0 }}>{desc}</p>
               </div>
             ))}
           </div>
@@ -354,9 +350,9 @@ export function QChanCaseStudy({ onBack }: QChanProps) {
       {/* ── GALLERY ──────────────────────────────────────────────────────── */}
       <section style={{ padding: "80px 40px", maxWidth: "1440px", margin: "0 auto" }}>
         <div style={{ display: "flex", alignItems: "center", gap: "16px", marginBottom: "32px" }}>
-          <div style={{ height: "1px", flex: 1, background: "rgba(255,255,255,0.06)" }} />
-          <span style={{ ...MONO, fontSize: "10px", letterSpacing: "0.3em", textTransform: "uppercase", color: "#444", whiteSpace: "nowrap" }}>Process Archive · {GALLERY.length} Frames</span>
-          <div style={{ height: "1px", flex: 1, background: "rgba(255,255,255,0.06)" }} />
+          <div style={{ height: "1px", flex: 1, background: "rgba(157,78,221,0.06)" }} />
+          <span style={{ ...MONO, fontSize: "10px", letterSpacing: "0.3em", textTransform: "uppercase", color: "#4d4160", whiteSpace: "nowrap" }}>Process Archive · {GALLERY.length} Frames</span>
+          <div style={{ height: "1px", flex: 1, background: "rgba(157,78,221,0.06)" }} />
         </div>
 
         {/* Phase filter */}
@@ -365,15 +361,15 @@ export function QChanCaseStudy({ onBack }: QChanProps) {
             <button key={p} onClick={() => setPhase(p)} style={{
               ...MONO, fontSize: "10px", fontWeight: 700, letterSpacing: "0.15em",
               textTransform: "uppercase", padding: "7px 18px",
-              background: phase === p ? "#d3bdf1" : "transparent",
-              color: phase === p ? "#0a0a0a" : "#555",
-              border: `1px solid ${phase === p ? "#d3bdf1" : "rgba(255,255,255,0.1)"}`,
+              background: phase === p ? "#FF69B4" : "transparent",
+              color: phase === p ? "var(--bg-dark)" : "#645578",
+              border: `1px solid ${phase === p ? "#FF69B4" : "rgba(157,78,221,0.1)"}`,
               cursor: "pointer", outline: "none", transition: "all 0.2s",
             }}
-              onMouseEnter={e => { if (phase !== p) { (e.currentTarget as HTMLElement).style.color = "#e5e2e1"; (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.3)"; } }}
-              onMouseLeave={e => { if (phase !== p) { (e.currentTarget as HTMLElement).style.color = "#555"; (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.1)"; } }}
+              onMouseEnter={e => { if (phase !== p) { (e.currentTarget as HTMLElement).style.color = "var(--text-light)"; (e.currentTarget as HTMLElement).style.borderColor = "rgba(157,78,221,0.3)"; } }}
+              onMouseLeave={e => { if (phase !== p) { (e.currentTarget as HTMLElement).style.color = "#645578"; (e.currentTarget as HTMLElement).style.borderColor = "rgba(157,78,221,0.1)"; } }}
             >
-              {p} {p !== "All" && <span style={{ color: phase === p ? "#0a0a0a66" : "#333" }}>({GALLERY.filter(g => g.phase === p).length})</span>}
+              {p} {p !== "All" && <span style={{ color: phase === p ? "var(--bg-dark)66" : "#3a2f4a" }}>({GALLERY.filter(g => g.phase === p).length})</span>}
             </button>
           ))}
         </div>
@@ -386,25 +382,27 @@ export function QChanCaseStudy({ onBack }: QChanProps) {
       </section>
 
       {/* ── CTA ──────────────────────────────────────────────────────────── */}
-      <section style={{ background: "#0d0d0d", borderTop: "1px solid rgba(255,255,255,0.05)", padding: "80px 40px" }}>
+      <section style={{ background: "var(--bg-card)", borderTop: "1px solid rgba(157,78,221,0.05)", padding: "80px 40px" }}>
         <div style={{ maxWidth: "1440px", margin: "0 auto" }}>
-          <h2 style={{ ...DISPLAY, fontSize: "clamp(28px, 4vw, 52px)", fontWeight: 800, letterSpacing: "-0.03em", color: "#e5e2e1", margin: "0 0 12px 0" }}>
+          <h2 style={{ ...DISPLAY, fontSize: "clamp(28px, 4vw, 52px)", fontWeight: 800, letterSpacing: "-0.03em", color: "var(--text-light)", margin: "0 0 12px 0" }}>
             Need an original{" "}
-            <span style={{ fontStyle: "italic", background: "linear-gradient(135deg, #d3bdf1, #f472b6)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>character?</span>
+            <span style={{ fontStyle: "italic", background: "linear-gradient(135deg, #FF69B4, #FF69B4)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>character?</span>
           </h2>
-          <p style={{ ...DISPLAY, fontSize: "15px", color: "#555", margin: "0 0 36px 0" }}>
+          <p style={{ ...DISPLAY, fontSize: "15px", color: "#645578", margin: "0 0 36px 0" }}>
             Digital Labs designs mascots, original characters, and 3D assets end-to-end — from brief to Blender.
           </p>
-          <button onClick={onBack} style={{
+          <Link href="/digital-labs/portfolio" style={{
+            display: "inline-block",
             ...MONO, fontSize: "11px", fontWeight: 700, letterSpacing: "0.18em",
             textTransform: "uppercase", padding: "14px 36px",
-            background: "#d3bdf1", color: "#0a0a0a",
-            border: "none", cursor: "pointer", outline: "none",
+            background: "#FF69B4", color: "var(--bg-dark)",
+            border: "none", cursor: "pointer", outline: "none", textDecoration: "none",
+            transition: "background 0.2s, box-shadow 0.2s",
           }}
-            onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = "#c4a8f0"; (e.currentTarget as HTMLElement).style.boxShadow = "0 0 24px rgba(211,189,241,0.3)"; }}
-            onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = "#d3bdf1"; (e.currentTarget as HTMLElement).style.boxShadow = "none"; }}
-          >Back to Showcase</button>
-          <p style={{ ...MONO, fontSize: "9px", color: "#333", letterSpacing: "0.15em", textTransform: "uppercase", marginTop: "48px" }}>
+            onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = "#c4a8f0"; (e.currentTarget as HTMLElement).style.boxShadow = "0 0 24px rgba(255,105,180,0.3)"; }}
+            onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = "#FF69B4"; (e.currentTarget as HTMLElement).style.boxShadow = "none"; }}
+          >Back to Showcase</Link>
+          <p style={{ ...MONO, fontSize: "9px", color: "#3a2f4a", letterSpacing: "0.15em", textTransform: "uppercase", marginTop: "48px" }}>
             © 2026 Digital Labs by COSQ · Q-Chan designed by Suna Mi · 3D by @ph4forms
           </p>
         </div>
@@ -442,16 +440,16 @@ function OutfitCard({ name, desc, accent }: { name: string; desc: string; accent
       onMouseLeave={() => setHov(false)}
       style={{
         padding: "24px 24px 28px",
-        background: "#0d0d0d",
-        border: `1px solid ${hov ? accent + "44" : "rgba(255,255,255,0.06)"}`,
+        background: "var(--bg-card)",
+        border: `1px solid ${hov ? accent + "44" : "rgba(157,78,221,0.06)"}`,
         transition: "border-color 0.25s",
       }}
     >
       <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "12px" }}>
         <div style={{ width: "8px", height: "8px", borderRadius: "50%", background: accent, flexShrink: 0 }} />
-        <span style={{ ...DISPLAY, fontSize: "14px", fontWeight: 700, color: hov ? accent : "#e5e2e1", transition: "color 0.2s" }}>{name}</span>
+        <span style={{ ...DISPLAY, fontSize: "14px", fontWeight: 700, color: hov ? accent : "var(--text-light)", transition: "color 0.2s" }}>{name}</span>
       </div>
-      <p style={{ ...DISPLAY, fontSize: "13px", color: "#555", lineHeight: 1.65, margin: 0 }}>{desc}</p>
+      <p style={{ ...DISPLAY, fontSize: "13px", color: "#645578", lineHeight: 1.65, margin: 0 }}>{desc}</p>
     </div>
   );
 }

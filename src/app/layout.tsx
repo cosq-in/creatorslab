@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Press_Start_2P, Outfit, Space_Grotesk, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 
 const pressStart2P = Press_Start_2P({
   weight: "400",
@@ -26,8 +24,9 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Creators Lab by CosQ - Gaming Media Agency",
-  description: "Your partner in gaming, streaming, and content creation",
+  title: "Creators Lab by CosQ - Gaming, Streaming & Creator Agency",
+  description:
+    "Your partner in gaming, streaming, and short-form content — from esports orgs and streamers to Instagram Reels and YouTube Shorts creators.",
 };
 
 export default function RootLayout({

@@ -1,8 +1,12 @@
 import PageHeader from "@/components/PageHeader";
+import PixelNavbar from "@/components/PixelNavbar";
+import PixelFooter from "@/components/PixelFooter";
 
 export default function AboutPage() {
     return (
-        <main>
+        <>
+            <PixelNavbar />
+            <main>
             <PageHeader title="About Us 🧪" subtitle="We are the scientists of success" />
 
             {/* Mission Section */}
@@ -22,7 +26,7 @@ export default function AboutPage() {
                         <div className="col-text">
                             <h2 className="section-title">Our Mission</h2>
                             <p className="pixel-text" style={{ color: 'var(--primary-color)', marginBottom: '1rem' }}>EMPOWERING CREATORS.</p>
-                            <p>Content creation is a lonely road. Burnout is real, algorithms are confusing, and monetization is hard. We exist to solve these problems.</p>
+                            <p>Content creation is a lonely road. Burnout is real, algorithms are confusing, and monetization is hard. We exist to solve these problems &mdash; whether you&apos;re grinding ranked on stream or cutting your next Reel.</p>
                             <p><strong>Our purpose</strong> is to provide the infrastructure, strategy, and support that allows creators to do what they do best: create. We handle the business, the data, and the tech so you can handle the community.</p>
                         </div>
                     </div>
@@ -42,7 +46,7 @@ export default function AboutPage() {
                         <div className="value-card pixel-card">
                             <div className="value-icon">🧪</div>
                             <h3>Data Driven</h3>
-                            <p>We don't guess. We test. Every strategy is backed by analytics and market research.</p>
+                            <p>We don&apos;t guess. We test. Every strategy is backed by analytics and market research.</p>
                         </div>
                         <div className="value-card pixel-card">
                             <div className="value-icon">🚀</div>
@@ -52,6 +56,8 @@ export default function AboutPage() {
                     </div>
                 </div>
             </section>
-        </main>
+            </main>
+            <PixelFooter />
+        </>
     );
 }

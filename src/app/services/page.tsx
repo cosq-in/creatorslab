@@ -1,10 +1,14 @@
 import Link from 'next/link';
 import PageHeader from "@/components/PageHeader";
+import PixelNavbar from "@/components/PixelNavbar";
+import PixelFooter from "@/components/PixelFooter";
 
 export default function ServicesPage() {
     return (
-        <main>
-            <PageHeader title="Our Services 🔬" subtitle="Complete solutions for content creators" />
+        <>
+            <PixelNavbar />
+            <main>
+            <PageHeader title="Our Services 🔬" subtitle="Complete solutions for content creators — gamers and everyday creators alike" />
 
             <section className="content-section">
                 <div className="container">
@@ -24,7 +28,7 @@ export default function ServicesPage() {
                                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 'var(--spacing-md)', marginTop: 'var(--spacing-md)' }}>
                                     <div>
                                         <h4 style={{ color: 'var(--accent-color)' }}>Target Audience</h4>
-                                        <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>Streamers, Esports Orgs, and Game Developers looking to build loyal communities.</p>
+                                        <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>Streamers, esports orgs, and game developers &mdash; plus everyday creators posting Reels, Shorts, and TikToks who want to grow on purpose.</p>
                                     </div>
                                     <div>
                                         <h4 style={{ color: 'var(--accent-color)' }}>Value Proposition</h4>
@@ -64,7 +68,7 @@ export default function ServicesPage() {
                                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 'var(--spacing-md)', marginTop: 'var(--spacing-md)' }}>
                                     <div>
                                         <h4 style={{ color: 'var(--accent-color)' }}>Target Audience</h4>
-                                        <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>YouTubers and Content Creators aiming for premium production value.</p>
+                                        <p style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>YouTubers and content creators aiming for premium production value, from long-form videos to vertical Shorts and Reels.</p>
                                     </div>
                                     <div>
                                         <h4 style={{ color: 'var(--accent-color)' }}>Value Proposition</h4>
@@ -85,6 +89,52 @@ export default function ServicesPage() {
                 </div>
             </section>
 
+            {/* Pricing */}
+            <section className="content-section alt-bg">
+                <div className="container">
+                    <h2 className="section-title center gradient-heading">Plans For Every Creator</h2>
+                    <p style={{ textAlign: 'center', color: 'var(--text-muted)', maxWidth: '600px', margin: '0 auto var(--spacing-lg)' }}>
+                        Whether you&apos;re just starting your first Shorts channel or running an established esports roster, there&apos;s a plan built for where you are.
+                    </p>
+                    <div className="pricing-grid">
+                        <div className="pricing-card pixel-card">
+                            <div className="pricing-tier">Starter</div>
+                            <div className="pricing-price">$299<span>/month</span></div>
+                            <ul className="pricing-features">
+                                <li>✓ Content calendar & strategy</li>
+                                <li>✓ 8 posts / edits per month</li>
+                                <li>✓ Monthly analytics report</li>
+                                <li>✓ Perfect for new creators</li>
+                            </ul>
+                            <Link href="/contact" className="pixel-button secondary" style={{ width: '100%', textAlign: 'center' }}>Get Started</Link>
+                        </div>
+                        <div className="pricing-card pixel-card featured">
+                            <div className="pricing-badge">Most Popular</div>
+                            <div className="pricing-tier">Professional</div>
+                            <div className="pricing-price">$699<span>/month</span></div>
+                            <ul className="pricing-features">
+                                <li>✓ Everything in Starter</li>
+                                <li>✓ Full content production</li>
+                                <li>✓ Daily posting & community management</li>
+                                <li>✓ Brand partnership introductions</li>
+                            </ul>
+                            <Link href="/contact" className="pixel-button primary" style={{ width: '100%', textAlign: 'center' }}>Get Started</Link>
+                        </div>
+                        <div className="pricing-card pixel-card">
+                            <div className="pricing-tier">Enterprise</div>
+                            <div className="pricing-price">Custom</div>
+                            <ul className="pricing-features">
+                                <li>✓ Everything in Professional</li>
+                                <li>✓ Dedicated account strategist</li>
+                                <li>✓ Multi-creator / org management</li>
+                                <li>✓ Priority turnaround</li>
+                            </ul>
+                            <Link href="/contact" className="pixel-button secondary" style={{ width: '100%', textAlign: 'center' }}>Talk To Us</Link>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             <section className="cta-section">
                 <div className="container">
                     <div className="cta-content">
@@ -94,6 +144,8 @@ export default function ServicesPage() {
                     </div>
                 </div>
             </section>
-        </main>
+            </main>
+            <PixelFooter />
+        </>
     );
 }

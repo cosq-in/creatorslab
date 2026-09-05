@@ -1,5 +1,7 @@
 "use client";
 import PageHeader from "@/components/PageHeader";
+import PixelNavbar from "@/components/PixelNavbar";
+import PixelFooter from "@/components/PixelFooter";
 import { useState } from 'react';
 
 const projects = [
@@ -37,6 +39,17 @@ const projects = [
         stats: ['5000% Growth', '50K Followers', 'Partnered']
     },
     {
+        title: 'From Zero to 400K on Shorts',
+        cat: ['creators', 'shorts'],
+        icon: '📱',
+        client: 'A Lifestyle Creator',
+        workType: 'Short-Form Growth',
+        toolsUsed: ['CapCut', 'Reels', 'Shorts'],
+        meta: 'Creator Success • 4 Months',
+        desc: 'Took a faceless lifestyle account from zero to 400K followers with a repeatable hook-and-edit system built specifically for Reels and YouTube Shorts.',
+        stats: ['400K Followers', '4 Months', '3 Brand Deals']
+    },
+    {
         title: 'Arknights Content Series',
         cat: ['games'],
         icon: '🏰',
@@ -71,6 +84,12 @@ const projects = [
     },
 ];
 
+const testimonials = [
+    { quote: "They treated my Reels like a real business, not a side hustle. My first brand deal paid for a year of the service.", name: "@mira.made.it", role: "Instagram Reels Creator", stars: "⭐⭐⭐⭐⭐" },
+    { quote: "Our tournament coverage has never been this fast or this clean. The team feels like part of our org.", name: "Dex", role: "Esports Team Manager", stars: "⭐⭐⭐⭐⭐" },
+    { quote: "I finally have a posting schedule I can actually keep up with. Shorts stopped feeling like a chore.", name: "Jae", role: "YouTube Shorts Creator", stars: "⭐⭐⭐⭐⭐" },
+];
+
 export default function PortfolioPage() {
     const [filter, setFilter] = useState('all');
 
@@ -79,13 +98,15 @@ export default function PortfolioPage() {
         : projects.filter(p => p.cat.includes(filter));
 
     return (
-        <main>
-            <PageHeader title="Our Portfolio 🏆" subtitle="Successful campaigns and happy creators" />
+        <>
+            <PixelNavbar />
+            <main>
+            <PageHeader title="Our Portfolio 🏆" subtitle="Successful campaigns and happy creators — gamers and everyday creators alike" />
 
             <section className="content-section">
                 <div className="container">
                     <div className="portfolio-filters">
-                        {['all', 'campaigns', 'creators', 'games'].map(f => (
+                        {['all', 'campaigns', 'creators', 'shorts', 'games'].map(f => (
                             <button
                                 key={f}
                                 className={`filter-btn ${filter === f ? 'active' : ''}`}
@@ -138,6 +159,27 @@ export default function PortfolioPage() {
                     </div>
                 </div>
             </section>
-        </main>
+
+            {/* Testimonials */}
+            <section className="content-section alt-bg">
+                <div className="container">
+                    <h2 className="section-title center">What Creators Say</h2>
+                    <div className="testimonials-grid">
+                        {testimonials.map((t, i) => (
+                            <div key={i} className="testimonial pixel-card">
+                                <div className="testimonial-stars">{t.stars}</div>
+                                <p>&ldquo;{t.quote}&rdquo;</p>
+                                <div className="testimonial-author">
+                                    <strong>{t.name}</strong>
+                                    <span>{t.role}</span>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+            </main>
+            <PixelFooter />
+        </>
     );
 }

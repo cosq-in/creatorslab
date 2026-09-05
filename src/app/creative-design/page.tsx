@@ -1,9 +1,13 @@
 import PageHeader from "@/components/PageHeader";
+import PixelNavbar from "@/components/PixelNavbar";
+import PixelFooter from "@/components/PixelFooter";
 import Link from 'next/link';
 
 export default function CreativeDesignPage() {
     return (
-        <main>
+        <>
+            <PixelNavbar />
+            <main>
             <PageHeader title="Creative Design 🎨" subtitle="Where art meets algorithm" />
 
             {/* Philosophy Section */}
@@ -62,7 +66,7 @@ export default function CreativeDesignPage() {
                         <div className="timeline-item">
                             <div className="timeline-year">01</div>
                             <h3>Discovery</h3>
-                            <p>We dive deep into your brand, audience, and goals to understand the "why".</p>
+                            <p>We dive deep into your brand, audience, and goals to understand the &ldquo;why&rdquo;.</p>
                         </div>
                         <div className="timeline-item">
                             <div className="timeline-year">02</div>
@@ -93,6 +97,8 @@ export default function CreativeDesignPage() {
                     </div>
                 </div>
             </section>
-        </main>
+            </main>
+            <PixelFooter />
+        </>
     );
 }

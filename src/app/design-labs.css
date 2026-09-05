@@ -1,105 +1,18 @@
 @import "tailwindcss";
 
-/* 
+/*
    ========================================
-   DESIGN LABS PREMIUM THEME
-   Scoped to .design-labs-theme
-   ======================================== 
+   Digital Labs — uses the shared pixel-lab
+   theme from globals.css. This file only
+   holds structural resets scoped to the
+   Digital Labs subtree.
+   ========================================
 */
 
 .design-labs-theme {
-    background-color: #0a0a0a;
-    color: #e5e2e1;
-    font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
 }
 
 .design-labs-theme * {
     box-sizing: border-box;
-}
-
-/* Premium Gradient Text */
-.design-labs-theme .text-gradient {
-    background: linear-gradient(135deg, #9D4EDD, #ff69b4);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-/* Global Container Fix */
-.design-labs-theme .container-centered {
-    width: 100%;
-    max-width: 1200px;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-}
-
-/* CRT Scanline overlay — fixed full-screen */
-.dl-crt-scanline {
-    pointer-events: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%),
-                linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
-    background-size: 100% 4px, 3px 100%;
-    z-index: 100;
-    opacity: 0.15;
-}
-
-/* Unknown italic gradient text with hover underline reveal */
-.dl-unknown-gradient {
-    background: linear-gradient(to right, #d3bdf1, #6e0044, #3d0024);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    position: relative;
-}
-.dl-unknown-gradient::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background: #d3bdf1;
-    transform: scaleX(0);
-    transform-origin: right;
-    transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1);
-}
-.dl-hero-container:hover .dl-unknown-gradient::after {
-    transform: scaleX(1);
-    transform-origin: left;
-}
-
-/* Glass panel — dark card with subtle border */
-.dl-glass-panel {
-    background: #0f0f0f;
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-}
-
-/* Carbon dot-grid background for stats section */
-.dl-carbon-bg {
-    background-image: radial-gradient(circle at 2px 2px, #1a0933 1px, transparent 0);
-    background-size: 24px 24px;
-}
-
-/* Glitch hover animation */
-.dl-glitch-hover:hover {
-    animation: dl-glitch 0.2s infinite;
-}
-@keyframes dl-glitch {
-    0%   { transform: translate(0); }
-    20%  { transform: translate(-2px, 2px); }
-    40%  { transform: translate(-2px, -2px); }
-    60%  { transform: translate(2px, 2px); }
-    80%  { transform: translate(2px, -2px); }
-    100% { transform: translate(0); }
 }

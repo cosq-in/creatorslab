@@ -1,49 +1,44 @@
 "use client";
 
 import { useState } from "react";
-import { ArrowLeft, ExternalLink, Instagram, Calendar, MapPin, Users, TrendingUp, Award, Zap } from "lucide-react";
-import { QChanCaseStudy } from "./QChanCaseStudy";
-
-interface PortfolioProps {
-  onBack: () => void;
-}
+import Link from "next/link";
+import { ArrowLeft, ExternalLink, Instagram, Calendar, Users, TrendingUp, Award, Zap } from "lucide-react";
 
 const MONO: React.CSSProperties = { fontFamily: "'JetBrains Mono', monospace" };
 const DISPLAY: React.CSSProperties = { fontFamily: "'Space Grotesk', sans-serif" };
 
-const SubNav = ({ title, onBack }: { title: string; onBack: () => void }) => (
+const SubNav = ({ title, backHref, backLabel = "Back to Home" }: { title: string; backHref: string; backLabel?: string }) => (
   <nav style={{
     position: "sticky", top: 0, zIndex: 100,
     background: "rgba(10,10,10,0.95)", backdropFilter: "blur(16px)",
-    borderBottom: "1px solid rgba(255,255,255,0.05)",
+    borderBottom: "1px solid rgba(157,78,221,0.05)",
     padding: "0 40px", height: "60px",
     display: "flex", alignItems: "center", justifyContent: "space-between",
   }}>
     <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-      <div style={{ width: "24px", height: "24px", background: "rgba(211,189,241,0.12)", border: "1px solid rgba(211,189,241,0.25)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-        <div style={{ width: "8px", height: "8px", background: "#d3bdf1", borderRadius: "50%" }} />
+      <div style={{ width: "24px", height: "24px", background: "rgba(255,105,180,0.12)", border: "1px solid rgba(255,105,180,0.25)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <div style={{ width: "8px", height: "8px", background: "#FF69B4", borderRadius: "50%" }} />
       </div>
-      <span style={{ ...MONO, fontSize: "11px", fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", color: "#d3bdf1" }}>{title}</span>
+      <span style={{ ...MONO, fontSize: "11px", fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", color: "#FF69B4" }}>{title}</span>
     </div>
-    <button onClick={onBack} style={{
+    <Link href={backHref} style={{
       display: "flex", alignItems: "center", gap: "8px",
-      ...MONO, fontSize: "11px", color: "#555", letterSpacing: "0.1em",
-      background: "none", border: "none", cursor: "pointer", outline: "none",
-      textTransform: "uppercase", transition: "color 0.2s",
+      ...MONO, fontSize: "11px", color: "#645578", letterSpacing: "0.1em",
+      textTransform: "uppercase", transition: "color 0.2s", textDecoration: "none",
     }}
-      onMouseEnter={e => ((e.currentTarget as HTMLElement).style.color = "#e5e2e1")}
-      onMouseLeave={e => ((e.currentTarget as HTMLElement).style.color = "#555")}
+      onMouseEnter={e => ((e.currentTarget as HTMLElement).style.color = "var(--text-light)")}
+      onMouseLeave={e => ((e.currentTarget as HTMLElement).style.color = "#645578")}
     >
-      <ArrowLeft size={14} /> Back to Home
-    </button>
+      <ArrowLeft size={14} /> {backLabel}
+    </Link>
   </nav>
 );
 
 function StatPill({ value, label, accent }: { value: string; label: string; accent?: string }) {
   return (
-    <div style={{ padding: "24px 28px", background: "#0d0d0d", border: "1px solid rgba(255,255,255,0.06)", flex: 1, minWidth: "140px" }}>
-      <div style={{ ...DISPLAY, fontSize: "clamp(28px, 3vw, 40px)", fontWeight: 800, letterSpacing: "-0.03em", color: accent || "#d3bdf1", lineHeight: 1, marginBottom: "6px" }}>{value}</div>
-      <div style={{ ...MONO, fontSize: "10px", letterSpacing: "0.18em", textTransform: "uppercase", color: "#444" }}>{label}</div>
+    <div style={{ padding: "24px 28px", background: "var(--bg-card)", border: "1px solid rgba(157,78,221,0.06)", flex: 1, minWidth: "140px" }}>
+      <div style={{ ...DISPLAY, fontSize: "clamp(28px, 3vw, 40px)", fontWeight: 800, letterSpacing: "-0.03em", color: accent || "#FF69B4", lineHeight: 1, marginBottom: "6px" }}>{value}</div>
+      <div style={{ ...MONO, fontSize: "10px", letterSpacing: "0.18em", textTransform: "uppercase", color: "#4d4160" }}>{label}</div>
     </div>
   );
 }
@@ -53,13 +48,13 @@ function TimelineNode({ year, title, desc, accent, last }: { year: string; title
     <div style={{ display: "flex", gap: "24px", position: "relative" }}>
       <div style={{ display: "flex", flexDirection: "column", alignItems: "center", flexShrink: 0 }}>
         <div style={{ width: "40px", height: "40px", borderRadius: "50%", background: accent, display: "flex", alignItems: "center", justifyContent: "center", zIndex: 1 }}>
-          <span style={{ ...MONO, fontSize: "9px", fontWeight: 800, color: "#0a0a0a", letterSpacing: "0.05em" }}>{year}</span>
+          <span style={{ ...MONO, fontSize: "9px", fontWeight: 800, color: "var(--bg-dark)", letterSpacing: "0.05em" }}>{year}</span>
         </div>
-        {!last && <div style={{ width: "1px", flex: 1, background: "rgba(255,255,255,0.06)", marginTop: "8px", minHeight: "60px" }} />}
+        {!last && <div style={{ width: "1px", flex: 1, background: "rgba(157,78,221,0.06)", marginTop: "8px", minHeight: "60px" }} />}
       </div>
       <div style={{ paddingBottom: last ? 0 : "48px", paddingTop: "8px" }}>
-        <h4 style={{ ...DISPLAY, fontSize: "16px", fontWeight: 700, color: "#e5e2e1", margin: "0 0 8px 0" }}>{title}</h4>
-        <p style={{ ...DISPLAY, fontSize: "14px", color: "#555", lineHeight: 1.65, margin: 0, maxWidth: "480px" }}>{desc}</p>
+        <h4 style={{ ...DISPLAY, fontSize: "16px", fontWeight: 700, color: "var(--text-light)", margin: "0 0 8px 0" }}>{title}</h4>
+        <p style={{ ...DISPLAY, fontSize: "14px", color: "#645578", lineHeight: 1.65, margin: 0, maxWidth: "480px" }}>{desc}</p>
       </div>
     </div>
   );
@@ -73,31 +68,31 @@ function ActivityCard({ icon, title, desc }: { icon: React.ReactNode; title: str
       onMouseLeave={() => setHov(false)}
       style={{
         padding: "24px 28px",
-        background: "#0d0d0d",
-        border: `1px solid ${hov ? "rgba(211,189,241,0.25)" : "rgba(255,255,255,0.06)"}`,
+        background: "var(--bg-card)",
+        border: `1px solid ${hov ? "rgba(255,105,180,0.25)" : "rgba(157,78,221,0.06)"}`,
         transition: "border-color 0.25s",
         display: "flex", gap: "16px", alignItems: "flex-start",
       }}
     >
-      <div style={{ width: "36px", height: "36px", minWidth: "36px", background: "rgba(211,189,241,0.08)", border: "1px solid rgba(211,189,241,0.18)", display: "flex", alignItems: "center", justifyContent: "center", color: "#d3bdf1" }}>
+      <div style={{ width: "36px", height: "36px", minWidth: "36px", background: "rgba(255,105,180,0.08)", border: "1px solid rgba(255,105,180,0.18)", display: "flex", alignItems: "center", justifyContent: "center", color: "#FF69B4" }}>
         {icon}
       </div>
       <div>
-        <h4 style={{ ...DISPLAY, fontSize: "14px", fontWeight: 700, color: "#e5e2e1", margin: "0 0 6px 0" }}>{title}</h4>
-        <p style={{ ...DISPLAY, fontSize: "13px", color: "#555", lineHeight: 1.6, margin: 0 }}>{desc}</p>
+        <h4 style={{ ...DISPLAY, fontSize: "14px", fontWeight: 700, color: "var(--text-light)", margin: "0 0 6px 0" }}>{title}</h4>
+        <p style={{ ...DISPLAY, fontSize: "13px", color: "#645578", lineHeight: 1.6, margin: 0 }}>{desc}</p>
       </div>
     </div>
   );
 }
 
 function SponsorBadge({ name, tier, price }: { name: string; tier: string; price: string }) {
-  const colors: Record<string, string> = { gold: "#f59e0b", silver: "#9ca3af", bronze: "#b45309", special: "#d3bdf1" };
-  const c = colors[tier] || "#d3bdf1";
+  const colors: Record<string, string> = { gold: "#f59e0b", silver: "#9ca3af", bronze: "#b45309", special: "#FF69B4" };
+  const c = colors[tier] || "#FF69B4";
   return (
-    <div style={{ padding: "16px 20px", background: "#0d0d0d", border: `1px solid ${c}22`, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+    <div style={{ padding: "16px 20px", background: "var(--bg-card)", border: `1px solid ${c}22`, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
       <div>
         <span style={{ ...MONO, fontSize: "9px", letterSpacing: "0.2em", textTransform: "uppercase", color: c, display: "block", marginBottom: "4px" }}>{tier}</span>
-        <span style={{ ...DISPLAY, fontSize: "14px", fontWeight: 700, color: "#e5e2e1" }}>{name}</span>
+        <span style={{ ...DISPLAY, fontSize: "14px", fontWeight: 700, color: "var(--text-light)" }}>{name}</span>
       </div>
       <span style={{ ...MONO, fontSize: "12px", fontWeight: 700, color: c }}>{price}</span>
     </div>
@@ -106,9 +101,9 @@ function SponsorBadge({ name, tier, price }: { name: string; tier: string; price
 
 function DeliverableTag({ label }: { label: string }) {
   return (
-    <div style={{ display: "inline-flex", alignItems: "center", gap: "6px", padding: "6px 14px", border: "1px solid rgba(211,189,241,0.2)", background: "rgba(211,189,241,0.04)" }}>
-      <div style={{ width: "5px", height: "5px", background: "#d3bdf1", borderRadius: "50%", flexShrink: 0 }} />
-      <span style={{ ...MONO, fontSize: "10px", letterSpacing: "0.12em", textTransform: "uppercase", color: "#888" }}>{label}</span>
+    <div style={{ display: "inline-flex", alignItems: "center", gap: "6px", padding: "6px 14px", border: "1px solid rgba(255,105,180,0.2)", background: "rgba(255,105,180,0.04)" }}>
+      <div style={{ width: "5px", height: "5px", background: "#FF69B4", borderRadius: "50%", flexShrink: 0 }} />
+      <span style={{ ...MONO, fontSize: "10px", letterSpacing: "0.12em", textTransform: "uppercase", color: "#a294b8" }}>{label}</span>
     </div>
   );
 }
@@ -125,7 +120,7 @@ const GRID_PROJECTS = [
     tags: ["Character Design", "3D"],
     preview: "/design-labs/WhatsApp Unknown 2026-06-07 at 7.03.55 AM/WhatsApp Image 2026-06-07 at 6.59.57 AM (1).jpeg",
     overlayGradient: "linear-gradient(to top, rgba(59,7,100,0.92) 0%, rgba(124,58,237,0.5) 50%, rgba(0,0,0,0.1) 100%)",
-    accent: "#d3bdf1",
+    accent: "#FF69B4",
     stats: "172cm OC · Heterochromia · VRoid Rigged",
     featured: true,
   },
@@ -137,9 +132,9 @@ const GRID_PROJECTS = [
     year: "2024",
     tags: ["Branding", "Event", "Campaign"],
     preview: "/design-labs/brochure pdf.pdf",
-    previewColor: "linear-gradient(135deg, #1a0033 0%, #4c1d95 50%, #f472b6 100%)",
+    previewColor: "linear-gradient(135deg, #1a0033 0%, #4c1d95 50%, #FF69B4 100%)",
     overlayGradient: "linear-gradient(to top, rgba(26,0,51,0.95) 0%, rgba(76,29,149,0.55) 50%, rgba(0,0,0,0.1) 100%)",
-    accent: "#f472b6",
+    accent: "#FF69B4",
     stats: "5,000+ Attendees · 34+ Events · 4 Years",
     featured: true,
   },
@@ -164,7 +159,7 @@ const GRID_PROJECTS = [
     tags: ["UI/UX", "Product"],
     previewColor: "linear-gradient(135deg, #7c3aed, #db2777)",
     overlayGradient: "linear-gradient(to top, rgba(124,58,237,0.9) 0%, rgba(219,39,119,0.4) 60%, transparent 100%)",
-    accent: "#d3bdf1",
+    accent: "#FF69B4",
     stats: "48 screens · Full design system",
   },
   {
@@ -188,7 +183,7 @@ const GRID_PROJECTS = [
     tags: ["Content", "Social"],
     previewColor: "linear-gradient(135deg, #059669, #0d9488)",
     overlayGradient: "linear-gradient(to top, rgba(5,150,105,0.9) 0%, rgba(13,148,136,0.4) 60%, transparent 100%)",
-    accent: "#34d399",
+    accent: "#06FFA5",
     stats: "2.4M reach · 60+ assets",
   },
   {
@@ -217,28 +212,28 @@ const GRID_PROJECTS = [
   },
 ];
 
-function PortfolioGrid({ onBack, onOpenCaseStudy, onOpenQChan }: { onBack: () => void; onOpenCaseStudy: () => void; onOpenQChan: () => void }) {
+export function PortfolioGrid() {
   const [filter, setFilter] = useState("All");
   const categories = ["All", "Branding", "UI/UX", "Content", "3D", "Event Design", "Character Design"];
   const filtered = filter === "All" ? GRID_PROJECTS : GRID_PROJECTS.filter(p => p.tags.includes(filter) || p.category === filter);
 
   return (
-    <div style={{ minHeight: "100vh", background: "#0a0a0a", color: "#e5e2e1" }}>
-      <SubNav title="Design Labs Showcase" onBack={onBack} />
+    <div style={{ minHeight: "100vh", background: "var(--bg-dark)", color: "var(--text-light)" }}>
+      <SubNav title="Design Labs Showcase" backHref="/digital-labs" />
 
       {/* Hero */}
       <section style={{ padding: "80px 40px 48px", maxWidth: "1440px", margin: "0 auto" }}>
-        <div style={{ display: "inline-flex", alignItems: "center", gap: "8px", padding: "5px 12px", border: "1px solid rgba(211,189,241,0.25)", background: "rgba(211,189,241,0.06)", marginBottom: "28px" }}>
-          <div style={{ width: "6px", height: "6px", borderRadius: "50%", background: "#00e292", boxShadow: "0 0 6px #00e292" }} />
-          <span style={{ ...MONO, fontSize: "9px", letterSpacing: "0.3em", textTransform: "uppercase", color: "#d3bdf1" }}>The Curated Archive</span>
+        <div style={{ display: "inline-flex", alignItems: "center", gap: "8px", padding: "5px 12px", border: "1px solid rgba(255,105,180,0.25)", background: "rgba(255,105,180,0.06)", marginBottom: "28px" }}>
+          <div style={{ width: "6px", height: "6px", borderRadius: "50%", background: "#06FFA5", boxShadow: "0 0 6px #06FFA5" }} />
+          <span style={{ ...MONO, fontSize: "9px", letterSpacing: "0.3em", textTransform: "uppercase", color: "#FF69B4" }}>The Curated Archive</span>
         </div>
-        <h1 style={{ ...DISPLAY, fontSize: "clamp(40px, 6vw, 72px)", fontWeight: 800, letterSpacing: "-0.03em", lineHeight: 1, color: "#e5e2e1", margin: "0 0 16px 0" }}>
+        <h1 style={{ ...DISPLAY, fontSize: "clamp(40px, 6vw, 72px)", fontWeight: 800, letterSpacing: "-0.03em", lineHeight: 1, color: "var(--text-light)", margin: "0 0 16px 0" }}>
           Proof of{" "}
-          <span style={{ fontStyle: "italic", background: "linear-gradient(135deg, #d3bdf1 0%, #9D4EDD 50%, #ffb0d0 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
+          <span style={{ fontStyle: "italic", background: "linear-gradient(135deg, #FF69B4 0%, #9D4EDD 50%, #FF69B4 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
             Innovation.
           </span>
         </h1>
-        <p style={{ ...DISPLAY, fontSize: "16px", color: "#555", lineHeight: 1.7, maxWidth: "520px", margin: "0 0 40px 0" }}>
+        <p style={{ ...DISPLAY, fontSize: "16px", color: "#645578", lineHeight: 1.7, maxWidth: "520px", margin: "0 0 40px 0" }}>
           Case studies, campaigns, and brand systems across disciplines.
         </p>
         {/* Filters */}
@@ -247,13 +242,13 @@ function PortfolioGrid({ onBack, onOpenCaseStudy, onOpenQChan }: { onBack: () =>
             <button key={cat} onClick={() => setFilter(cat)} style={{
               ...MONO, fontSize: "10px", fontWeight: 700, letterSpacing: "0.15em",
               textTransform: "uppercase", padding: "8px 20px",
-              background: filter === cat ? "#d3bdf1" : "transparent",
-              color: filter === cat ? "#0a0a0a" : "#555",
-              border: `1px solid ${filter === cat ? "#d3bdf1" : "rgba(255,255,255,0.1)"}`,
+              background: filter === cat ? "#FF69B4" : "transparent",
+              color: filter === cat ? "var(--bg-dark)" : "#645578",
+              border: `1px solid ${filter === cat ? "#FF69B4" : "rgba(157,78,221,0.1)"}`,
               cursor: "pointer", outline: "none", transition: "all 0.2s",
             }}
-              onMouseEnter={e => { if (filter !== cat) { (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.3)"; (e.currentTarget as HTMLElement).style.color = "#e5e2e1"; } }}
-              onMouseLeave={e => { if (filter !== cat) { (e.currentTarget as HTMLElement).style.borderColor = "rgba(255,255,255,0.1)"; (e.currentTarget as HTMLElement).style.color = "#555"; } }}
+              onMouseEnter={e => { if (filter !== cat) { (e.currentTarget as HTMLElement).style.borderColor = "rgba(157,78,221,0.3)"; (e.currentTarget as HTMLElement).style.color = "var(--text-light)"; } }}
+              onMouseLeave={e => { if (filter !== cat) { (e.currentTarget as HTMLElement).style.borderColor = "rgba(157,78,221,0.1)"; (e.currentTarget as HTMLElement).style.color = "#645578"; } }}
             >{cat}</button>
           ))}
         </div>
@@ -266,9 +261,9 @@ function PortfolioGrid({ onBack, onOpenCaseStudy, onOpenQChan }: { onBack: () =>
             <GridCard
               key={project.id}
               project={project}
-              onClick={
-                project.id === "oac-cosq" ? onOpenCaseStudy :
-                project.id === "q-chan"   ? onOpenQChan :
+              href={
+                project.id === "oac-cosq" ? "/digital-labs/portfolio/oac-cosq" :
+                project.id === "q-chan"   ? "/digital-labs/portfolio/q-chan" :
                 undefined
               }
             />
@@ -277,24 +272,26 @@ function PortfolioGrid({ onBack, onOpenCaseStudy, onOpenQChan }: { onBack: () =>
       </section>
 
       {/* CTA */}
-      <section style={{ background: "#0d0d0d", borderTop: "1px solid rgba(255,255,255,0.05)", padding: "80px 40px" }}>
+      <section style={{ background: "var(--bg-card)", borderTop: "1px solid rgba(157,78,221,0.05)", padding: "80px 40px" }}>
         <div style={{ maxWidth: "1440px", margin: "0 auto" }}>
-          <h2 style={{ ...DISPLAY, fontSize: "clamp(28px, 4vw, 52px)", fontWeight: 800, letterSpacing: "-0.03em", color: "#e5e2e1", margin: "0 0 28px 0" }}>
+          <h2 style={{ ...DISPLAY, fontSize: "clamp(28px, 4vw, 52px)", fontWeight: 800, letterSpacing: "-0.03em", color: "var(--text-light)", margin: "0 0 28px 0" }}>
             Have a Bold{" "}
-            <span style={{ fontStyle: "italic", background: "linear-gradient(135deg, #d3bdf1 0%, #9D4EDD 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
+            <span style={{ fontStyle: "italic", background: "linear-gradient(135deg, #FF69B4 0%, #9D4EDD 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
               Project?
             </span>
           </h2>
-          <button onClick={onBack} style={{
+          <Link href="/digital-labs/submit-project" style={{
+            display: "inline-block",
             ...MONO, fontSize: "11px", fontWeight: 700, letterSpacing: "0.18em",
             textTransform: "uppercase", padding: "14px 36px",
-            background: "#d3bdf1", color: "#0a0a0a",
-            border: "none", cursor: "pointer", outline: "none",
+            background: "#FF69B4", color: "var(--bg-dark)",
+            border: "none", cursor: "pointer", outline: "none", textDecoration: "none",
+            transition: "background 0.2s, box-shadow 0.2s",
           }}
-            onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = "#c4a8f0"; (e.currentTarget as HTMLElement).style.boxShadow = "0 0 24px rgba(211,189,241,0.3)"; }}
-            onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = "#d3bdf1"; (e.currentTarget as HTMLElement).style.boxShadow = "none"; }}
-          >Start the Conversation</button>
-          <p style={{ ...MONO, fontSize: "9px", color: "#333", letterSpacing: "0.15em", textTransform: "uppercase", marginTop: "48px" }}>
+            onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = "#c4a8f0"; (e.currentTarget as HTMLElement).style.boxShadow = "0 0 24px rgba(255,105,180,0.3)"; }}
+            onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = "#FF69B4"; (e.currentTarget as HTMLElement).style.boxShadow = "none"; }}
+          >Start the Conversation</Link>
+          <p style={{ ...MONO, fontSize: "9px", color: "#3a2f4a", letterSpacing: "0.15em", textTransform: "uppercase", marginTop: "48px" }}>
             © 2026 Design Labs Showcase by COSQ
           </p>
         </div>
@@ -303,27 +300,26 @@ function PortfolioGrid({ onBack, onOpenCaseStudy, onOpenQChan }: { onBack: () =>
   );
 }
 
-function GridCard({ project, onClick }: { project: typeof GRID_PROJECTS[0]; onClick?: () => void }) {
+function GridCard({ project, href }: { project: typeof GRID_PROJECTS[0]; href?: string }) {
   const [hov, setHov] = useState(false);
   const hasImage = !!project.preview;
 
-  return (
-    <div
-      onMouseEnter={() => setHov(true)}
-      onMouseLeave={() => setHov(false)}
-      onClick={onClick}
-      style={{
-        background: "#0d0d0d",
-        border: `1px solid ${hov ? project.accent + "66" : "rgba(255,255,255,0.06)"}`,
-        overflow: "hidden",
-        cursor: onClick ? "pointer" : "default",
-        transition: "border-color 0.3s, transform 0.25s, box-shadow 0.3s",
-        transform: hov ? "translateY(-3px)" : "translateY(0)",
-        boxShadow: hov && onClick ? `0 8px 32px ${project.accent}22` : "none",
-      }}
-    >
+  const cardStyle: React.CSSProperties = {
+    display: "block",
+    textDecoration: "none",
+    background: "var(--bg-card)",
+    border: `1px solid ${hov ? project.accent + "66" : "rgba(157,78,221,0.06)"}`,
+    overflow: "hidden",
+    cursor: href ? "pointer" : "default",
+    transition: "border-color 0.3s, transform 0.25s, box-shadow 0.3s",
+    transform: hov ? "translateY(-3px)" : "translateY(0)",
+    boxShadow: hov && href ? `0 8px 32px ${project.accent}22` : "none",
+  };
+
+  const cardBody = (
+    <>
       {/* Thumbnail */}
-      <div style={{ aspectRatio: "16/9", position: "relative", overflow: "hidden", background: project.previewColor || "#111" }}>
+      <div style={{ aspectRatio: "16/9", position: "relative", overflow: "hidden", background: project.previewColor || "var(--bg-card)" }}>
 
         {/* Real photo for featured cards */}
         {hasImage && (
@@ -340,7 +336,7 @@ function GridCard({ project, onClick }: { project: typeof GRID_PROJECTS[0]; onCl
 
         {/* Dot grid for non-photo cards */}
         {!hasImage && (
-          <div style={{ position: "absolute", inset: 0, backgroundImage: "radial-gradient(circle at 2px 2px, rgba(255,255,255,0.07) 1px, transparent 0)", backgroundSize: "20px 20px" }} />
+          <div style={{ position: "absolute", inset: 0, backgroundImage: "radial-gradient(circle at 2px 2px, rgba(157,78,221,0.07) 1px, transparent 0)", backgroundSize: "20px 20px" }} />
         )}
 
         {/* Gradient overlay — always */}
@@ -356,11 +352,11 @@ function GridCard({ project, onClick }: { project: typeof GRID_PROJECTS[0]; onCl
 
         {/* Category + year */}
         <div style={{ position: "absolute", top: "12px", left: "12px", right: "12px", display: "flex", justifyContent: "space-between", zIndex: 2 }}>
-          <div style={{ display: "inline-flex", alignItems: "center", gap: "5px", padding: "3px 10px", background: "rgba(0,0,0,0.5)", backdropFilter: "blur(8px)", border: "1px solid rgba(255,255,255,0.12)" }}>
+          <div style={{ display: "inline-flex", alignItems: "center", gap: "5px", padding: "3px 10px", background: "rgba(0,0,0,0.5)", backdropFilter: "blur(8px)", border: "1px solid rgba(157,78,221,0.12)" }}>
             <div style={{ width: "4px", height: "4px", borderRadius: "50%", background: project.accent }} />
             <span style={{ ...MONO, fontSize: "8px", letterSpacing: "0.18em", textTransform: "uppercase", color: "#fff" }}>{project.category}</span>
           </div>
-          <span style={{ ...MONO, fontSize: "9px", color: "rgba(255,255,255,0.5)", padding: "3px 8px", background: "rgba(0,0,0,0.4)" }}>{project.year}</span>
+          <span style={{ ...MONO, fontSize: "9px", color: "rgba(157,78,221,0.5)", padding: "3px 8px", background: "rgba(0,0,0,0.4)" }}>{project.year}</span>
         </div>
 
         {/* Title overlaid on gradient at bottom — for featured cards */}
@@ -376,14 +372,14 @@ function GridCard({ project, onClick }: { project: typeof GRID_PROJECTS[0]; onCl
         )}
 
         {/* Hover CTA */}
-        {onClick && (
+        {href && (
           <div style={{
             position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center",
             opacity: hov ? 1 : 0, transition: "opacity 0.3s", zIndex: 3,
           }}>
-            <div style={{ display: "flex", alignItems: "center", gap: "8px", padding: "10px 24px", background: "rgba(255,255,255,0.92)" }}>
-              <span style={{ ...MONO, fontSize: "10px", fontWeight: 800, letterSpacing: "0.15em", textTransform: "uppercase", color: "#0a0a0a" }}>View Case Study</span>
-              <ExternalLink size={12} style={{ color: "#0a0a0a" }} />
+            <div style={{ display: "flex", alignItems: "center", gap: "8px", padding: "10px 24px", background: "rgba(157,78,221,0.92)" }}>
+              <span style={{ ...MONO, fontSize: "10px", fontWeight: 800, letterSpacing: "0.15em", textTransform: "uppercase", color: "var(--bg-dark)" }}>View Case Study</span>
+              <ExternalLink size={12} style={{ color: "var(--bg-dark)" }} />
             </div>
           </div>
         )}
@@ -393,35 +389,34 @@ function GridCard({ project, onClick }: { project: typeof GRID_PROJECTS[0]; onCl
       <div style={{ padding: "18px 20px 22px" }}>
         <div style={{ display: "flex", flexWrap: "wrap", gap: "4px", marginBottom: "10px" }}>
           {project.tags.map(t => (
-            <span key={t} style={{ ...MONO, fontSize: "8px", letterSpacing: "0.12em", textTransform: "uppercase", color: "#444", padding: "2px 8px", border: "1px solid rgba(255,255,255,0.06)" }}>{t}</span>
+            <span key={t} style={{ ...MONO, fontSize: "8px", letterSpacing: "0.12em", textTransform: "uppercase", color: "#4d4160", padding: "2px 8px", border: "1px solid rgba(157,78,221,0.06)" }}>{t}</span>
           ))}
         </div>
-        <h3 style={{ ...DISPLAY, fontSize: "17px", fontWeight: 700, color: hov ? project.accent : "#e5e2e1", letterSpacing: "-0.01em", margin: "0 0 5px 0", transition: "color 0.25s" }}>
+        <h3 style={{ ...DISPLAY, fontSize: "17px", fontWeight: 700, color: hov ? project.accent : "var(--text-light)", letterSpacing: "-0.01em", margin: "0 0 5px 0", transition: "color 0.25s" }}>
           {project.title}
         </h3>
-        <p style={{ ...DISPLAY, fontSize: "13px", color: "#555", lineHeight: 1.6, margin: "0 0 12px 0" }}>{project.subtitle}</p>
-        <div style={{ ...MONO, fontSize: "9px", color: "#333", letterSpacing: "0.1em", paddingTop: "11px", borderTop: "1px solid rgba(255,255,255,0.04)" }}>{project.stats}</div>
+        <p style={{ ...DISPLAY, fontSize: "13px", color: "#645578", lineHeight: 1.6, margin: "0 0 12px 0" }}>{project.subtitle}</p>
+        <div style={{ ...MONO, fontSize: "9px", color: "#3a2f4a", letterSpacing: "0.1em", paddingTop: "11px", borderTop: "1px solid rgba(157,78,221,0.04)" }}>{project.stats}</div>
       </div>
+    </>
+  );
+
+  if (href) {
+    return (
+      <Link href={href} onMouseEnter={() => setHov(true)} onMouseLeave={() => setHov(false)} style={cardStyle}>
+        {cardBody}
+      </Link>
+    );
+  }
+
+  return (
+    <div onMouseEnter={() => setHov(true)} onMouseLeave={() => setHov(false)} style={cardStyle}>
+      {cardBody}
     </div>
   );
 }
 
-export function Portfolio({ onBack }: PortfolioProps) {
-  const [view, setView] = useState<"grid" | "oac" | "qchan">("grid");
-
-  if (view === "oac")   return <OACCaseStudy onBack={() => setView("grid")} />;
-  if (view === "qchan") return <QChanCaseStudy onBack={() => setView("grid")} />;
-
-  return (
-    <PortfolioGrid
-      onBack={onBack}
-      onOpenCaseStudy={() => setView("oac")}
-      onOpenQChan={() => setView("qchan")}
-    />
-  );
-}
-
-function OACCaseStudy({ onBack }: { onBack: () => void }) {
+export function OACCaseStudy() {
 
   const timeline = [
     { year: "2020", title: "Origins in Lockdown", desc: "Odisha Anime Club is founded in February 2020 during COVID-19 to combat isolation and bring together anime fans across Odisha — the state's first and only anime club, born from a Quora post asking if one even existed.", accent: "#a78bfa" },
@@ -430,8 +425,8 @@ function OACCaseStudy({ onBack }: { onBack: () => void }) {
     { year: "2023", title: "AniMay — Collaboration Era", desc: "OAC's flagship AniMay event launches in collaboration with @funhub.odisha — private anime screenings, quiz competitions, games, and cosplay under one roof. The club earns national recognition in Otaku Mantra's coverage of Indian anime clubs.", accent: "#e879f9" },
     { year: "Feb '24", title: "Odisha Cosplay Community — A New Movement Begins", desc: "cos.labs unveils the Odisha Cosplay Community (OCC) — a joint venture between @odisha_anime_club_ and @odisha_pop_culture, built for cosplayers, by cosplayers. 226 likes. 31 comments. The secret was out.", accent: "#fb923c" },
     { year: "Oct '24", title: "Halloween Party — CosQ Launch Campaign", desc: "Digital Labs designs the CosQ Halloween Party campaign: event poster, social media kit, ticket graphics. 200+ attendees at Azzuro Club, Bhubaneswar — with @showmates.in ticketing, @odisha_anime_club_ as anime partner, and @odishacosplaycommunity as cosplay partner. The city's first taste of CosQ.", accent: "#ff6b35" },
-    { year: "Nov '24", title: "CosQ — Odisha's Biggest Cosplay Event", desc: "The culmination of 4 years of community-building. Digital Labs designs the entire visual identity, brochure, brand system, and event collaterals for CosQ — a 5,000+ attendee festival at Dream City Resort, Bhubaneswar, on November 30, 2024.", accent: "#f472b6" },
-    { year: "2026", title: "Ichi-Go — Odisha's First Anime Festival of 2026", desc: "OAC scales to a full public anime festival format. Ichi-Go 2026, held on February 1 in Bhubaneswar, marks the next chapter — ticketed via District.in with its own dedicated Instagram presence @ichi_go_2026.", accent: "#d3bdf1", last: true },
+    { year: "Nov '24", title: "CosQ — Odisha&apos;s Biggest Cosplay Event", desc: "The culmination of 4 years of community-building. Digital Labs designs the entire visual identity, brochure, brand system, and event collaterals for CosQ — a 5,000+ attendee festival at Dream City Resort, Bhubaneswar, on November 30, 2024.", accent: "#FF69B4" },
+    { year: "2026", title: "Ichi-Go — Odisha's First Anime Festival of 2026", desc: "OAC scales to a full public anime festival format. Ichi-Go 2026, held on February 1 in Bhubaneswar, marks the next chapter — ticketed via District.in with its own dedicated Instagram presence @ichi_go_2026.", accent: "#FF69B4", last: true },
   ];
 
   const activities = [
@@ -464,35 +459,35 @@ function OACCaseStudy({ onBack }: { onBack: () => void }) {
   ];
 
   return (
-    <div style={{ minHeight: "100vh", background: "#0a0a0a", color: "#e5e2e1" }}>
-      <SubNav title="Case Study — OAC × CosQ" onBack={onBack} />
+    <div style={{ minHeight: "100vh", background: "var(--bg-dark)", color: "var(--text-light)" }}>
+      <SubNav title="Case Study — OAC × CosQ" backHref="/digital-labs/portfolio" backLabel="Back to Portfolio" />
 
       {/* ── HERO ── */}
       <section style={{ padding: "80px 40px 0", maxWidth: "1440px", margin: "0 auto" }}>
         <div style={{ display: "flex", flexWrap: "wrap", gap: "8px", marginBottom: "32px" }}>
-          <div style={{ display: "inline-flex", alignItems: "center", gap: "8px", padding: "5px 12px", border: "1px solid rgba(211,189,241,0.25)", background: "rgba(211,189,241,0.06)" }}>
-            <div style={{ width: "6px", height: "6px", borderRadius: "50%", background: "#00e292", boxShadow: "0 0 6px #00e292" }} />
-            <span style={{ ...MONO, fontSize: "9px", letterSpacing: "0.3em", textTransform: "uppercase", color: "#d3bdf1" }}>Case Study · 2020–2026</span>
+          <div style={{ display: "inline-flex", alignItems: "center", gap: "8px", padding: "5px 12px", border: "1px solid rgba(255,105,180,0.25)", background: "rgba(255,105,180,0.06)" }}>
+            <div style={{ width: "6px", height: "6px", borderRadius: "50%", background: "#06FFA5", boxShadow: "0 0 6px #06FFA5" }} />
+            <span style={{ ...MONO, fontSize: "9px", letterSpacing: "0.3em", textTransform: "uppercase", color: "#FF69B4" }}>Case Study · 2020–2026</span>
           </div>
-          <div style={{ display: "inline-flex", alignItems: "center", gap: "8px", padding: "5px 12px", border: "1px solid rgba(255,255,255,0.08)", background: "transparent" }}>
-            <Calendar size={10} style={{ color: "#555" }} />
-            <span style={{ ...MONO, fontSize: "9px", letterSpacing: "0.2em", textTransform: "uppercase", color: "#555" }}>30 Nov 2024 · Dream City Resort, Bhubaneswar</span>
+          <div style={{ display: "inline-flex", alignItems: "center", gap: "8px", padding: "5px 12px", border: "1px solid rgba(157,78,221,0.08)", background: "transparent" }}>
+            <Calendar size={10} style={{ color: "#645578" }} />
+            <span style={{ ...MONO, fontSize: "9px", letterSpacing: "0.2em", textTransform: "uppercase", color: "#645578" }}>30 Nov 2024 · Dream City Resort, Bhubaneswar</span>
           </div>
         </div>
 
-        <h1 style={{ ...DISPLAY, fontSize: "clamp(44px, 7vw, 96px)", fontWeight: 800, letterSpacing: "-0.04em", lineHeight: 0.95, color: "#e5e2e1", margin: "0 0 24px 0" }}>
+        <h1 style={{ ...DISPLAY, fontSize: "clamp(44px, 7vw, 96px)", fontWeight: 800, letterSpacing: "-0.04em", lineHeight: 0.95, color: "var(--text-light)", margin: "0 0 24px 0" }}>
           From a{" "}
-          <span style={{ fontStyle: "italic", background: "linear-gradient(135deg, #a78bfa 0%, #f472b6 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
+          <span style={{ fontStyle: "italic", background: "linear-gradient(135deg, #a78bfa 0%, #FF69B4 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
             Quora Post
           </span>
           <br />to{" "}
-          <span style={{ fontStyle: "italic", background: "linear-gradient(135deg, #d3bdf1 0%, #9D4EDD 50%, #ffb0d0 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
-            Odisha's Biggest
+          <span style={{ fontStyle: "italic", background: "linear-gradient(135deg, #FF69B4 0%, #9D4EDD 50%, #FF69B4 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
+            Odisha&apos;s Biggest
           </span>
           <br />Cosplay Festival.
         </h1>
 
-        <p style={{ ...DISPLAY, fontSize: "18px", color: "#555", lineHeight: 1.7, maxWidth: "620px", margin: "0 0 48px 0" }}>
+        <p style={{ ...DISPLAY, fontSize: "18px", color: "#645578", lineHeight: 1.7, maxWidth: "620px", margin: "0 0 48px 0" }}>
           Digital Labs designed everything for CosQ — the brand, the brochure, the event identity, the sponsorship deck.
           This is the story of how one community went from pandemic WhatsApp groups to 5,000+ attendees in 4 years.
         </p>
@@ -506,23 +501,23 @@ function OACCaseStudy({ onBack }: { onBack: () => void }) {
             { label: "Studio", value: "Digital Labs by COSQ" },
           ].map(({ label, value }) => (
             <div key={label}>
-              <div style={{ ...MONO, fontSize: "9px", letterSpacing: "0.2em", textTransform: "uppercase", color: "#444", marginBottom: "4px" }}>{label}</div>
-              <div style={{ ...DISPLAY, fontSize: "15px", fontWeight: 700, color: "#e5e2e1" }}>{value}</div>
+              <div style={{ ...MONO, fontSize: "9px", letterSpacing: "0.2em", textTransform: "uppercase", color: "#4d4160", marginBottom: "4px" }}>{label}</div>
+              <div style={{ ...DISPLAY, fontSize: "15px", fontWeight: 700, color: "var(--text-light)" }}>{value}</div>
             </div>
           ))}
         </div>
 
         {/* Hero stats bar */}
-        <div style={{ display: "flex", flexWrap: "wrap", gap: "1px", background: "rgba(255,255,255,0.04)", marginBottom: "0" }}>
-          <StatPill value="5,000+" label="CosQ Expected Attendees" accent="#f472b6" />
+        <div style={{ display: "flex", flexWrap: "wrap", gap: "1px", background: "rgba(157,78,221,0.04)", marginBottom: "0" }}>
+          <StatPill value="5,000+" label="CosQ Expected Attendees" accent="#FF69B4" />
           <StatPill value="200+" label="Halloween Party Attendees" accent="#ff6b35" />
           <StatPill value="34+" label="Events Over 4 Years" accent="#a78bfa" />
-          <StatPill value="12+" label="Brand Collaborators" accent="#d3bdf1" />
+          <StatPill value="12+" label="Brand Collaborators" accent="#FF69B4" />
         </div>
       </section>
 
       {/* ── FULL-WIDTH COVER IMAGE BAND ── */}
-      <div style={{ width: "100%", height: "2px", background: "linear-gradient(90deg, #a78bfa, #f472b6, #d3bdf1)" }} />
+      <div style={{ width: "100%", height: "2px", background: "linear-gradient(90deg, #a78bfa, #FF69B4, #FF69B4)" }} />
       <div style={{
         width: "100%",
         background: "linear-gradient(135deg, #1a0033 0%, #2d0060 40%, #600030 80%, #1a0033 100%)",
@@ -534,30 +529,30 @@ function OACCaseStudy({ onBack }: { onBack: () => void }) {
         {/* Dot grid texture */}
         <div style={{
           position: "absolute", inset: 0,
-          backgroundImage: "radial-gradient(circle at 2px 2px, rgba(211,189,241,0.15) 1px, transparent 0)",
+          backgroundImage: "radial-gradient(circle at 2px 2px, rgba(255,105,180,0.15) 1px, transparent 0)",
           backgroundSize: "28px 28px",
         }} />
         <div style={{ position: "relative", zIndex: 1, textAlign: "center", maxWidth: "900px" }}>
-          <div style={{ ...MONO, fontSize: "11px", letterSpacing: "0.3em", textTransform: "uppercase", color: "rgba(211,189,241,0.5)", marginBottom: "20px" }}>Odisha's Biggest Cosplay Event</div>
-          <div style={{ ...DISPLAY, fontSize: "clamp(56px, 10vw, 120px)", fontWeight: 800, letterSpacing: "-0.04em", lineHeight: 0.9, color: "#fff", textShadow: "0 0 80px rgba(211,189,241,0.4)" }}>
+          <div style={{ ...MONO, fontSize: "11px", letterSpacing: "0.3em", textTransform: "uppercase", color: "rgba(255,105,180,0.5)", marginBottom: "20px" }}>Odisha&apos;s Biggest Cosplay Event</div>
+          <div style={{ ...DISPLAY, fontSize: "clamp(56px, 10vw, 120px)", fontWeight: 800, letterSpacing: "-0.04em", lineHeight: 0.9, color: "#fff", textShadow: "0 0 80px rgba(255,105,180,0.4)" }}>
             CosQ
           </div>
-          <div style={{ ...MONO, fontSize: "13px", letterSpacing: "0.5em", textTransform: "uppercase", color: "rgba(255,255,255,0.35)", marginTop: "16px" }}>2024 · Bhubaneswar</div>
+          <div style={{ ...MONO, fontSize: "13px", letterSpacing: "0.5em", textTransform: "uppercase", color: "rgba(157,78,221,0.35)", marginTop: "16px" }}>2024 · Bhubaneswar</div>
           <div style={{ display: "flex", gap: "8px", justifyContent: "center", flexWrap: "wrap", marginTop: "32px" }}>
             {["Cosplay", "LAN Gaming", "Manga Art", "Live Music", "Beyblade", "VTubing", "AMV Edit", "Battle of Bands"].map(tag => (
-              <span key={tag} style={{ ...MONO, fontSize: "9px", letterSpacing: "0.18em", textTransform: "uppercase", padding: "5px 12px", background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.12)", color: "rgba(255,255,255,0.5)" }}>{tag}</span>
+              <span key={tag} style={{ ...MONO, fontSize: "9px", letterSpacing: "0.18em", textTransform: "uppercase", padding: "5px 12px", background: "rgba(157,78,221,0.06)", border: "1px solid rgba(157,78,221,0.12)", color: "rgba(157,78,221,0.5)" }}>{tag}</span>
             ))}
           </div>
         </div>
       </div>
-      <div style={{ width: "100%", height: "2px", background: "linear-gradient(90deg, #d3bdf1, #f472b6, #a78bfa)" }} />
+      <div style={{ width: "100%", height: "2px", background: "linear-gradient(90deg, #FF69B4, #FF69B4, #a78bfa)" }} />
 
       {/* ── HALLOWEEN CAMPAIGN EVENT ── */}
       <section style={{ padding: "80px 40px", maxWidth: "1440px", margin: "0 auto" }}>
         <div style={{ display: "flex", alignItems: "center", gap: "16px", marginBottom: "48px" }}>
-          <div style={{ height: "1px", flex: 1, background: "rgba(255,255,255,0.06)" }} />
-          <span style={{ ...MONO, fontSize: "10px", letterSpacing: "0.3em", textTransform: "uppercase", color: "#444", whiteSpace: "nowrap" }}>Campaign Event · October 2024</span>
-          <div style={{ height: "1px", flex: 1, background: "rgba(255,255,255,0.06)" }} />
+          <div style={{ height: "1px", flex: 1, background: "rgba(157,78,221,0.06)" }} />
+          <span style={{ ...MONO, fontSize: "10px", letterSpacing: "0.3em", textTransform: "uppercase", color: "#4d4160", whiteSpace: "nowrap" }}>Campaign Event · October 2024</span>
+          <div style={{ height: "1px", flex: 1, background: "rgba(157,78,221,0.06)" }} />
         </div>
 
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "40px", alignItems: "stretch" }} className="halloween-single-col">
@@ -579,7 +574,7 @@ function OACCaseStudy({ onBack }: { onBack: () => void }) {
               <div style={{ ...DISPLAY, fontSize: "clamp(36px, 5vw, 64px)", fontWeight: 800, letterSpacing: "-0.04em", lineHeight: 0.95, color: "#fff", marginBottom: "12px" }}>
                 Halloween
               </div>
-              <div style={{ ...DISPLAY, fontSize: "clamp(36px, 5vw, 64px)", fontWeight: 800, letterSpacing: "-0.04em", lineHeight: 0.95, fontStyle: "italic", background: "linear-gradient(135deg, #ff6b35, #f472b6, #a855f7)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text", marginBottom: "28px" }}>
+              <div style={{ ...DISPLAY, fontSize: "clamp(36px, 5vw, 64px)", fontWeight: 800, letterSpacing: "-0.04em", lineHeight: 0.95, fontStyle: "italic", background: "linear-gradient(135deg, #ff6b35, #FF69B4, #a855f7)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text", marginBottom: "28px" }}>
                 Party.
               </div>
               <div style={{ display: "flex", flexWrap: "wrap", gap: "6px" }}>
@@ -591,29 +586,29 @@ function OACCaseStudy({ onBack }: { onBack: () => void }) {
             <div style={{ position: "relative", zIndex: 1, display: "flex", gap: "32px", marginTop: "40px" }}>
               <div>
                 <div style={{ ...DISPLAY, fontSize: "28px", fontWeight: 800, color: "#ff6b35", lineHeight: 1 }}>200+</div>
-                <div style={{ ...MONO, fontSize: "9px", letterSpacing: "0.18em", textTransform: "uppercase", color: "#555", marginTop: "4px" }}>Attendees</div>
+                <div style={{ ...MONO, fontSize: "9px", letterSpacing: "0.18em", textTransform: "uppercase", color: "#645578", marginTop: "4px" }}>Attendees</div>
               </div>
               <div>
                 <div style={{ ...DISPLAY, fontSize: "28px", fontWeight: 800, color: "#a855f7", lineHeight: 1 }}>₹299</div>
-                <div style={{ ...MONO, fontSize: "9px", letterSpacing: "0.18em", textTransform: "uppercase", color: "#555", marginTop: "4px" }}>Entry Ticket</div>
+                <div style={{ ...MONO, fontSize: "9px", letterSpacing: "0.18em", textTransform: "uppercase", color: "#645578", marginTop: "4px" }}>Entry Ticket</div>
               </div>
               <div>
-                <div style={{ ...DISPLAY, fontSize: "28px", fontWeight: 800, color: "#f472b6", lineHeight: 1 }}>3–9PM</div>
-                <div style={{ ...MONO, fontSize: "9px", letterSpacing: "0.18em", textTransform: "uppercase", color: "#555", marginTop: "4px" }}>Event Duration</div>
+                <div style={{ ...DISPLAY, fontSize: "28px", fontWeight: 800, color: "#FF69B4", lineHeight: 1 }}>3–9PM</div>
+                <div style={{ ...MONO, fontSize: "9px", letterSpacing: "0.18em", textTransform: "uppercase", color: "#645578", marginTop: "4px" }}>Event Duration</div>
               </div>
             </div>
           </div>
 
           {/* Right — details */}
           <div style={{ display: "flex", flexDirection: "column", gap: "0" }}>
-            <div style={{ ...MONO, fontSize: "10px", letterSpacing: "0.3em", textTransform: "uppercase", color: "#444", marginBottom: "20px" }}>The Launch Campaign</div>
-            <h3 style={{ ...DISPLAY, fontSize: "clamp(22px, 3vw, 36px)", fontWeight: 800, letterSpacing: "-0.03em", color: "#e5e2e1", margin: "0 0 16px 0", lineHeight: 1.1 }}>
-              CosQ's first public event. A controlled explosion — to prove the brand could fill a room.
+            <div style={{ ...MONO, fontSize: "10px", letterSpacing: "0.3em", textTransform: "uppercase", color: "#4d4160", marginBottom: "20px" }}>The Launch Campaign</div>
+            <h3 style={{ ...DISPLAY, fontSize: "clamp(22px, 3vw, 36px)", fontWeight: 800, letterSpacing: "-0.03em", color: "var(--text-light)", margin: "0 0 16px 0", lineHeight: 1.1 }}>
+              CosQ&apos;s first public event. A controlled explosion — to prove the brand could fill a room.
             </h3>
-            <p style={{ ...DISPLAY, fontSize: "15px", color: "#555", lineHeight: 1.75, margin: "0 0 28px 0" }}>
-              Before the grand November festival, Digital Labs ran a campaign event to build hype and test the brand in the wild. The CosQ Halloween Party at Azzuro Club (Bhubaneswar's premium sky lounge) was designed as a Trick or Treat — a spooky night for the anime, cosplay, comics, pop culture, and gaming community.
+            <p style={{ ...DISPLAY, fontSize: "15px", color: "#645578", lineHeight: 1.75, margin: "0 0 28px 0" }}>
+              Before the grand November festival, Digital Labs ran a campaign event to build hype and test the brand in the wild. The CosQ Halloween Party at Azzuro Club (Bhubaneswar&apos;s premium sky lounge) was designed as a Trick or Treat — a spooky night for the anime, cosplay, comics, pop culture, and gaming community.
             </p>
-            <p style={{ ...DISPLAY, fontSize: "15px", color: "#555", lineHeight: 1.75, margin: "0 0 32px 0" }}>
+            <p style={{ ...DISPLAY, fontSize: "15px", color: "#645578", lineHeight: 1.75, margin: "0 0 32px 0" }}>
               Over 200 attendees showed up. The event poster — dark purple gothic anime aesthetic, ticket artwork, and social media carousel — was entirely designed by Digital Labs and posted to @the.cosq. Ticketing through Showmates. 354+ Instagram likes on the launch post.
             </p>
             <div style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
@@ -626,9 +621,9 @@ function OACCaseStudy({ onBack }: { onBack: () => void }) {
                 { label: "Cosplay Partner", value: "@odishacosplaycommunity" },
                 { label: "Ticket Price", value: "₹299 · 150 redeemable + 1 shot free (2 for girls)" },
               ].map(({ label, value }) => (
-                <div key={label} style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", padding: "12px 16px", background: "#0d0d0d", gap: "20px", borderBottom: "1px solid rgba(255,255,255,0.03)" }}>
-                  <span style={{ ...MONO, fontSize: "9px", letterSpacing: "0.15em", textTransform: "uppercase", color: "#444", flexShrink: 0 }}>{label}</span>
-                  <span style={{ ...DISPLAY, fontSize: "12px", fontWeight: 600, color: "#666", textAlign: "right" }}>{value}</span>
+                <div key={label} style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", padding: "12px 16px", background: "var(--bg-card)", gap: "20px", borderBottom: "1px solid rgba(157,78,221,0.03)" }}>
+                  <span style={{ ...MONO, fontSize: "9px", letterSpacing: "0.15em", textTransform: "uppercase", color: "#4d4160", flexShrink: 0 }}>{label}</span>
+                  <span style={{ ...DISPLAY, fontSize: "12px", fontWeight: 600, color: "#786a8f", textAlign: "right" }}>{value}</span>
                 </div>
               ))}
             </div>
@@ -639,9 +634,9 @@ function OACCaseStudy({ onBack }: { onBack: () => void }) {
       {/* ── TIMELINE ── */}
       <section style={{ padding: "80px 40px", maxWidth: "1440px", margin: "0 auto" }}>
         <div style={{ display: "flex", alignItems: "center", gap: "16px", marginBottom: "48px" }}>
-          <div style={{ height: "1px", flex: 1, background: "rgba(255,255,255,0.06)" }} />
-          <span style={{ ...MONO, fontSize: "10px", letterSpacing: "0.3em", textTransform: "uppercase", color: "#444", whiteSpace: "nowrap" }}>The Journey · 2020 to 2026</span>
-          <div style={{ height: "1px", flex: 1, background: "rgba(255,255,255,0.06)" }} />
+          <div style={{ height: "1px", flex: 1, background: "rgba(157,78,221,0.06)" }} />
+          <span style={{ ...MONO, fontSize: "10px", letterSpacing: "0.3em", textTransform: "uppercase", color: "#4d4160", whiteSpace: "nowrap" }}>The Journey · 2020 to 2026</span>
+          <div style={{ height: "1px", flex: 1, background: "rgba(157,78,221,0.06)" }} />
         </div>
 
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0 80px" }} className="timeline-single-col">
@@ -659,20 +654,20 @@ function OACCaseStudy({ onBack }: { onBack: () => void }) {
       </section>
 
       {/* ── BRIEF SECTION ── */}
-      <section style={{ background: "#0d0d0d", borderTop: "1px solid rgba(255,255,255,0.05)", borderBottom: "1px solid rgba(255,255,255,0.05)", padding: "80px 40px" }}>
+      <section style={{ background: "var(--bg-card)", borderTop: "1px solid rgba(157,78,221,0.05)", borderBottom: "1px solid rgba(157,78,221,0.05)", padding: "80px 40px" }}>
         <div style={{ maxWidth: "1440px", margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1.4fr", gap: "80px", alignItems: "start" }} className="brief-single-col">
           <div>
-            <div style={{ ...MONO, fontSize: "10px", letterSpacing: "0.3em", textTransform: "uppercase", color: "#444", marginBottom: "20px" }}>The Brief</div>
-            <h2 style={{ ...DISPLAY, fontSize: "clamp(28px, 4vw, 48px)", fontWeight: 800, letterSpacing: "-0.03em", lineHeight: 1.05, color: "#e5e2e1", margin: "0 0 24px 0" }}>
+            <div style={{ ...MONO, fontSize: "10px", letterSpacing: "0.3em", textTransform: "uppercase", color: "#4d4160", marginBottom: "20px" }}>The Brief</div>
+            <h2 style={{ ...DISPLAY, fontSize: "clamp(28px, 4vw, 48px)", fontWeight: 800, letterSpacing: "-0.03em", lineHeight: 1.05, color: "var(--text-light)", margin: "0 0 24px 0" }}>
               Build an entire event universe from{" "}
-              <span style={{ fontStyle: "italic", background: "linear-gradient(135deg, #d3bdf1, #f472b6)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
+              <span style={{ fontStyle: "italic", background: "linear-gradient(135deg, #FF69B4, #FF69B4)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
                 scratch.
               </span>
             </h2>
-            <p style={{ ...DISPLAY, fontSize: "15px", color: "#555", lineHeight: 1.75, margin: "0 0 24px 0" }}>
+            <p style={{ ...DISPLAY, fontSize: "15px", color: "#645578", lineHeight: 1.75, margin: "0 0 24px 0" }}>
               Odisha Anime Club approached Digital Labs to design every visual touchpoint for CosQ 2024 — from the event logo and mascot character to a 15-page sponsorship brochure, social media kit, and multi-tier partnership deck targeted at national brands and media houses.
             </p>
-            <p style={{ ...DISPLAY, fontSize: "15px", color: "#555", lineHeight: 1.75, margin: 0 }}>
+            <p style={{ ...DISPLAY, fontSize: "15px", color: "#645578", lineHeight: 1.75, margin: 0 }}>
               The ask: make it feel like it belonged in Tokyo, not just Bhubaneswar. Make it loud. Make it real.
             </p>
           </div>
@@ -686,9 +681,9 @@ function OACCaseStudy({ onBack }: { onBack: () => void }) {
               { label: "Media Partners", value: "The AniLyst Podcast, JioCinema" },
               { label: "Key Outreach", value: "Viz Media, PVR INOX Pictures, Otaku Army" },
             ].map(({ label, value }) => (
-              <div key={label} style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", padding: "14px 20px", background: "#080808", gap: "20px" }}>
-                <span style={{ ...MONO, fontSize: "9px", letterSpacing: "0.15em", textTransform: "uppercase", color: "#444", flexShrink: 0 }}>{label}</span>
-                <span style={{ ...DISPLAY, fontSize: "13px", fontWeight: 600, color: "#888", textAlign: "right" }}>{value}</span>
+              <div key={label} style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", padding: "14px 20px", background: "var(--bg-dark)", gap: "20px" }}>
+                <span style={{ ...MONO, fontSize: "9px", letterSpacing: "0.15em", textTransform: "uppercase", color: "#4d4160", flexShrink: 0 }}>{label}</span>
+                <span style={{ ...DISPLAY, fontSize: "13px", fontWeight: 600, color: "#a294b8", textAlign: "right" }}>{value}</span>
               </div>
             ))}
           </div>
@@ -698,9 +693,9 @@ function OACCaseStudy({ onBack }: { onBack: () => void }) {
       {/* ── ACTIVITIES ── */}
       <section style={{ padding: "80px 40px", maxWidth: "1440px", margin: "0 auto" }}>
         <div style={{ display: "flex", alignItems: "center", gap: "16px", marginBottom: "48px" }}>
-          <div style={{ height: "1px", flex: 1, background: "rgba(255,255,255,0.06)" }} />
-          <span style={{ ...MONO, fontSize: "10px", letterSpacing: "0.3em", textTransform: "uppercase", color: "#444", whiteSpace: "nowrap" }}>Event Universe · CosQ Activations</span>
-          <div style={{ height: "1px", flex: 1, background: "rgba(255,255,255,0.06)" }} />
+          <div style={{ height: "1px", flex: 1, background: "rgba(157,78,221,0.06)" }} />
+          <span style={{ ...MONO, fontSize: "10px", letterSpacing: "0.3em", textTransform: "uppercase", color: "#4d4160", whiteSpace: "nowrap" }}>Event Universe · CosQ Activations</span>
+          <div style={{ height: "1px", flex: 1, background: "rgba(157,78,221,0.06)" }} />
         </div>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))", gap: "8px" }}>
           {activities.map(a => <ActivityCard key={a.title} {...a} />)}
@@ -708,20 +703,20 @@ function OACCaseStudy({ onBack }: { onBack: () => void }) {
       </section>
 
       {/* ── SPONSORSHIP ARCHITECTURE ── */}
-      <section style={{ background: "#0d0d0d", borderTop: "1px solid rgba(255,255,255,0.05)", borderBottom: "1px solid rgba(255,255,255,0.05)", padding: "80px 40px" }}>
+      <section style={{ background: "var(--bg-card)", borderTop: "1px solid rgba(157,78,221,0.05)", borderBottom: "1px solid rgba(157,78,221,0.05)", padding: "80px 40px" }}>
         <div style={{ maxWidth: "1440px", margin: "0 auto" }}>
           <div style={{ display: "flex", alignItems: "center", gap: "16px", marginBottom: "48px" }}>
-            <div style={{ height: "1px", flex: 1, background: "rgba(255,255,255,0.06)" }} />
-            <span style={{ ...MONO, fontSize: "10px", letterSpacing: "0.3em", textTransform: "uppercase", color: "#444", whiteSpace: "nowrap" }}>Designed Deliverable · Sponsorship Architecture</span>
-            <div style={{ height: "1px", flex: 1, background: "rgba(255,255,255,0.06)" }} />
+            <div style={{ height: "1px", flex: 1, background: "rgba(157,78,221,0.06)" }} />
+            <span style={{ ...MONO, fontSize: "10px", letterSpacing: "0.3em", textTransform: "uppercase", color: "#4d4160", whiteSpace: "nowrap" }}>Designed Deliverable · Sponsorship Architecture</span>
+            <div style={{ height: "1px", flex: 1, background: "rgba(157,78,221,0.06)" }} />
           </div>
 
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "40px", alignItems: "start" }} className="sponsor-single-col">
             <div>
-              <h3 style={{ ...DISPLAY, fontSize: "clamp(24px, 3vw, 40px)", fontWeight: 800, letterSpacing: "-0.03em", color: "#e5e2e1", margin: "0 0 16px 0" }}>
+              <h3 style={{ ...DISPLAY, fontSize: "clamp(24px, 3vw, 40px)", fontWeight: 800, letterSpacing: "-0.03em", color: "var(--text-light)", margin: "0 0 16px 0" }}>
                 A tiered partnership system worthy of national brands.
               </h3>
-              <p style={{ ...DISPLAY, fontSize: "15px", color: "#555", lineHeight: 1.7, margin: "0 0 32px 0" }}>
+              <p style={{ ...DISPLAY, fontSize: "15px", color: "#645578", lineHeight: 1.7, margin: "0 0 32px 0" }}>
                 Digital Labs designed the full sponsorship deck — four main tiers plus specialist partner categories — that OAC used to pitch brands like Viz Media, PVR INOX, and The AniLyst Podcast.
               </p>
               <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
@@ -730,15 +725,15 @@ function OACCaseStudy({ onBack }: { onBack: () => void }) {
             </div>
 
             <div>
-              <div style={{ ...MONO, fontSize: "10px", letterSpacing: "0.2em", textTransform: "uppercase", color: "#444", marginBottom: "20px" }}>Golden Gyoza Tier Benefits</div>
+              <div style={{ ...MONO, fontSize: "10px", letterSpacing: "0.2em", textTransform: "uppercase", color: "#4d4160", marginBottom: "20px" }}>Golden Gyoza Tier Benefits</div>
               {[
                 "Stage Presence (exclusive)", "Cosplayer Sponsorship", "Prominent Logo Placement",
                 "Banner Ad Placement", "Live Stream Branding", "Sponsored Email Blast",
                 "Branded Photo Booth", "VIP Badge Branding", "20×20ft Customised Stall",
               ].map((b, i) => (
-                <div key={b} style={{ display: "flex", alignItems: "center", gap: "12px", padding: "11px 0", borderBottom: "1px solid rgba(255,255,255,0.04)" }}>
-                  <span style={{ ...MONO, fontSize: "9px", color: "#333", minWidth: "20px" }}>{String(i + 1).padStart(2, "0")}</span>
-                  <span style={{ ...DISPLAY, fontSize: "13px", color: "#888" }}>{b}</span>
+                <div key={b} style={{ display: "flex", alignItems: "center", gap: "12px", padding: "11px 0", borderBottom: "1px solid rgba(157,78,221,0.04)" }}>
+                  <span style={{ ...MONO, fontSize: "9px", color: "#3a2f4a", minWidth: "20px" }}>{String(i + 1).padStart(2, "0")}</span>
+                  <span style={{ ...DISPLAY, fontSize: "13px", color: "#a294b8" }}>{b}</span>
                   <div style={{ marginLeft: "auto", width: "20px", height: "20px", borderRadius: "50%", background: "#f59e0b22", border: "1px solid #f59e0b55", display: "flex", alignItems: "center", justifyContent: "center" }}>
                     <div style={{ width: "6px", height: "6px", borderRadius: "50%", background: "#f59e0b" }} />
                   </div>
@@ -752,41 +747,41 @@ function OACCaseStudy({ onBack }: { onBack: () => void }) {
       {/* ── BRAND COLLABORATORS ── */}
       <section style={{ padding: "80px 40px", maxWidth: "1440px", margin: "0 auto" }}>
         <div style={{ display: "flex", alignItems: "center", gap: "16px", marginBottom: "48px" }}>
-          <div style={{ height: "1px", flex: 1, background: "rgba(255,255,255,0.06)" }} />
-          <span style={{ ...MONO, fontSize: "10px", letterSpacing: "0.3em", textTransform: "uppercase", color: "#444", whiteSpace: "nowrap" }}>Brand Collaboration Network</span>
-          <div style={{ height: "1px", flex: 1, background: "rgba(255,255,255,0.06)" }} />
+          <div style={{ height: "1px", flex: 1, background: "rgba(157,78,221,0.06)" }} />
+          <span style={{ ...MONO, fontSize: "10px", letterSpacing: "0.3em", textTransform: "uppercase", color: "#4d4160", whiteSpace: "nowrap" }}>Brand Collaboration Network</span>
+          <div style={{ height: "1px", flex: 1, background: "rgba(157,78,221,0.06)" }} />
         </div>
 
         <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
           {collaborators.map(name => (
-            <div key={name} style={{ padding: "10px 20px", background: "#0d0d0d", border: "1px solid rgba(255,255,255,0.06)" }}>
-              <span style={{ ...DISPLAY, fontSize: "13px", fontWeight: 600, color: "#666" }}>{name}</span>
+            <div key={name} style={{ padding: "10px 20px", background: "var(--bg-card)", border: "1px solid rgba(157,78,221,0.06)" }}>
+              <span style={{ ...DISPLAY, fontSize: "13px", fontWeight: 600, color: "#786a8f" }}>{name}</span>
             </div>
           ))}
         </div>
 
         {/* AniLyst callout */}
-        <div style={{ marginTop: "40px", padding: "32px 36px", background: "#0d0d0d", border: "1px solid rgba(211,189,241,0.15)", display: "flex", gap: "24px", alignItems: "flex-start", flexWrap: "wrap" }}>
-          <div style={{ width: "48px", height: "48px", minWidth: "48px", background: "linear-gradient(135deg, #a78bfa, #f472b6)", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <div style={{ marginTop: "40px", padding: "32px 36px", background: "var(--bg-card)", border: "1px solid rgba(255,105,180,0.15)", display: "flex", gap: "24px", alignItems: "flex-start", flexWrap: "wrap" }}>
+          <div style={{ width: "48px", height: "48px", minWidth: "48px", background: "linear-gradient(135deg, #a78bfa, #FF69B4)", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center" }}>
             <span style={{ ...MONO, fontSize: "10px", fontWeight: 800, color: "#fff" }}>AL</span>
           </div>
           <div style={{ flex: 1, minWidth: "200px" }}>
-            <div style={{ ...MONO, fontSize: "9px", letterSpacing: "0.2em", textTransform: "uppercase", color: "#d3bdf1", marginBottom: "6px" }}>Media Partner</div>
-            <h4 style={{ ...DISPLAY, fontSize: "16px", fontWeight: 700, color: "#e5e2e1", margin: "0 0 8px 0" }}>The AniLyst Podcast · JioCinema</h4>
-            <p style={{ ...DISPLAY, fontSize: "13px", color: "#555", lineHeight: 1.65, margin: 0 }}>
-              YouTube's #1 ranked Indian Anime Podcast — first anime content creators with an OTT show on JioCinema. Featured Jason Paige (Pokémon theme voice), Sanket Mhatre, and Japanese Embassy representatives. CosQ outreach to Uday Singh (AniLyst) came through this partnership channel.
+            <div style={{ ...MONO, fontSize: "9px", letterSpacing: "0.2em", textTransform: "uppercase", color: "#FF69B4", marginBottom: "6px" }}>Media Partner</div>
+            <h4 style={{ ...DISPLAY, fontSize: "16px", fontWeight: 700, color: "var(--text-light)", margin: "0 0 8px 0" }}>The AniLyst Podcast · JioCinema</h4>
+            <p style={{ ...DISPLAY, fontSize: "13px", color: "#645578", lineHeight: 1.65, margin: 0 }}>
+              YouTube&apos;s #1 ranked Indian Anime Podcast — first anime content creators with an OTT show on JioCinema. Featured Jason Paige (Pokémon theme voice), Sanket Mhatre, and Japanese Embassy representatives. CosQ outreach to Uday Singh (AniLyst) came through this partnership channel.
             </p>
           </div>
         </div>
       </section>
 
       {/* ── DELIVERABLES ── */}
-      <section style={{ background: "#0d0d0d", borderTop: "1px solid rgba(255,255,255,0.05)", borderBottom: "1px solid rgba(255,255,255,0.05)", padding: "80px 40px" }}>
+      <section style={{ background: "var(--bg-card)", borderTop: "1px solid rgba(157,78,221,0.05)", borderBottom: "1px solid rgba(157,78,221,0.05)", padding: "80px 40px" }}>
         <div style={{ maxWidth: "1440px", margin: "0 auto" }}>
-          <div style={{ ...MONO, fontSize: "10px", letterSpacing: "0.3em", textTransform: "uppercase", color: "#444", marginBottom: "20px" }}>What Digital Labs Delivered</div>
-          <h2 style={{ ...DISPLAY, fontSize: "clamp(28px, 4vw, 52px)", fontWeight: 800, letterSpacing: "-0.03em", color: "#e5e2e1", margin: "0 0 36px 0" }}>
+          <div style={{ ...MONO, fontSize: "10px", letterSpacing: "0.3em", textTransform: "uppercase", color: "#4d4160", marginBottom: "20px" }}>What Digital Labs Delivered</div>
+          <h2 style={{ ...DISPLAY, fontSize: "clamp(28px, 4vw, 52px)", fontWeight: 800, letterSpacing: "-0.03em", color: "var(--text-light)", margin: "0 0 36px 0" }}>
             Every pixel.{" "}
-            <span style={{ fontStyle: "italic", background: "linear-gradient(135deg, #d3bdf1, #f472b6)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
+            <span style={{ fontStyle: "italic", background: "linear-gradient(135deg, #FF69B4, #FF69B4)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
               Every screen.
             </span>
           </h2>
@@ -799,9 +794,9 @@ function OACCaseStudy({ onBack }: { onBack: () => void }) {
       {/* ── INSTAGRAM EMBEDS ── */}
       <section style={{ padding: "80px 40px", maxWidth: "1440px", margin: "0 auto" }}>
         <div style={{ display: "flex", alignItems: "center", gap: "16px", marginBottom: "48px" }}>
-          <div style={{ height: "1px", flex: 1, background: "rgba(255,255,255,0.06)" }} />
-          <span style={{ ...MONO, fontSize: "10px", letterSpacing: "0.3em", textTransform: "uppercase", color: "#444", whiteSpace: "nowrap" }}>From the Feed · Campaign Posts</span>
-          <div style={{ height: "1px", flex: 1, background: "rgba(255,255,255,0.06)" }} />
+          <div style={{ height: "1px", flex: 1, background: "rgba(157,78,221,0.06)" }} />
+          <span style={{ ...MONO, fontSize: "10px", letterSpacing: "0.3em", textTransform: "uppercase", color: "#4d4160", whiteSpace: "nowrap" }}>From the Feed · Campaign Posts</span>
+          <div style={{ height: "1px", flex: 1, background: "rgba(157,78,221,0.06)" }} />
         </div>
 
         {/* Instagram embed grid — 2 columns */}
@@ -813,13 +808,13 @@ function OACCaseStudy({ onBack }: { onBack: () => void }) {
               <div style={{ width: "6px", height: "6px", borderRadius: "50%", background: "#fb923c", boxShadow: "0 0 6px #fb923c" }} />
               <span style={{ ...MONO, fontSize: "9px", letterSpacing: "0.25em", textTransform: "uppercase", color: "#fb923c" }}>OCC Launch · Feb 10, 2024 · @cos.labs</span>
             </div>
-            <div style={{ background: "#0d0d0d", border: "1px solid rgba(251,146,60,0.2)", overflow: "hidden" }}>
+            <div style={{ background: "var(--bg-card)", border: "1px solid rgba(251,146,60,0.2)", overflow: "hidden" }}>
               <blockquote
                 className="instagram-media"
                 data-instgrm-captioned
                 data-instgrm-permalink="https://www.instagram.com/p/C3LBvVYyu3C/?utm_source=ig_embed&amp;utm_campaign=loading"
                 data-instgrm-version="14"
-                style={{ background: "#0d0d0d", border: 0, margin: 0, padding: 0, width: "100%", minWidth: "326px" }}
+                style={{ background: "var(--bg-card)", border: 0, margin: 0, padding: 0, width: "100%", minWidth: "326px" }}
               />
             </div>
           </div>
@@ -830,13 +825,13 @@ function OACCaseStudy({ onBack }: { onBack: () => void }) {
               <div style={{ width: "6px", height: "6px", borderRadius: "50%", background: "#ff6b35", boxShadow: "0 0 6px #ff6b35" }} />
               <span style={{ ...MONO, fontSize: "9px", letterSpacing: "0.25em", textTransform: "uppercase", color: "#ff6b35" }}>Halloween Party · Oct 24, 2024 · @the.cosq</span>
             </div>
-            <div style={{ background: "#0d0d0d", border: "1px solid rgba(255,107,53,0.2)", overflow: "hidden" }}>
+            <div style={{ background: "var(--bg-card)", border: "1px solid rgba(255,107,53,0.2)", overflow: "hidden" }}>
               <blockquote
                 className="instagram-media"
                 data-instgrm-captioned
                 data-instgrm-permalink="https://www.instagram.com/p/DBghi4JS954/?utm_source=ig_embed&amp;utm_campaign=loading"
                 data-instgrm-version="14"
-                style={{ background: "#0d0d0d", border: 0, margin: 0, padding: 0, width: "100%", minWidth: "326px" }}
+                style={{ background: "var(--bg-card)", border: 0, margin: 0, padding: 0, width: "100%", minWidth: "326px" }}
               />
             </div>
           </div>
@@ -849,7 +844,7 @@ function OACCaseStudy({ onBack }: { onBack: () => void }) {
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))", gap: "8px", marginTop: "40px" }}>
           {[
             { handle: "@odisha_anime_club_", platform: "OAC Instagram", color: "linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045)" },
-            { handle: "@the.cosq", platform: "CosQ Instagram", color: "linear-gradient(135deg, #9D4EDD, #f472b6)" },
+            { handle: "@the.cosq", platform: "CosQ Instagram", color: "linear-gradient(135deg, #9D4EDD, #FF69B4)" },
             { handle: "@cos.labs", platform: "Cos.Labs · Design Feed", color: "linear-gradient(135deg, #ea580c, #fb923c)" },
             { handle: "@ichi_go_2026", platform: "Ichi-Go 2026", color: "linear-gradient(135deg, #1d4ed8, #7c3aed)" },
           ].map(({ handle, platform, color }) => (
@@ -861,18 +856,18 @@ function OACCaseStudy({ onBack }: { onBack: () => void }) {
       </section>
 
       {/* ── OUTCOME ── */}
-      <section style={{ background: "#0d0d0d", borderTop: "1px solid rgba(255,255,255,0.05)", padding: "80px 40px" }}>
+      <section style={{ background: "var(--bg-card)", borderTop: "1px solid rgba(157,78,221,0.05)", padding: "80px 40px" }}>
         <div style={{ maxWidth: "1440px", margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "80px", alignItems: "center" }} className="outcome-single-col">
           <div>
-            <div style={{ ...MONO, fontSize: "10px", letterSpacing: "0.3em", textTransform: "uppercase", color: "#444", marginBottom: "20px" }}>The Outcome</div>
-            <h2 style={{ ...DISPLAY, fontSize: "clamp(28px, 4vw, 52px)", fontWeight: 800, letterSpacing: "-0.03em", color: "#e5e2e1", margin: "0 0 24px 0", lineHeight: 1.05 }}>
+            <div style={{ ...MONO, fontSize: "10px", letterSpacing: "0.3em", textTransform: "uppercase", color: "#4d4160", marginBottom: "20px" }}>The Outcome</div>
+            <h2 style={{ ...DISPLAY, fontSize: "clamp(28px, 4vw, 52px)", fontWeight: 800, letterSpacing: "-0.03em", color: "var(--text-light)", margin: "0 0 24px 0", lineHeight: 1.05 }}>
               A state-level movement, designed{" "}
-              <span style={{ fontStyle: "italic", background: "linear-gradient(135deg, #d3bdf1, #a78bfa)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
+              <span style={{ fontStyle: "italic", background: "linear-gradient(135deg, #FF69B4, #a78bfa)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
                 end-to-end.
               </span>
             </h2>
-            <p style={{ ...DISPLAY, fontSize: "15px", color: "#555", lineHeight: 1.75, margin: 0 }}>
-              CosQ went from concept to Odisha's largest cosplay event in a single edition. The brand system Digital Labs built gave OAC the visual credibility to pitch national partners including Viz Media, PVR INOX Pictures, and JioCinema's AniLyst Podcast — elevating what was once a community Discord server into a professionally designed cultural institution.
+            <p style={{ ...DISPLAY, fontSize: "15px", color: "#645578", lineHeight: 1.75, margin: 0 }}>
+              CosQ went from concept to Odisha&apos;s largest cosplay event in a single edition. The brand system Digital Labs built gave OAC the visual credibility to pitch national partners including Viz Media, PVR INOX Pictures, and JioCinema&apos;s AniLyst Podcast — elevating what was once a community Discord server into a professionally designed cultural institution.
             </p>
           </div>
           <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
@@ -882,9 +877,9 @@ function OACCaseStudy({ onBack }: { onBack: () => void }) {
               { metric: "4-tier sponsorship system", detail: "₹25K to ₹2.5L — fully designed, pitched, and deployed" },
               { metric: "Ichi-Go 2026 secured", detail: "Odisha's first public anime festival of 2026, Feb 1, Bhubaneswar" },
             ].map(({ metric, detail }) => (
-              <div key={metric} style={{ padding: "20px 24px", background: "#080808", border: "1px solid rgba(255,255,255,0.05)" }}>
-                <div style={{ ...DISPLAY, fontSize: "14px", fontWeight: 700, color: "#e5e2e1", marginBottom: "6px" }}>{metric}</div>
-                <div style={{ ...DISPLAY, fontSize: "13px", color: "#444" }}>{detail}</div>
+              <div key={metric} style={{ padding: "20px 24px", background: "var(--bg-dark)", border: "1px solid rgba(157,78,221,0.05)" }}>
+                <div style={{ ...DISPLAY, fontSize: "14px", fontWeight: 700, color: "var(--text-light)", marginBottom: "6px" }}>{metric}</div>
+                <div style={{ ...DISPLAY, fontSize: "13px", color: "#4d4160" }}>{detail}</div>
               </div>
             ))}
           </div>
@@ -893,32 +888,33 @@ function OACCaseStudy({ onBack }: { onBack: () => void }) {
 
       {/* ── CTA ── */}
       <section style={{ padding: "80px 40px", maxWidth: "1440px", margin: "0 auto" }}>
-        <h2 style={{ ...DISPLAY, fontSize: "clamp(28px, 4vw, 52px)", fontWeight: 800, letterSpacing: "-0.03em", color: "#e5e2e1", margin: "0 0 12px 0" }}>
+        <h2 style={{ ...DISPLAY, fontSize: "clamp(28px, 4vw, 52px)", fontWeight: 800, letterSpacing: "-0.03em", color: "var(--text-light)", margin: "0 0 12px 0" }}>
           Ready to build your{" "}
-          <span style={{ fontStyle: "italic", background: "linear-gradient(135deg, #d3bdf1 0%, #9D4EDD 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
+          <span style={{ fontStyle: "italic", background: "linear-gradient(135deg, #FF69B4 0%, #9D4EDD 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
             movement?
           </span>
         </h2>
-        <p style={{ ...DISPLAY, fontSize: "15px", color: "#555", margin: "0 0 40px 0" }}>Digital Labs handles brand, event, and campaign design end-to-end.</p>
-        <button onClick={onBack} style={{
+        <p style={{ ...DISPLAY, fontSize: "15px", color: "#645578", margin: "0 0 40px 0" }}>Digital Labs handles brand, event, and campaign design end-to-end.</p>
+        <Link href="/digital-labs/submit-project" style={{
+          display: "inline-block",
           ...MONO, fontSize: "11px", fontWeight: 700, letterSpacing: "0.18em",
           textTransform: "uppercase", padding: "14px 36px",
-          background: "#d3bdf1", color: "#0a0a0a",
-          border: "none", cursor: "pointer", outline: "none",
+          background: "#FF69B4", color: "var(--bg-dark)",
+          border: "none", cursor: "pointer", outline: "none", textDecoration: "none",
           transition: "background 0.2s, box-shadow 0.2s",
         }}
           onMouseEnter={e => {
             (e.currentTarget as HTMLElement).style.background = "#c4a8f0";
-            (e.currentTarget as HTMLElement).style.boxShadow = "0 0 24px rgba(211,189,241,0.3)";
+            (e.currentTarget as HTMLElement).style.boxShadow = "0 0 24px rgba(255,105,180,0.3)";
           }}
           onMouseLeave={e => {
-            (e.currentTarget as HTMLElement).style.background = "#d3bdf1";
+            (e.currentTarget as HTMLElement).style.background = "#FF69B4";
             (e.currentTarget as HTMLElement).style.boxShadow = "none";
           }}
         >
           Start a Project
-        </button>
-        <p style={{ ...MONO, fontSize: "9px", color: "#333", letterSpacing: "0.15em", textTransform: "uppercase", marginTop: "48px" }}>
+        </Link>
+        <p style={{ ...MONO, fontSize: "9px", color: "#3a2f4a", letterSpacing: "0.15em", textTransform: "uppercase", marginTop: "48px" }}>
           © 2026 Digital Labs by COSQ · Case Study: Odisha Anime Club × CosQ
         </p>
       </section>
@@ -954,16 +950,16 @@ function SocialCard({ handle, platform, color }: { handle: string; platform: str
       onMouseLeave={() => setHov(false)}
       style={{
         aspectRatio: "1",
-        background: hov ? color : "#0d0d0d",
-        border: `1px solid ${hov ? "transparent" : "rgba(255,255,255,0.06)"}`,
+        background: hov ? color : "var(--bg-card)",
+        border: `1px solid ${hov ? "transparent" : "rgba(157,78,221,0.06)"}`,
         display: "flex", flexDirection: "column", justifyContent: "flex-end",
         padding: "16px", cursor: "pointer",
         transition: "background 0.3s, border-color 0.3s",
       }}
     >
-      <Instagram size={20} style={{ color: hov ? "#fff" : "#333", marginBottom: "8px", transition: "color 0.3s" }} />
-      <div style={{ ...MONO, fontSize: "10px", fontWeight: 700, letterSpacing: "0.1em", color: hov ? "#fff" : "#e5e2e1", transition: "color 0.3s" }}>{handle}</div>
-      <div style={{ ...MONO, fontSize: "9px", letterSpacing: "0.12em", color: hov ? "rgba(255,255,255,0.6)" : "#444", textTransform: "uppercase", marginTop: "2px", transition: "color 0.3s" }}>{platform}</div>
+      <Instagram size={20} style={{ color: hov ? "#fff" : "#3a2f4a", marginBottom: "8px", transition: "color 0.3s" }} />
+      <div style={{ ...MONO, fontSize: "10px", fontWeight: 700, letterSpacing: "0.1em", color: hov ? "#fff" : "var(--text-light)", transition: "color 0.3s" }}>{handle}</div>
+      <div style={{ ...MONO, fontSize: "9px", letterSpacing: "0.12em", color: hov ? "rgba(157,78,221,0.6)" : "#4d4160", textTransform: "uppercase", marginTop: "2px", transition: "color 0.3s" }}>{platform}</div>
     </div>
   );
 }
