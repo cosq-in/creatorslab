@@ -99,7 +99,6 @@ export default function ServicesPage() {
                     <div className="pricing-grid">
                         <div className="pricing-card pixel-card">
                             <div className="pricing-tier">Starter</div>
-                            <div className="pricing-price">$299<span>/month</span></div>
                             <ul className="pricing-features">
                                 <li>✓ Content calendar & strategy</li>
                                 <li>✓ 8 posts / edits per month</li>
@@ -111,7 +110,6 @@ export default function ServicesPage() {
                         <div className="pricing-card pixel-card featured">
                             <div className="pricing-badge">Most Popular</div>
                             <div className="pricing-tier">Professional</div>
-                            <div className="pricing-price">$699<span>/month</span></div>
                             <ul className="pricing-features">
                                 <li>✓ Everything in Starter</li>
                                 <li>✓ Full content production</li>
@@ -122,7 +120,6 @@ export default function ServicesPage() {
                         </div>
                         <div className="pricing-card pixel-card">
                             <div className="pricing-tier">Enterprise</div>
-                            <div className="pricing-price">Custom</div>
                             <ul className="pricing-features">
                                 <li>✓ Everything in Professional</li>
                                 <li>✓ Dedicated account strategist</li>

@@ -1,7 +1,7 @@
 const STATS = [
-    { number: "500+", label: "Creators" },
-    { number: "50M+", label: "Total Reach" },
-    { number: "100+", label: "Campaigns" },
+    { number: "2+", label: "Creators" },
+    { number: "5k+", label: "Total Reach" },
+    { number: "1+", label: "Campaigns" },
     { number: "24/7", label: "Support" },
 ];
 

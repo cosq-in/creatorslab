@@ -35,7 +35,9 @@ export default function PixelFooter() {
                         <ul>
                             <li><Link href="/contact">Contact Us</Link></li>
                             <li><a href="mailto:marketing@cosq.in">marketing@cosq.in</a></li>
-                            <li><a href="#">discord.gg/creatorslab</a></li>
+                            <li><a href="mailto:info@cosq.in">info@cosq.in</a></li>
+                            <li><a href="https://discord.gg/u5bKmxrZVF" target="_blank" rel="noopener noreferrer">Discord</a></li>
+                            <li><a href="https://www.instagram.com/cosq.events/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
                         </ul>
                     </div>
                 </div>

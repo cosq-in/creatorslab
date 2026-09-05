@@ -12,7 +12,7 @@ const FAQS = [
     },
     {
         q: "How much do your services cost?",
-        a: "Plans start at $299/month for creators just getting started, with custom pricing for larger orgs and teams. Check out our Services page for the full breakdown, or reach out and we'll recommend a fit.",
+        a: "Pricing is tailored to each creator and campaign — reach out and we'll put together a custom quote that fits your goals and budget.",
     },
     {
         q: "I'm brand new with barely any followers. Can you still help?",
@@ -161,6 +161,12 @@ export default function ContactPage() {
                             </div>
 
                             <div className="info-card pixel-card">
+                                <h3>📧 Info</h3>
+                                <p><a href="mailto:info@cosq.in">info@cosq.in</a></p>
+                                <p className="info-note">For general information</p>
+                            </div>
+
+                            <div className="info-card pixel-card">
                                 <h3>💼 Business & Founders</h3>
                                 <p><a href="mailto:soham@cosq.in">soham@cosq.in</a></p>
                                 <p className="info-note">Soham (Co-Founder)</p>
@@ -168,8 +174,14 @@ export default function ContactPage() {
 
                             <div className="info-card pixel-card">
                                 <h3>💬 Join Our Discord</h3>
-                                <p><a href="#">discord.gg/creatorslab</a></p>
+                                <p><a href="https://discord.gg/u5bKmxrZVF" target="_blank" rel="noopener noreferrer">discord.gg/u5bKmxrZVF</a></p>
                                 <p className="info-note">Connect with our community</p>
+                            </div>
+
+                            <div className="info-card pixel-card">
+                                <h3>📸 Follow Us</h3>
+                                <p><a href="https://www.instagram.com/cosq.events/" target="_blank" rel="noopener noreferrer">@cosq.events</a></p>
+                                <p className="info-note">Follow us on Instagram</p>
                             </div>
                         </div>
                     </div>

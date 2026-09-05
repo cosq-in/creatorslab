@@ -74,6 +74,15 @@ export default function TeamPage() {
                             <p className="member-role" style={{ color: 'var(--accent-color)', fontWeight: 'bold', marginBottom: 'var(--spacing-sm)' }}>UI/UX Designer</p>
                             <p style={{ color: 'var(--text-muted)' }}>Designs the interfaces creators actually use, obsessing over the small details that make a product feel effortless.</p>
                         </div>
+
+                        {/* Member 8 */}
+                        <div className="pixel-card team-member" style={{ textAlign: 'center' }}>
+                            <div className="member-avatar" style={{ fontSize: '4rem', marginBottom: 'var(--spacing-sm)' }}>📝</div>
+                            {/* TODO: Upload real photo to /public/team/chinmayee.jpg and use <Image> */}
+                            <h3 style={{ color: 'var(--primary-color)', marginBottom: 'var(--spacing-xs)' }}>Chinmayee Mishra</h3>
+                            <p className="member-role" style={{ color: 'var(--accent-color)', fontWeight: 'bold', marginBottom: 'var(--spacing-sm)' }}>Company Secretary</p>
+                            <p style={{ color: 'var(--text-muted)' }}>Keeps Creators Lab compliant and well-governed, handling the legal and regulatory backbone behind the agency&apos;s growth.</p>
+                        </div>
                     </div>
                 </div>
             </section>
