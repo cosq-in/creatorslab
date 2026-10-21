@@ -1,0 +1,515 @@
+/* ---------- Gate (/) ---------- */
+
+.gate {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  background: #fff url(/desktop-background.png) center/cover no-repeat;
+}
+
+.gate-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.gate-brand {
+  position: absolute;
+  top: 20px;
+  left: 28px;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.gate-brand img,
+.wing-brand img {
+  height: 44px;
+  width: 44px;
+  object-fit: contain;
+}
+
+.gate-brand span {
+  font: 400 24px var(--font-display);
+  color: var(--cosq-pink);
+  text-shadow: 2px 2px 0 var(--cosq-purple);
+}
+
+.gate-home,
+.gate-skip {
+  position: absolute;
+  font: 400 14px var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--cosq-purple-deep);
+}
+
+.gate-home {
+  top: 28px;
+  right: 28px;
+  z-index: 6;
+}
+
+.gate-skip {
+  bottom: 24px;
+  right: 28px;
+  z-index: 5;
+  cursor: pointer;
+  background: none;
+  border: 0;
+  padding: 0;
+}
+
+.gate-beat {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 15vh 32px 0;
+  pointer-events: none;
+  transition: opacity .7s, transform .7s;
+}
+
+.gate-beat h1 {
+  font: 400 clamp(34px, 6.5vw, 84px)/1 var(--font-display);
+  text-align: center;
+  color: var(--cosq-pink);
+  max-width: 1000px;
+  text-shadow: 5px 5px 0 var(--cosq-purple);
+}
+
+.gate-choose {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  transition: opacity .8s .3s;
+}
+
+.gate-choose-title {
+  text-align: center;
+  padding: 84px 24px 0;
+}
+
+.gate-choose-title h2 {
+  font: 400 clamp(28px, 4.6vw, 56px)/1 var(--font-display);
+  color: var(--cosq-purple-deep);
+}
+
+.gate-wings {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr));
+  gap: 28px;
+  padding: 28px;
+  min-height: 0;
+}
+
+.gate-wing {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: stretch;
+  gap: 12px;
+  padding: 32px;
+  color: #fff;
+  text-align: left;
+  font: inherit;
+  border-radius: 0;
+}
+
+.gate-wing.design {
+  background: var(--cosq-pink);
+  border: 6px solid var(--cosq-purple);
+  box-shadow: var(--shadow-hard);
+  transform: rotate(-1deg);
+}
+
+.gate-wing.creators {
+  background: var(--cosq-purple);
+  border: 6px solid var(--cosq-pink);
+  box-shadow: 6px 6px 0 var(--cosq-purple-deep);
+  transform: rotate(1deg);
+}
+
+.gate-wing:hover {
+  transform: rotate(0deg) scale(1.01);
+}
+
+.gate-wing span {
+  font: 400 14px var(--font-display);
+}
+
+.gate-wing h3 {
+  font: 400 clamp(34px, 5vw, 64px)/1 var(--font-display);
+  text-shadow: 3px 3px 0 var(--cosq-purple);
+}
+
+.gate-wing.creators h3 {
+  text-shadow: 3px 3px 0 var(--cosq-pink);
+}
+
+.gate-wing p {
+  font: 500 clamp(16px, 1.6vw, 21px)/1.4 var(--font-body);
+}
+
+/* ---------- Wing shell ---------- */
+
+.wing {
+  position: relative;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background: #fff;
+}
+
+.wing-top {
+  border-bottom: 6px solid var(--cosq-purple);
+}
+
+.wing-nav {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 14px 32px;
+  transition: opacity .6s;
+}
+
+.wing-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.wing-brand span {
+  font: 400 24px var(--font-display);
+  color: #fff;
+  text-shadow: 2px 2px 0 var(--cosq-purple);
+}
+
+.wing-menu-toggle {
+  display: none;
+}
+
+.wing-tabs {
+  display: flex;
+  gap: 6px 18px;
+  flex-wrap: wrap;
+  align-items: center;
+  font: 400 13px var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.wing-tab,
+.wing-tab:hover {
+  color: #fff;
+  padding: 4px 0;
+  border-bottom: 4px solid transparent;
+}
+
+.wing-tab.is-active {
+  border-bottom-color: #fff;
+}
+
+.wing-switch {
+  cursor: pointer;
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  color: #fff;
+  background: var(--cosq-purple-deep);
+  border: 0;
+  padding: 6px 12px;
+  border-radius: 4px;
+}
+
+.wing-hero {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 32px 48px;
+}
+
+.wing-hero.is-home {
+  padding: 48px 32px 80px;
+}
+
+.wing-hero h1 {
+  font: 400 clamp(34px, 5.4vw, 64px)/0.98 var(--font-display);
+  color: #fff;
+  margin: 22px 0 18px;
+  max-width: 1000px;
+  text-shadow: 5px 5px 0 var(--cosq-purple);
+}
+
+.wing-hero.is-home h1 {
+  font-size: var(--fs-h1);
+}
+
+.wing-hero p {
+  font: 500 20px/1.45 var(--font-body);
+  color: #fff;
+  max-width: 660px;
+}
+
+.wing-ctas {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 32px;
+}
+
+.wing-footer {
+  border-top: 6px solid var(--cosq-purple);
+  padding: 56px 32px 28px;
+}
+
+.wing-footer-row {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.wing-footer-row > div:first-child {
+  max-width: 620px;
+}
+
+.wing-footer h2 {
+  font: 400 clamp(28px, 4vw, 44px)/1 var(--font-display);
+  color: #fff;
+  text-shadow: 3px 3px 0 var(--cosq-purple);
+  margin: 0 0 12px;
+}
+
+.wing-footer p {
+  font-size: 17px;
+  line-height: 1.45;
+  color: #fff;
+}
+
+.wing-footer-ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.wing-copy {
+  max-width: 1200px;
+  margin: 32px auto 0;
+  color: #fff;
+  font-size: 14px;
+}
+
+/* ---------- Phones ---------- */
+
+@media (max-width: 640px) {
+  .gate-brand {
+    top: 16px;
+    left: 16px;
+  }
+
+  .gate-brand img {
+    height: 36px;
+    width: 36px;
+  }
+
+  .gate-brand span {
+    font-size: 20px;
+  }
+
+  .gate-home {
+    top: 24px;
+    right: 16px;
+    font-size: 12px;
+  }
+
+  .gate-skip {
+    right: 16px;
+  }
+
+  .gate-beat {
+    padding: 15vh 16px 0;
+  }
+
+  .gate-choose-title {
+    padding: 76px 16px 0;
+  }
+
+  .gate-wings {
+    gap: 18px;
+    padding: 18px 16px 24px;
+  }
+
+  .gate-wing {
+    padding: 22px;
+    gap: 8px;
+  }
+
+  .wing-nav {
+    flex-wrap: nowrap;
+    padding: 10px 16px;
+  }
+
+  .wing-brand img {
+    height: 36px;
+    width: 36px;
+  }
+
+  .wing-brand span {
+    font-size: 20px;
+  }
+
+  .wing-menu-toggle {
+    display: inline-flex;
+    align-items: center;
+    min-height: 40px;
+    padding: 0 14px;
+    border: 3px solid var(--cosq-purple);
+    border-radius: 4px;
+    background: #fff;
+    color: var(--cosq-purple-deep);
+    font: 400 14px var(--font-display);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    box-shadow: var(--shadow-hard-sm);
+    cursor: pointer;
+  }
+
+  .wing-tabs {
+    display: none;
+    position: absolute;
+    z-index: 50;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    background: var(--cosq-purple-deep);
+    border-top: 4px solid var(--cosq-purple);
+    border-bottom: 4px solid var(--cosq-purple);
+    font-size: 17px;
+  }
+
+  .wing-tabs.is-open {
+    display: flex;
+  }
+
+  .wing-tab,
+  .wing-tab:hover {
+    padding: 14px 16px;
+    border-bottom: 2px solid rgba(255, 255, 255, .15);
+  }
+
+  .wing-tab.is-active {
+    border-bottom-color: rgba(255, 255, 255, .15);
+    background: var(--cosq-purple);
+  }
+
+  .wing-switch {
+    margin: 12px 16px 16px;
+    padding: 12px 14px;
+    background: var(--cosq-pink);
+    border: 3px solid #fff;
+    text-align: left;
+  }
+
+  .wing-hero,
+  .wing-hero.is-home {
+    padding: 24px 16px 40px;
+  }
+
+  .wing-hero.is-home h1 {
+    font-size: clamp(36px, 11vw, 56px);
+  }
+
+  .wing-hero h1 {
+    text-shadow: 4px 4px 0 var(--cosq-purple);
+  }
+
+  .wing-hero p {
+    font-size: 17px;
+  }
+
+  .wing-ctas,
+  .wing-footer-ctas {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 4px;
+  }
+
+  /* Design-system buttons carry inline sizes, so phones override them here */
+  .wing-ctas > *,
+  .wing-footer-ctas > *,
+  .stack-on-phone > a,
+  .stack-on-phone > button {
+    width: calc(100% - 6px);
+    min-height: 50px !important;
+    padding: 0 16px !important;
+    font-size: 17px !important;
+  }
+
+  .wing-footer {
+    padding: 48px 16px 24px;
+  }
+
+  .wing-footer-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+/* ---------- Page bits ---------- */
+
+.oac-timeline-row {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 24px;
+  padding: 20px 0;
+  border-top: 4px solid var(--cosq-purple);
+}
+
+@media (max-width: 640px) {
+  .oac-timeline-row {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+}
+
+.careers-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.careers-side {
+  text-align: right;
+}
+
+@media (max-width: 640px) {
+  .careers-side {
+    text-align: left;
+  }
+}
+
+/* Two process frames per row on phones instead of one tall column */
+@media (max-width: 640px) {
+  .qchan-gallery {
+    --min: 140px !important;
+    --gap: 12px !important;
+  }
+}

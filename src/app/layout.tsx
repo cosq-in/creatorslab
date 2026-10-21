@@ -1,32 +1,25 @@
 import type { Metadata } from "next";
-import { Press_Start_2P, Outfit, Space_Grotesk, JetBrains_Mono } from "next/font/google";
+import { Bungee, Outfit } from "next/font/google";
 import "./globals.css";
+import "@/components/labs/labs.css";
 
-const pressStart2P = Press_Start_2P({
+const bungee = Bungee({
   weight: "400",
   subsets: ["latin"],
-  variable: "--font-primary",
+  variable: "--font-display",
 });
 
+// Same weights as the CosQ design system; 600 text resolves to 700 there too.
 const outfit = Outfit({
+  weight: ["400", "500", "700"],
   subsets: ["latin"],
   variable: "--font-body",
 });
 
-const spaceGrotesk = Space_Grotesk({
-  subsets: ["latin"],
-  variable: "--font-space-grotesk",
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
-  variable: "--font-jetbrains-mono",
-});
-
 export const metadata: Metadata = {
-  title: "Creators Lab by CosQ - Gaming, Streaming & Creator Agency",
+  title: "CosQ Labs: Design Lab & Creators Lab",
   description:
-    "Your partner in gaming, streaming, and short-form content — from esports orgs and streamers to Instagram Reels and YouTube Shorts creators.",
+    "Two wings of CosQ. Design Lab: premier design and marketing, end to end. Creators Lab: the best creators for brands, the best brands for creators.",
 };
 
 export default function RootLayout({
@@ -36,7 +29,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${pressStart2P.variable} ${outfit.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable}`}>
+      <body className={`${bungee.variable} ${outfit.variable}`}>
         {children}
       </body>
     </html>
